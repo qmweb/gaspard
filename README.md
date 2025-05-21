@@ -36,22 +36,6 @@ docker compose up
 
 ---
 
-## 🧪 Useful Commands
+## 🤝 Contributing
 
-- **Rebuild containers after changes** (e.g. dependency updates):
-
-  ```bash
-  docker compose up --build
-  ```
-
-- **Stop all running services:**:
-
-  ```bash
-  docker compose down
-  ```
-
-- **Use the correct Node.js version** (via NVM):
-
-  ```bash
-  nvm use <version>
-  ```
+Check out the Contributing Guide for more information.
