@@ -1,59 +1,67 @@
 'use client';
 
-import { ReactNode, useEffect, useRef } from 'react';
-import { useMediaQuery } from 'react-responsive';
+import { Layout as AntLayout, Menu } from 'antd';
+import {
+  Building2,
+  FileText,
+  Home,
+  Receipt,
+  Settings,
+  TrendingUp,
+  Wallet,
+} from 'lucide-react';
+import { ReactNode } from 'react';
 
-import Footer from '@/client/components/layout/Footer';
-import Header from '@/client/components/layout/Header';
-import ResponsiveMenu from '@/client/components/layout/ReponsiveMenu';
-import useMenuStore from '@/client/stores/menuStore';
-import { BREAKPOINTS } from '@/utils/constants/screen';
+import '@/client/styles/components/layout/layout.scss';
+import '@/client/styles/components/layout/sidebar.scss';
 
-export default function Layout({
-  children,
-}: {
-  children: ReactNode;
-}) {
-  const { responsiveMenuState, setResponsiveMenuState } = useMenuStore();
-  const responsiveMenuRef = useRef<HTMLDivElement>(null);
-  const isMobile = useMediaQuery({ maxWidth: BREAKPOINTS.S });
+import Logo from '~/images/logo_dark.svg';
 
-  useEffect(() => {
-    const handleClickOutsideResponsiveMenu = (event: MouseEvent) => {
-      if (
-        responsiveMenuState &&
-        responsiveMenuRef.current &&
-        !responsiveMenuRef.current.contains(event.target as Node)
-      ) {
-        setResponsiveMenuState(!responsiveMenuState);
-      }
-    };
+const { Header, Content, Sider } = AntLayout;
 
-    document.addEventListener('mousedown', handleClickOutsideResponsiveMenu);
+export default function Layout({ children }: { children: ReactNode }) {
+  const items = [
+    {
+      type: 'group' as const,
+      label: 'Gestion',
+      key: 'group-gestion',
+      children: [
+        {
+          key: 'dashboard',
+          icon: <Home size={18} />,
+          label: 'Tableau de bord',
+        },
+        { key: 'entities', icon: <Building2 size={18} />, label: 'Entités' },
+      ],
+    },
+    { type: 'divider' as const, key: 'divider-1' },
+    {
+      type: 'group' as const,
+      label: 'Finances',
+      key: 'group-finances',
+      children: [
+        { key: 'estimates', icon: <FileText size={18} />, label: 'Devis' },
+        { key: 'invoices', icon: <Receipt size={18} />, label: 'Factures' },
+        { key: 'expenses', icon: <Wallet size={18} />, label: 'Dépenses' },
+        { key: 'incomes', icon: <TrendingUp size={18} />, label: 'Recettes' },
+      ],
+    },
+    { type: 'divider' as const, key: 'divider-2' },
+    { key: 'settings', icon: <Settings size={18} />, label: 'Paramètres' },
+  ];
 
-    return () => {
-      document.removeEventListener(
-        'mousedown',
-        handleClickOutsideResponsiveMenu,
-      );
-    };
-  });
-
-  useEffect(() => {
-    document.body.style.overflowY =
-      responsiveMenuState && isMobile ? 'hidden' : 'auto';
-
-    return () => {
-      document.body.style.overflowY = 'auto';
-    };
-  }, [responsiveMenuState, isMobile]);
-  
   return (
     <>
-      <Header />
-      <ResponsiveMenu ref={responsiveMenuRef} />
-      <main>{children}</main>
-      <Footer />
+      <AntLayout className='layout' hasSider>
+        <Sider className='custom-sidebar'>
+          <Logo className='custom-sidebar__logo' />
+          <Menu defaultSelectedKeys={['1']} items={items} />
+        </Sider>
+        <AntLayout>
+          <Header />
+          <Content>{children}</Content>
+        </AntLayout>
+      </AntLayout>
     </>
   );
 }
