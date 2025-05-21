@@ -1,14 +1,13 @@
 import { create } from 'zustand';
 
 interface MenuState {
-  responsiveMenuState: boolean;
-  setResponsiveMenuState: (state: boolean) => void;
+  currentKey: string;
+  setCurrentKey: (key: string) => void;
 }
 
 const useMenuStore = create<MenuState>((set) => ({
-  responsiveMenuState: false,
-  setResponsiveMenuState: (state: boolean) =>
-    set({ responsiveMenuState: state }),
+  currentKey: 'dashboard',
+  setCurrentKey: (key) => set({ currentKey: String(key) }),
 }));
 
 export default useMenuStore;
