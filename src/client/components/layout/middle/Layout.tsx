@@ -7,8 +7,9 @@ import {
   Home,
   LogOut,
   Receipt,
-  Settings,
   TrendingUp,
+  User,
+  Users,
   Wallet,
 } from 'lucide-react';
 import { ReactNode } from 'react';
@@ -44,11 +45,13 @@ export default function Layout({ children }: { children: ReactNode }) {
       label: 'Paramètres',
       key: 'group-settings',
       children: [
+        { key: 'profile', icon: <User size={18} />, label: 'Profil' },
+        { key: 'users', icon: <Users size={18} />, label: 'Utilisateurs' },
         { key: 'entities', icon: <Building2 size={18} />, label: 'Entités' },
-        { key: 'settings', icon: <Settings size={18} />, label: 'Paramètres' },
-        { key: 'logout', icon: <LogOut size={18} />, label: 'Déconnexion' },
       ],
     },
+    { type: 'divider' as const, key: 'divider-2' },
+    { key: 'logout', icon: <LogOut size={18} />, label: 'Déconnexion' },
   ];
 
   return (
