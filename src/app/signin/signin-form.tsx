@@ -3,6 +3,7 @@ import { signIn } from "../../../lib/auth-client";
 import { useState } from "react";
 
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -70,9 +71,11 @@ export default function SignIn() {
                   },
                   onResponse: (ctx) => {
                     setLoading(false);
+                    
                   },
                 },
                 );
+                redirect("/"); // Redirect to the home page after successful login
               }}
             >
               {loading ? (
