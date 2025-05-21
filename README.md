@@ -1,5 +1,3 @@
-![qmweb](https://github.com/user-attachments/assets/4ea966f6-e5b5-4612-970a-3f349c86c78e)
-
 ## ✅ Prerequisites
 
 Before starting, make sure you have the following installed:
