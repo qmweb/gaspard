@@ -1,4 +1,7 @@
-import { Wallet } from 'lucide-react';
+import { Dropdown } from 'antd';
+import { Plus, Upload, Wallet } from 'lucide-react';
+
+import ButtonPrimary from '@/client/components/ui/Button/ButtonPrimary';
 
 export default function ExpensesPage() {
   return (
@@ -6,6 +9,24 @@ export default function ExpensesPage() {
       <h2 className='layout__title-with-icon'>
         <Wallet size={22} /> Dépenses
       </h2>
+      <div>
+        <ButtonPrimary>
+          <Upload size={16} /> Importer
+        </ButtonPrimary>
+        <Dropdown
+          menu={{
+            items: [
+              { key: 'normal', label: 'Dépense unique' },
+              { key: 'recurrent', label: 'Dépense récurrente' },
+            ],
+          }}
+          trigger={['click']}
+        >
+          <ButtonPrimary>
+            <Plus size={16} /> Créer
+          </ButtonPrimary>
+        </Dropdown>
+      </div>
       <table>
         <thead>
           <tr>

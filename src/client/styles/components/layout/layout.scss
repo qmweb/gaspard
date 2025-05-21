@@ -83,8 +83,13 @@
       h2 {
         font-size: $fs-lg;
         font-weight: $fw-semibold;
-        padding-bottom: $spacing-lg;
-        @include flex(flex-start, center, $gap: $spacing-sm);
+        padding-bottom: $spacing-md;
+        border-bottom: 1px solid color.change($grey, $alpha: 0.3);
+        margin-bottom: $spacing-lg;
+
+        & {
+          @include flex(flex-start, center, $gap: $spacing-sm);
+        }
       }
     }
   }

@@ -1,4 +1,7 @@
-import { TrendingUp } from 'lucide-react';
+import { Dropdown } from 'antd';
+import { Plus, TrendingUp, Upload } from 'lucide-react';
+
+import ButtonPrimary from '@/client/components/ui/Button/ButtonPrimary';
 
 export default function IncomesPage() {
   return (
@@ -6,6 +9,24 @@ export default function IncomesPage() {
       <h2 className='layout__title-with-icon'>
         <TrendingUp size={22} /> Recettes
       </h2>
+      <div>
+        <ButtonPrimary>
+          <Upload size={16} /> Importer
+        </ButtonPrimary>
+        <Dropdown
+          menu={{
+            items: [
+              { key: 'normal', label: 'Revenu unique' },
+              { key: 'recurrent', label: 'Revenu récurrent' },
+            ],
+          }}
+          trigger={['click']}
+        >
+          <ButtonPrimary>
+            <Plus size={16} /> Créer
+          </ButtonPrimary>
+        </Dropdown>
+      </div>
       <table>
         <thead>
           <tr>
