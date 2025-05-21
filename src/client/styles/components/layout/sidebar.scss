@@ -30,5 +30,7 @@
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+    font-family: $base-font-family !important;
+    font-weight: $fw-medium !important;
   }
 }
