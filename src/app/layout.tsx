@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { ReactNode } from 'react';
 
-import Layout from '@/client/components/layout/Layout';
 import { Gotham } from '@/client/fonts';
 import { ReactQueryProvider } from '@/client/providers/ReactQueryProvider';
 import { APP_URL } from '@/utils/constants/config';
@@ -11,8 +10,8 @@ export const revalidate = 300; // 5 minutes
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: {
-      default: 'Template',
-      template: `%s | Template`,
+      default: 'Gaspard',
+      template: `%s | Gaspard`,
     },
     robots: {
       index: true,
@@ -54,9 +53,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang='fr'>
       <body className={`${Gotham.variable}`}>
-        <ReactQueryProvider>
-          <Layout>{children}</Layout>
-        </ReactQueryProvider>
+        <ReactQueryProvider>{children}</ReactQueryProvider>
       </body>
     </html>
   );
