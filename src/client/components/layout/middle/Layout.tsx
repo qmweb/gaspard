@@ -1,97 +1,59 @@
 'use client';
 
-import { Layout as AntLayout, Menu } from 'antd';
-import {
-  Building2,
-  FileText,
-  Home,
-  LogOut,
-  Receipt,
-  TrendingUp,
-  User,
-  Users,
-  Wallet,
-} from 'lucide-react';
-import { lazy, ReactNode, Suspense, useState } from 'react';
+import { Breadcrumb, Layout as AntLayout, Menu } from 'antd';
+import React, { lazy, ReactNode, Suspense } from 'react';
 
 import '@/client/styles/components/layout/layout.scss';
 
 import Loader from '@/client/components/ui/Loader/Loader';
+import { MENU_ITEMS, MenuItemType } from '@/client/constants/menu';
+import useMenuStore from '@/client/stores/menuStore';
 
 import Logo from '~/images/logo_dark.svg';
 
 const { Content, Sider } = AntLayout;
 
 export default function Layout({ children }: { children: ReactNode }) {
-  const [currentPage, setCurrentPage] = useState('dashboard');
+  const currentPage = useMenuStore((state) => state.currentKey);
+  const setCurrentPage = useMenuStore((state) => state.setCurrentKey);
 
-  const items = [
-    {
-      key: 'dashboard',
-      icon: <Home size={18} />,
-      label: 'Tableau de bord',
-      onClick: () => setCurrentPage('dashboard'),
-    },
-    { type: 'divider' as const, key: 'divider-1' },
-    {
-      type: 'group' as const,
-      label: 'Finances',
-      key: 'group-finances',
-      children: [
-        {
-          key: 'expenses',
-          icon: <Wallet size={18} />,
-          label: 'Dépenses',
-          onClick: () => setCurrentPage('expenses'),
-        },
-        {
-          key: 'incomes',
-          icon: <TrendingUp size={18} />,
-          label: 'Recettes',
-          onClick: () => setCurrentPage('incomes'),
-        },
-        {
-          key: 'estimates',
-          icon: <FileText size={18} />,
-          label: 'Devis',
-          onClick: () => setCurrentPage('estimates'),
-        },
-        {
-          key: 'invoices',
-          icon: <Receipt size={18} />,
-          label: 'Factures',
-          onClick: () => setCurrentPage('invoices'),
-        },
-      ],
-    },
-    {
-      type: 'group' as const,
-      label: 'Paramètres',
-      key: 'group-settings',
-      children: [
-        {
-          key: 'profile',
-          icon: <User size={18} />,
-          label: 'Profil',
-          onClick: () => setCurrentPage('profile'),
-        },
-        {
-          key: 'users',
-          icon: <Users size={18} />,
-          label: 'Utilisateurs',
-          onClick: () => setCurrentPage('users'),
-        },
-        {
-          key: 'entities',
-          icon: <Building2 size={18} />,
-          label: 'Entités',
-          onClick: () => setCurrentPage('entities'),
-        },
-      ],
-    },
-    { type: 'divider' as const, key: 'divider-2' },
-    { key: 'logout', icon: <LogOut size={18} />, label: 'Déconnexion' },
-  ];
+  // Add onClick to each menu item recursively
+  function addOnClick(items: MenuItemType[]): MenuItemType[] {
+    return items.map((item) => {
+      if (item.type === 'group' && item.children) {
+        return { ...item, children: addOnClick(item.children) };
+      }
+      if (!item.type) {
+        return { ...item, onClick: () => setCurrentPage(item.key) };
+      }
+      return item;
+    });
+  }
+  const items = addOnClick(MENU_ITEMS);
+
+  // Centralized breadcrumb meta from menu
+  const pageMeta = MENU_ITEMS.reduce<
+    Record<string, { label: string; icon: React.ReactNode }>
+  >((acc, item) => {
+    if (item.type === 'group' && item.children) {
+      item.children.forEach((child) => {
+        if (child && !child.type && child.label && child.icon) {
+          acc[String(child.key)] = {
+            label: typeof child.label === 'string' ? child.label : '',
+            icon: React.cloneElement(child.icon as React.ReactElement, {
+              size: 16,
+            }),
+          };
+        }
+      });
+    } else if (!item.type && item.label && item.icon) {
+      acc[String(item.key)] = {
+        label: typeof item.label === 'string' ? item.label : '',
+        icon: React.cloneElement(item.icon as React.ReactElement, { size: 16 }),
+      };
+    }
+    return acc;
+  }, {});
 
   // Dynamic import for each page
   const pageComponents: Record<
@@ -116,12 +78,25 @@ export default function Layout({ children }: { children: ReactNode }) {
           <Logo className='layout__sidebar__logo' />
           <Menu
             selectedKeys={[currentPage]}
-            items={items}
+            items={items as MenuItemType[]}
             onClick={({ key }) => setCurrentPage(key as string)}
           />
         </Sider>
-        <AntLayout className='layout__content'>
-          <Content>
+        <AntLayout className='layout__main-content'>
+          <header className='layout__main-content__breadcrumb'>
+            <Breadcrumb
+              items={[
+                pageMeta[currentPage] && {
+                  title: (
+                    <>
+                      {pageMeta[currentPage].icon} {pageMeta[currentPage].label}
+                    </>
+                  ),
+                },
+              ].filter(Boolean)}
+            />
+          </header>
+          <Content className='layout__main-content__content'>
             <Suspense fallback={<Loader />}>
               {PageComponent ? <PageComponent /> : children}
             </Suspense>
