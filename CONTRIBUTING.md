@@ -12,7 +12,7 @@ Thank you for your interest in contributing to Gaspard! 🙌
 2. **Create a branch**
 
    ```bash
-      git checkout -b feat/short-description
+      git switch -c feat/short-description
    ```
 
 3. **Commit & Push**
