@@ -1,0 +1,16 @@
+services:
+  next-template:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.${BUILD_TARGET}
+    ports:
+      - '${PORT:-3000}:3000'
+    restart: on-failure:3
+    volumes:
+      - .:/app:delegated
+      - /app/node_modules
+      - /app/.next
+    env_file:
+      - ./.env
+    command: >
+      sh -c "[ \"$BUILD_TARGET\" != \"dev\" ] && yarn run build; yarn run start:${BUILD_TARGET:-prod}"

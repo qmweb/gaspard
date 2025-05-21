@@ -1,0 +1,25 @@
+# Production
+FROM node:22 AS prod
+
+WORKDIR /app
+
+# Enable Corepack
+RUN corepack enable
+
+# Copy package.json, yarn.lock, and .yarnrc.yml for caching
+COPY package.json yarn.lock .yarnrc.yml ./
+
+# Set Yarn to use the latest stable version (Yarn Berry)
+RUN yarn set version stable
+
+# Install dependencies
+RUN yarn install --immutable
+
+# Copier le code source de l'application
+COPY . .
+
+# Expose port
+EXPOSE 3000
+
+# Run in production mode
+CMD ["yarn", "run", "start:prod"]

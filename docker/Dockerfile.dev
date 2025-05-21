@@ -1,0 +1,25 @@
+# Développement
+FROM node:22 AS dev
+
+WORKDIR /app
+
+# Enable Corepack (required for Yarn Berry)
+RUN corepack enable
+
+# Copy package.json and yarn.lock first for better caching
+COPY package.json yarn.lock .yarnrc.yml ./
+
+# Set Yarn to use the latest stable version (Yarn Berry)
+RUN yarn set version stable
+
+# Install dependencies with Yarn Berry
+RUN yarn install --immutable
+
+# Copier le code source de l'application
+COPY . .
+
+# Exposer le port de développement
+EXPOSE 3000
+
+# Démarrer l'application en mode développement avec hot-reload
+CMD ["yarn", "run", "start:dev"]
