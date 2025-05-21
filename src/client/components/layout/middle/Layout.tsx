@@ -15,7 +15,6 @@ import {
 import { ReactNode } from 'react';
 
 import '@/client/styles/components/layout/layout.scss';
-import '@/client/styles/components/layout/sidebar.scss';
 
 import Logo from '~/images/logo_dark.svg';
 
@@ -57,11 +56,11 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <>
       <AntLayout className='layout' hasSider>
-        <Sider className='custom-sidebar'>
-          <Logo className='custom-sidebar__logo' />
+        <Sider className='layout__sidebar'>
+          <Logo className='layout__sidebar__logo' />
           <Menu defaultSelectedKeys={['1']} items={items} />
         </Sider>
-        <AntLayout>
+        <AntLayout className='layout__content'>
           <Content>{children}</Content>
         </AntLayout>
       </AntLayout>
