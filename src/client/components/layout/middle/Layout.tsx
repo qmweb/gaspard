@@ -5,6 +5,7 @@ import {
   Building2,
   FileText,
   Home,
+  LogOut,
   Receipt,
   Settings,
   TrendingUp,
@@ -17,22 +18,14 @@ import '@/client/styles/components/layout/sidebar.scss';
 
 import Logo from '~/images/logo_dark.svg';
 
-const { Header, Content, Sider } = AntLayout;
+const { Content, Sider } = AntLayout;
 
 export default function Layout({ children }: { children: ReactNode }) {
   const items = [
     {
-      type: 'group' as const,
-      label: 'Gestion',
-      key: 'group-gestion',
-      children: [
-        {
-          key: 'dashboard',
-          icon: <Home size={18} />,
-          label: 'Tableau de bord',
-        },
-        { key: 'entities', icon: <Building2 size={18} />, label: 'Entités' },
-      ],
+      key: 'dashboard',
+      icon: <Home size={18} />,
+      label: 'Tableau de bord',
     },
     { type: 'divider' as const, key: 'divider-1' },
     {
@@ -46,8 +39,16 @@ export default function Layout({ children }: { children: ReactNode }) {
         { key: 'incomes', icon: <TrendingUp size={18} />, label: 'Recettes' },
       ],
     },
-    { type: 'divider' as const, key: 'divider-2' },
-    { key: 'settings', icon: <Settings size={18} />, label: 'Paramètres' },
+    {
+      type: 'group' as const,
+      label: 'Paramètres',
+      key: 'group-settings',
+      children: [
+        { key: 'entities', icon: <Building2 size={18} />, label: 'Entités' },
+        { key: 'settings', icon: <Settings size={18} />, label: 'Paramètres' },
+        { key: 'logout', icon: <LogOut size={18} />, label: 'Déconnexion' },
+      ],
+    },
   ];
 
   return (
@@ -58,7 +59,6 @@ export default function Layout({ children }: { children: ReactNode }) {
           <Menu defaultSelectedKeys={['1']} items={items} />
         </Sider>
         <AntLayout>
-          <Header />
           <Content>{children}</Content>
         </AntLayout>
       </AntLayout>

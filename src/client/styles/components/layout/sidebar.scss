@@ -22,4 +22,13 @@
       color: $primary !important;
     }
   }
+
+  .ant-menu-item,
+  .ant-menu-submenu-title,
+  .ant-menu-item-group-title {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
 }
