@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { ReactNode } from 'react';
 
-import { Gotham } from '@/client/fonts';
+import { Inter } from '@/client/fonts';
 import { ReactQueryProvider } from '@/client/providers/ReactQueryProvider';
 import { APP_URL } from '@/utils/constants/config';
 
@@ -52,7 +52,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang='fr'>
-      <body className={`${Gotham.variable}`}>
+      <body className={`${Inter.variable}`}>
         <ReactQueryProvider>{children}</ReactQueryProvider>
       </body>
     </html>
