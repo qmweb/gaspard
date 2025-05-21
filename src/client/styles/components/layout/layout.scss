@@ -13,10 +13,11 @@
     max-width: 275px !important;
     min-width: 275px !important;
     width: 275px !important;
-    padding: $spacing-md !important;
+    padding: $spacing-xl $spacing-md !important;
 
     &__logo {
       padding: $spacing-lg $spacing-xl;
+      padding-top: 0;
     }
 
     .ant-menu {
@@ -53,7 +54,16 @@
   &__content {
     border-radius: $border-radius-sm;
     margin-left: $spacing-md;
+    padding: $spacing-xxl;
     background: $white !important;
     box-shadow: inset 0 0 10px color.change($grey, $alpha: 0.3);
+    overflow-x: hidden !important;
+
+    h2 {
+      font-size: $fs-lg;
+      font-weight: $fw-semibold;
+      padding-bottom: $spacing-lg;
+      @include flex(flex-start, center, $gap: $spacing-sm);
+    }
   }
 }
