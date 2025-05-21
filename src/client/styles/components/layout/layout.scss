@@ -10,6 +10,10 @@
     background: $white !important;
     border-radius: $border-radius-sm;
     box-shadow: $box-shadow-sm;
+    max-width: 275px;
+    min-width: 275px;
+    width: 275px;
+    padding: $spacing-md;
 
     &__logo {
       padding: $spacing-lg $spacing-xl;
