@@ -7672,6 +7672,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-spinners@npm:^0.17.0":
+  version: 0.17.0
+  resolution: "react-spinners@npm:0.17.0"
+  peerDependencies:
+    react: ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10c0/175107ba7b9ab2954559376ebe12c7561d4856402773b044c74972e9ba3e8c274454910bf23eb21000064e827a269ef4e48e69432a57395a1fa7edd05a428e7c
+  languageName: node
+  linkType: hard
+
 "react@npm:^18.3.1":
   version: 18.3.1
   resolution: "react@npm:18.3.1"
@@ -8628,6 +8638,7 @@ __metadata:
     react-icons: "npm:^5.3.0"
     react-loading-skeleton: "npm:^3.5.0"
     react-responsive: "npm:^10.0.0"
+    react-spinners: "npm:^0.17.0"
     sass: "npm:^1.83.0"
     slugify: "npm:^1.6.6"
     swiper: "npm:^11.1.15"

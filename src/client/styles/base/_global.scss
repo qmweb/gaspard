@@ -87,22 +87,23 @@ h5,
 h6 {
   @include title($fs-xxl, $fw-light, normal, normal);
   font-family: $ff-serif !important;
+  font-weight: $fw-semibold !important;
 }
 
 h2 {
-  font-size: $fs-xl;
-}
-h3 {
   font-size: $fs-lg;
 }
-h4 {
+h3 {
   font-size: $fs-md;
 }
-h5 {
+h4 {
   font-size: $fs-regular-lg;
 }
-h6 {
+h5 {
   font-size: $fs-regular;
+}
+h6 {
+  font-size: $fs-regular-sm;
 }
 
 p {
