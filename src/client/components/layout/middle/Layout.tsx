@@ -33,10 +33,10 @@ export default function Layout({ children }: { children: ReactNode }) {
       label: 'Finances',
       key: 'group-finances',
       children: [
-        { key: 'estimates', icon: <FileText size={18} />, label: 'Devis' },
-        { key: 'invoices', icon: <Receipt size={18} />, label: 'Factures' },
         { key: 'expenses', icon: <Wallet size={18} />, label: 'Dépenses' },
         { key: 'incomes', icon: <TrendingUp size={18} />, label: 'Recettes' },
+        { key: 'estimates', icon: <FileText size={18} />, label: 'Devis' },
+        { key: 'invoices', icon: <Receipt size={18} />, label: 'Factures' },
       ],
     },
     {

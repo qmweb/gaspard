@@ -1,7 +1,9 @@
-import '@/client/styles/components/ui/button/primary.scss';
 import React from 'react';
 
-interface ButtonPrimaryProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+import '@/client/styles/components/ui/button/primary.scss';
+
+interface ButtonPrimaryProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   colorType?: string;
   url?: string;
@@ -17,11 +19,7 @@ const ButtonPrimary = ({
   const buttonClassName = `button-primary button-primary--${colorType ?? ''} ${className ?? ''}`;
 
   return (
-    <button
-      type='button'
-      className={buttonClassName}
-      {...props}
-    >
+    <button type='button' className={buttonClassName} {...props}>
       {children}
     </button>
   );
