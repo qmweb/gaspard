@@ -1,4 +1,6 @@
-import { Users } from 'lucide-react';
+import { Plus, Users } from 'lucide-react';
+
+import ButtonPrimary from '@/client/components/ui/Button/ButtonPrimary';
 
 export default function UsersPage() {
   return (
@@ -6,6 +8,11 @@ export default function UsersPage() {
       <h2 className='layout__title-with-icon'>
         <Users size={22} /> Liste des utilisateurs
       </h2>
+      <div>
+        <ButtonPrimary>
+          <Plus size={16} /> Créer
+        </ButtonPrimary>
+      </div>
       <table>
         <thead>
           <tr>
