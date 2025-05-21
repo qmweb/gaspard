@@ -3,4 +3,53 @@
 
 .layout {
   height: 100dvh;
+  padding: $spacing-md;
+  background: $white !important;
+
+  &__sidebar {
+    background: $white !important;
+    border-radius: $border-radius-sm;
+    box-shadow: $box-shadow-sm;
+
+    &__logo {
+      padding: $spacing-lg $spacing-xl;
+    }
+
+    .ant-menu {
+      border-inline-end: 0 !important;
+    }
+
+    .ant-menu-item {
+      & > * {
+        cursor: pointer;
+      }
+      &:hover {
+        background-color: color.change($primary, $alpha: 0.05) !important;
+        color: $primary !important;
+      }
+      &-selected,
+      &-active {
+        background-color: color.change($primary, $alpha: 0.1) !important;
+        color: $primary !important;
+      }
+    }
+
+    .ant-menu-item,
+    .ant-menu-submenu-title,
+    .ant-menu-item-group-title {
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      font-family: $base-font-family !important;
+      font-weight: $fw-medium !important;
+    }
+  }
+
+  &__content {
+    border-radius: $border-radius-sm;
+    margin-left: $spacing-md;
+    background: $white !important;
+    box-shadow: inset 0 0 10px color.change($grey, $alpha: 0.3);
+  }
 }
