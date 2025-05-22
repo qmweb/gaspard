@@ -2,6 +2,8 @@
 
 import { Breadcrumb, Layout as AntLayout, Menu } from 'antd';
 import React, { lazy, ReactNode, Suspense } from 'react';
+// Toaster
+import { Toaster } from 'sonner';
 
 import '@/client/styles/components/layout/layout.scss';
 
@@ -105,6 +107,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           </header>
           <Content className='layout__main-content__content'>
             <Suspense fallback={<Loader />}>
+              <Toaster richColors position='bottom-right' />
               {PageComponent ? <PageComponent /> : children}
             </Suspense>
           </Content>
