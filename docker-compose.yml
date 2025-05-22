@@ -1,5 +1,5 @@
 services:
-  next-template:
+  app:
     build:
       context: .
       dockerfile: docker/Dockerfile.${BUILD_TARGET}
@@ -14,3 +14,22 @@ services:
       - ./.env
     command: >
       sh -c "[ \"$BUILD_TARGET\" != \"dev\" ] && yarn run build; yarn run start:${BUILD_TARGET:-prod}"
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

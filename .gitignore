@@ -47,9 +47,7 @@ sitemap.xml
 sitemap-*.xml
 
 # prisma
-/prisma/migrations
-/src/app/generated/**/
-generated
+/src/app/generated/**
 
 
 # Ignorer les bases de données SQLite de développement Prisma
@@ -58,5 +56,4 @@ prisma/*.db
 prisma/*.db-journal
 
 # Ignorer les migrations non finalisées
-prisma/migrations/*/migration.sql
 !prisma/migrations/*/.gitkeep
