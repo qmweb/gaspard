@@ -11,7 +11,6 @@ import ButtonPrimary from '@/client/components/ui/Button/ButtonPrimary';
 import { signIn } from '@/utils/lib/auth-client';
 
 import Logo from '~/images/logo_dark.svg';
-
 export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
