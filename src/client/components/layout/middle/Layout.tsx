@@ -1,13 +1,14 @@
 'use client';
 
 import { Breadcrumb, Layout as AntLayout, Menu } from 'antd';
+import { signOut } from 'lib/auth-client';
 import React, { lazy, ReactNode, Suspense } from 'react';
 
 import '@/client/styles/components/layout/layout.scss';
 
 import Loader from '@/client/components/ui/Loader/Loader';
-import { MENU_ITEMS, MenuItemType } from '@/client/constants/menu';
 import useMenuStore from '@/client/stores/menuStore';
+import { MENU_ITEMS, MenuItemType } from '@/utils/constants/menu';
 
 import Logo from '~/images/logo_dark.svg';
 
@@ -78,8 +79,14 @@ export default function Layout({ children }: { children: ReactNode }) {
           <Logo className='layout__sidebar__logo' />
           <Menu
             selectedKeys={[currentPage]}
-            items={items as MenuItemType[]}
-            onClick={({ key }) => setCurrentPage(key as string)}
+            items={MENU_ITEMS as MenuItemType[]}
+            onClick={async ({ key }) => {
+              if (key === 'logout') {
+                await signOut();
+              } else {
+                setCurrentPage(key as string);
+              }
+            }}
           />
         </Sider>
         <AntLayout className='layout__main-content'>

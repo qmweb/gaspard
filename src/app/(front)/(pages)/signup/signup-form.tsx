@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-import { signUp } from '../../../lib/auth-client';
+import { signUp } from '@/utils/lib/auth-client';
 
 export default function SignUp() {
   const [firstName, setFirstName] = useState('');
