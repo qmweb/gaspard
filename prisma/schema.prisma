@@ -13,7 +13,7 @@ datasource db {
 }
 
 model User {
-  id            String    @id
+  id            String       @id
   name          String
   email         String
   emailVerified Boolean
@@ -22,6 +22,7 @@ model User {
   updatedAt     DateTime
   sessions      Session[]
   accounts      Account[]
+  Membership    Membership[]
 
   @@unique([email])
   @@map("user")
@@ -70,4 +71,181 @@ model Verification {
   updatedAt  DateTime?
 
   @@map("verification")
+}
+
+// =====================
+// ENUMS
+// =====================
+enum Role {
+  OWNER
+  ADMIN
+  MEMBER
+  ACCOUNTANT
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  PAID
+  CANCELLED
+  OVERDUE
+}
+
+enum EstimateStatus {
+  DRAFT
+  SENT
+  ACCEPTED
+  REJECTED
+  EXPIRED
+}
+
+enum EntityType {
+  CLIENT
+  SUPPLIER
+  TAX
+}
+
+// =====================
+// ORGANIZATION & MEMBERSHIP
+// =====================
+model Organization {
+  id                String            @id @default(uuid())
+  name              String
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  memberships       Membership[]
+  expenses          Expense[]
+  incomes           Income[]
+  invoices          Invoice[]
+  estimates         Estimate[]
+  entities          Entity[]
+  taxes             Tax[]
+  expenseCategories ExpenseCategory[]
+}
+
+model Membership {
+  id             String       @id @default(uuid())
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId         String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String
+  role           Role
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@unique([userId, organizationId])
+}
+
+// =====================
+// ACCOUNTING MODELS
+// =====================
+model Expense {
+  id             String           @id @default(uuid())
+  organization   Organization     @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String
+  category       ExpenseCategory? @relation(fields: [categoryId], references: [id])
+  categoryId     String?
+  entity         Entity?          @relation(fields: [entityId], references: [id])
+  entityId       String?
+  amount         Float
+  date           DateTime
+  description    String?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+}
+
+model Income {
+  id             String       @id @default(uuid())
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String
+  entity         Entity?      @relation(fields: [entityId], references: [id])
+  entityId       String?
+  amount         Float
+  date           DateTime
+  description    String?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+}
+
+model Invoice {
+  id             String        @id @default(uuid())
+  organization   Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String
+  entity         Entity        @relation(fields: [entityId], references: [id])
+  entityId       String
+  status         InvoiceStatus
+  totalAmount    Float
+  taxes          InvoiceTax[]
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
+
+model Estimate {
+  id             String         @id @default(uuid())
+  organization   Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String
+  entity         Entity         @relation(fields: [entityId], references: [id])
+  entityId       String
+  status         EstimateStatus
+  totalAmount    Float
+  taxes          EstimateTax[]
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+}
+
+model Entity {
+  id             String       @id @default(uuid())
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String
+  name           String
+  type           EntityType
+  expenses       Expense[]
+  incomes        Income[]
+  invoices       Invoice[]
+  estimates      Estimate[]
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+}
+
+model Tax {
+  id             String        @id @default(uuid())
+  organization   Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String
+  name           String
+  rate           Float
+  invoices       InvoiceTax[]
+  estimates      EstimateTax[]
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
+
+model ExpenseCategory {
+  id             String       @id @default(uuid())
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  organizationId String
+  name           String
+  expenses       Expense[]
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+}
+
+// =====================
+// PIVOT TABLES FOR TAXES
+// =====================
+model InvoiceTax {
+  id        String  @id @default(uuid())
+  invoice   Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  invoiceId String
+  tax       Tax     @relation(fields: [taxId], references: [id], onDelete: Cascade)
+  taxId     String
+  amount    Float
+}
+
+model EstimateTax {
+  id         String   @id @default(uuid())
+  estimate   Estimate @relation(fields: [estimateId], references: [id], onDelete: Cascade)
+  estimateId String
+  tax        Tax      @relation(fields: [taxId], references: [id], onDelete: Cascade)
+  taxId      String
+  amount     Float
 }
