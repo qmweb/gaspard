@@ -17,6 +17,9 @@ const compat = new FlatCompat({
 });
 
 export default fixupConfigRules([
+  {
+    ignores: ['src/app/generated/prisma/**', '**/generated/**'],
+  },
   ...compat.extends(
     'eslint:recommended',
     'next',
@@ -41,8 +44,8 @@ export default fixupConfigRules([
     },
 
     rules: {
-      'no-unused-vars': process.env.NODE_ENV === "production" ? "error" : "off",
-      "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
+      'no-unused-vars': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+      'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       'react/no-unescaped-entities': 'off',
       'react/display-name': 'off',
