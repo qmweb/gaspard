@@ -1,6 +1,7 @@
 'use client';
 
 import { Breadcrumb, Layout as AntLayout, Menu } from 'antd';
+import { useRouter } from 'next/navigation';
 import React, { lazy, ReactNode, Suspense } from 'react';
 // Toaster
 import { Toaster } from 'sonner';
@@ -73,6 +74,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     users: lazy(() => import('@/app/(middle)/(pages)/users')),
   };
   const PageComponent = pageComponents[currentPage];
+  const router = useRouter();
 
   return (
     <>
@@ -85,6 +87,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             onClick={async ({ key }) => {
               if (key === 'logout') {
                 await signOut();
+                router.replace('/signin');
               } else {
                 setCurrentPage(key as string);
               }

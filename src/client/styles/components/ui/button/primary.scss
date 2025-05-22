@@ -13,4 +13,24 @@
   & {
     @include flex(center, center, $gap: $spacing-xs);
   }
+
+  &_loading--text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: $spacing-xs;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &_static--text:hover {
+    cursor: pointer;
+  }
+
+  &__login {
+    width: 100%;
+    max-width: 100%;
+  }
 }
