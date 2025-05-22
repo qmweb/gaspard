@@ -1,7 +1,10 @@
 'use client';
+
 import { Input } from 'antd';
 import { LoaderCircle, Lock, Mail, User } from 'lucide-react';
 import Link from 'next/link';
+
+import { signUp } from '@lib/auth-client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -9,13 +12,12 @@ import { toast } from 'sonner';
 import '@/client/styles/components/ui/form/signupform.scss';
 
 import ButtonPrimary from '@/client/components/ui/Button/ButtonPrimary';
-import { signUp } from '@/utils/lib/auth-client';
 
 import Logo from '~/images/logo_dark.svg';
 
-export default function SignIn() {
-  const [name, setName] = useState('');
-  const [lastname, setLastname] = useState('');
+export default function SignUp() {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -60,9 +62,9 @@ export default function SignIn() {
                   placeholder='Christophe'
                   required
                   onChange={(e) => {
-                    setName(e.target.value);
+                    setFirstName(e.target.value);
                   }}
-                  value={name}
+                  value={firstName}
                   size='large'
                   prefix={<User />}
                 />{' '}
@@ -72,9 +74,9 @@ export default function SignIn() {
                   placeholder='Courtin'
                   required
                   onChange={(e) => {
-                    setLastname(e.target.value);
+                    setLastName(e.target.value);
                   }}
-                  value={lastname}
+                  value={lastName}
                   size='large'
                   prefix={<User />}
                 />
@@ -146,7 +148,7 @@ export default function SignIn() {
                 await signUp.email(
                   {
                     email,
-                    name: name + ' ' + lastname,
+                    name: firstName + ' ' + lastName,
                     password: password == confirmPassword ? password : '',
                   },
                   {

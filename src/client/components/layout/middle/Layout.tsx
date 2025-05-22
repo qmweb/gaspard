@@ -1,6 +1,8 @@
 'use client';
 
-import { Breadcrumb, Layout as AntLayout, Menu } from 'antd';
+import { Layout as AntLayout, Breadcrumb, Menu } from 'antd';
+
+import { signOut } from 'lib/auth-client';
 import { useRouter } from 'next/navigation';
 import React, { lazy, ReactNode, Suspense } from 'react';
 // Toaster
@@ -11,7 +13,6 @@ import '@/client/styles/components/layout/layout.scss';
 import Loader from '@/client/components/ui/Loader/Loader';
 import useMenuStore from '@/client/stores/menuStore';
 import { MENU_ITEMS, MenuItemType } from '@/utils/constants/menu';
-import { signOut } from '@/utils/lib/auth-client';
 
 import Logo from '~/images/logo_dark.svg';
 

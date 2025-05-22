@@ -1,4 +1,7 @@
 'use client';
+
+import '@/client/styles/components/ui/form/loginform.scss';
+import { signIn } from '@lib/auth-client';
 import { Input } from 'antd';
 import { LoaderCircle, Lock, Mail } from 'lucide-react';
 import Link from 'next/link';
@@ -6,10 +9,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
-import '@/client/styles/components/ui/form/loginform.scss';
-
 import ButtonPrimary from '@/client/components/ui/Button/ButtonPrimary';
-import { signIn } from '@/utils/lib/auth-client';
 
 import Logo from '~/images/logo_dark.svg';
 
