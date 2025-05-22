@@ -2,7 +2,7 @@
 import { redirect } from 'next/navigation';
 import { useState } from 'react';
 
-import { signIn } from '../../../lib/auth-client';
+import { signIn } from '@/utils/lib/auth-client';
 
 export default function SignIn() {
   const [email, setEmail] = useState('');
@@ -67,7 +67,7 @@ export default function SignIn() {
                   },
                 },
               );
-              redirect('/'); // Redirect to the home page after successful login
+              redirect('/');
             }}
           >
             {loading ? <p>Chargement...</p> : <p> Login </p>}
