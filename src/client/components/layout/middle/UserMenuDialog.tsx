@@ -2,6 +2,7 @@ import { Button, Modal, Select } from 'antd';
 import React from 'react';
 
 import ButtonPrimary from '@/client/components/ui/Button/ButtonPrimary';
+import { useTheme } from '@/client/providers/ThemeProvider';
 
 interface UserMenuDialogProps {
   open: boolean;
@@ -15,7 +16,7 @@ const languages = [
 
 export default function UserMenuDialog({ open, onClose }: UserMenuDialogProps) {
   const [language, setLanguage] = React.useState('fr');
-  const [theme, setTheme] = React.useState<'light' | 'dark'>('light');
+  const { theme, setTheme } = useTheme();
 
   return (
     <Modal

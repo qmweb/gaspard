@@ -4,12 +4,13 @@
 .layout {
   height: 100dvh;
   padding: $spacing-md;
-  background: $white !important;
+  background: var(--background-color) !important;
+  color: var(--text-color) !important;
 
   &__sidebar,
   &__main-content__content,
   &__main-content__breadcrumb {
-    background: $white !important;
+    background: var(--background-color) !important;
     border-radius: $border-radius-sm;
     box-shadow: $box-shadow-sm;
   }
@@ -27,6 +28,8 @@
 
     .ant-menu {
       border-inline-end: 0 !important;
+      background: var(--background-color) !important;
+      color: var(--text-color) !important;
     }
 
     .ant-menu-item {
@@ -34,13 +37,13 @@
         cursor: pointer;
       }
       &:hover {
-        background-color: color.change($primary, $alpha: 0.05) !important;
-        color: $primary !important;
+        background-color: var(--hover-color) !important;
+        color: var(--primary-color) !important;
       }
       &-selected,
       &-active {
-        background-color: color.change($primary, $alpha: 0.1) !important;
-        color: $primary !important;
+        background-color: var(--active-color) !important;
+        color: var(--primary-color) !important;
       }
     }
 
@@ -53,13 +56,14 @@
       -ms-user-select: none;
       font-family: $base-font-family !important;
       font-weight: $fw-medium !important;
+      color: $base-color !important;
     }
   }
 
   &__main-content {
     & {
       margin-left: $spacing-md;
-      background: $white !important;
+      background: var(--background-color) !important;
     }
 
     &__breadcrumb {
@@ -72,6 +76,7 @@
         & {
           font-family: $base-font-family !important;
           font-weight: $fw-medium !important;
+          color: var(--text-color) !important;
         }
       }
     }
@@ -84,8 +89,9 @@
         font-size: $fs-lg;
         font-weight: $fw-semibold;
         padding-bottom: $spacing-md;
-        border-bottom: 1px solid color.change($grey, $alpha: 0.3);
+        border-bottom: 1px solid var(--border-color-alpha);
         margin-bottom: $spacing-lg;
+        color: $base-color !important;
 
         & {
           @include flex(flex-start, center, $gap: $spacing-sm);

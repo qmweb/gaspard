@@ -1,29 +1,60 @@
-/*
- ** ====================================================
- ** Colors
- ** ====================================================
- */
+/* Theme Variables */
+:root {
+  /* Default light theme variables */
+  --primary-color: #131313;
+  --secondary-color: #ffffff;
+  --background-color: #ffffff;
+  --text-color: #131313;
+  --border-color: #d1d1d1;
+  --border-color-alpha: rgba(209, 209, 209, 0.3);
+  --hover-color: rgba(19, 19, 19, 0.05);
+  --active-color: rgba(19, 19, 19, 0.1);
+
+  /* Add smooth transitions for theme changes */
+  --theme-transition:
+    background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Dark theme overrides */
+:root[data-theme='dark'] {
+  --primary-color: #ffffff;
+  --secondary-color: #131313;
+  --background-color: #131313;
+  --text-color: #ffffff;
+  --border-color: #2e2e2e;
+  --border-color-alpha: rgba(46, 46, 46, 0.3);
+  --hover-color: rgba(255, 255, 255, 0.05);
+  --active-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Apply transitions to elements */
+*,
+*::before,
+*::after {
+  transition: var(--theme-transition);
+}
 
 /* Primary Colors */
-$primary: #131313;
+$primary: var(--primary-color);
 
 /* Secondary Colors */
-$secondary: #ffffff;
+$secondary: var(--secondary-color);
 
 /* Neutrals */
 $black: #131313;
 $white: #ffffff;
 
 /* Grays */
-$grey: #d1d1d1;
+$grey: var(--border-color);
 
 /* Selection colors */
-$select-color: $secondary;
-$select-bg-color: $primary;
+$select-color: var(--secondary-color);
+$select-bg-color: var(--primary-color);
 
 /* Base variables */
-$base-color: $black;
-$base-bg-color: $white;
+$base-color: var(--text-color);
+$base-bg-color: var(--background-color);
 
 /*
  ** ====================================================

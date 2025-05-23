@@ -15,7 +15,7 @@ services:
     command: >
       sh -c "[ \"$BUILD_TARGET\" != \"dev\" ] && yarn run build; yarn run start:${BUILD_TARGET:-prod}"
     environment:
-      - DATABASE_URL=${DATABASE_URL}
+      - DATABASE_URL=${DATABASE_DOCKER_URL}
     depends_on:
       - postgres
 
