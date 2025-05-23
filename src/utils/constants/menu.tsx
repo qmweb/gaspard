@@ -1,5 +1,6 @@
 import type { MenuProps } from 'antd';
 import {
+  BarChart,
   Building2,
   FileText,
   Home,
@@ -28,7 +29,6 @@ export const MENU_ITEMS: MenuItemType[] = [
     icon: <Home size={18} />,
     label: 'Tableau de bord',
   },
-  { type: 'divider', key: 'divider-1' },
   {
     type: 'group',
     label: 'Finances',
@@ -45,11 +45,13 @@ export const MENU_ITEMS: MenuItemType[] = [
     label: 'Paramètres',
     key: 'group-settings',
     children: [
-      { key: 'profile', icon: <User size={18} />, label: 'Profil' },
-      { key: 'users', icon: <Users size={18} />, label: 'Utilisateurs' },
       { key: 'entities', icon: <Building2 size={18} />, label: 'Entités' },
+      { key: 'reports', icon: <BarChart size={18} />, label: 'Rapports' },
     ],
   },
-  { type: 'divider', key: 'divider-2' },
+
+  { type: 'divider', key: 'divider-user' },
+  { key: 'users', icon: <Users size={18} />, label: 'Utilisateurs' },
+  { key: 'user-info', icon: <User size={18} />, label: '' },
   { key: 'logout', icon: <LogOut size={18} />, label: 'Déconnexion' },
 ];
