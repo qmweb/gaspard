@@ -36,6 +36,18 @@ docker compose up
 
 ---
 
+## ✨ Creating a New Feature
+
+To generate a new feature (optionally with a page and styles), run:
+
+```bash
+yarn next-maker feature:create
+```
+
+You will be prompted for the feature name, and whether to create a page for it. If you choose to create a page, you will also select the section (front, middle, or back). The script will generate the necessary files and folders in the appropriate locations.
+
+---
+
 ## 🤝 Contributing
 
 Check out the Contributing Guide for more information.

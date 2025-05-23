@@ -2,10 +2,10 @@ import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import { ReactNode } from 'react';
 
-import { Inter } from '@/client/fonts';
-import { ReactQueryProvider } from '@/client/providers/ReactQueryProvider';
-import { ThemeProvider } from '@/client/providers/ThemeProvider';
 import { APP_URL } from '@/utils/constants/config';
+import { Inter } from '@/utils/fonts';
+import { ReactQueryProvider } from '@/utils/providers/ReactQueryProvider';
+import { ThemeProvider } from '@/utils/providers/ThemeProvider';
 
 export const revalidate = 300; // 5 minutes
 
@@ -60,7 +60,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           src='https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4'
         />
       </head>
-      <body className={Inter.variable}>
+
+      <body className={`${Inter.variable}`}>
         <ReactQueryProvider>
           <ThemeProvider>{children}</ThemeProvider>
         </ReactQueryProvider>
