@@ -1,4 +1,4 @@
-import Layout from '@/client/components/layout/middle/Layout';
+import Layout from '@/app/_components/layout/middle/Layout';
 
 export default function MiddleLayout({
   children,

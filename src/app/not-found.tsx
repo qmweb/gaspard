@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import '@/client/styles/pages/not-found.scss';
+import '@/styles/pages/front/not-found.scss';
 
 export const metadata: Metadata = {
   title: 'Erreur 404',
@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-      <section className='not-found'>
-        <h1>Oups ! Cette page n'existe pas...</h1>
-      </section>
+    <section className='not-found'>
+      <h1>Oups ! Cette page n'existe pas...</h1>
+    </section>
   );
 }
