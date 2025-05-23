@@ -91,6 +91,7 @@ h6 {
   @include title($fs-xxl, $fw-light, normal, normal);
   font-family: $ff-serif !important;
   font-weight: $fw-semibold !important;
+  color: $base-color !important;
 }
 
 h2 {

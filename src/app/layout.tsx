@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 
 import { Inter } from '@/client/fonts';
 import { ReactQueryProvider } from '@/client/providers/ReactQueryProvider';
+import { ThemeProvider } from '@/client/providers/ThemeProvider';
 import { APP_URL } from '@/utils/constants/config';
 
 export const revalidate = 300; // 5 minutes
@@ -52,18 +53,18 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang='fr'>
-        <head>
-          <Script
-            strategy='lazyOnload'
-            src='https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4'
-          />
-        </head>
-        <body className={`${Inter.variable}`}>
-          <ReactQueryProvider>
-            {children}
-          </ReactQueryProvider>
-        </body>
+    <html lang='fr' data-theme='light'>
+      <head>
+        <Script
+          strategy='lazyOnload'
+          src='https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4'
+        />
+      </head>
+      <body className={Inter.variable}>
+        <ReactQueryProvider>
+          <ThemeProvider>{children}</ThemeProvider>
+        </ReactQueryProvider>
+      </body>
     </html>
   );
 }
