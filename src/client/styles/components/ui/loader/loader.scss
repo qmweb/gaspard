@@ -1,8 +1,0 @@
-@use '../../../base' as *;
-@use 'sass:color';
-
-.loader {
-  @include flex(center, center, column);
-  height: 100%;
-  width: 100%;
-}

@@ -1,6 +1,6 @@
 import { headers } from 'next/headers';
 
-import { auth } from '@/utils/auth';
+import { auth } from '@/features/auth';
 
 export const getUser = async () => {
   'use server';
