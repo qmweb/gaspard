@@ -1,10 +1,10 @@
 'use client';
 
-import { useSession } from '@lib/auth-client';
 import { Button, Modal, Select } from 'antd';
 import React, { useState } from 'react';
 
 import ButtonPrimary from '@/app/_components/ui/Button/ButtonPrimary';
+import { useSession } from '@/utils/lib/better-auth/auth-client';
 import { useTheme } from '@/utils/providers/ThemeProvider';
 
 interface UserMenuDialogProps {

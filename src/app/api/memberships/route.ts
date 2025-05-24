@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 import { PrismaClient } from '@/app/generated/prisma';
-import { getUser } from '@/utils/lib/auth-session';
+import { getUser } from '@/utils/lib/better-auth/auth-session';
 
 export async function GET() {
   const user = await getUser();

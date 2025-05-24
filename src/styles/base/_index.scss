@@ -8,7 +8,7 @@
 
 @import 'tailwindcss';
 
-@import 'tw-animate-css';
+// @import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -87,10 +87,6 @@
 :root {
   --radius: 0.625rem;
 
-  --background: oklch(1 0 0);
-
-  --foreground: oklch(0.141 0.005 285.823);
-
   --card: oklch(1 0 0);
 
   --card-foreground: oklch(0.141 0.005 285.823);
@@ -148,6 +144,10 @@
   --sidebar-border: oklch(0.92 0.004 286.32);
 
   --sidebar-ring: oklch(0.705 0.015 286.067);
+
+  --background: oklch(1 0 0);
+
+  --foreground: oklch(0.141 0.005 285.823);
 }
 
 .dark {
