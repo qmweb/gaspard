@@ -1,12 +1,14 @@
 import { Receipt } from 'lucide-react';
 
+import '@/client/styles/components/ui/table/table.scss';
+
 export default function InvoicesPage() {
   return (
     <section className='invoices'>
       <h2 className='layout__title-with-icon'>
         <Receipt size={22} /> Factures
       </h2>
-      <table>
+      <table className='table'>
         <thead>
           <tr>
             <th>Numéro</th>

@@ -1,5 +1,7 @@
 import { Plus, Users } from 'lucide-react';
 
+import '@/client/styles/components/ui/table/table.scss';
+
 import ButtonPrimary from '@/client/components/ui/Button/ButtonPrimary';
 
 export default function UsersPage() {
@@ -13,7 +15,7 @@ export default function UsersPage() {
           <Plus size={16} /> Créer
         </ButtonPrimary>
       </div>
-      <table>
+      <table className='table'>
         <thead>
           <tr>
             <th>Nom</th>

@@ -1,5 +1,8 @@
+'use client';
+
+import { useSession } from '@lib/auth-client';
 import { Button, Modal, Select } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 
 import ButtonPrimary from '@/client/components/ui/Button/ButtonPrimary';
 import { useTheme } from '@/client/providers/ThemeProvider';
@@ -15,8 +18,19 @@ const languages = [
 ];
 
 export default function UserMenuDialog({ open, onClose }: UserMenuDialogProps) {
+  const { data: session } = useSession();
+  const user = session?.user;
+  const userName = user?.name || '';
+  let firstName = '';
+  let lastName = '';
+  if (userName) {
+    const parts = userName.split(' ');
+    firstName = parts[0];
+    lastName = parts.slice(1).join(' ');
+  }
   const [language, setLanguage] = React.useState('fr');
   const { theme, setTheme } = useTheme();
+  const [loading, setLoading] = useState(true);
 
   return (
     <Modal
@@ -47,13 +61,13 @@ export default function UserMenuDialog({ open, onClose }: UserMenuDialogProps) {
       </div>
       <ul>
         <li>
-          <strong>Prénom :</strong> John
+          <strong>Prénom :</strong> {firstName}
         </li>
         <li>
-          <strong>Nom :</strong> Doe
+          <strong>Nom :</strong> {lastName}
         </li>
         <li>
-          <strong>Email :</strong> john.doe@example.com
+          <strong>Email :</strong> {user?.email}
         </li>
         <li>
           <strong>Mot de passe :</strong> ***********

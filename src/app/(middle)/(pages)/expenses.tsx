@@ -1,6 +1,8 @@
 import { Dropdown } from 'antd';
 import { Plus, Upload, Wallet } from 'lucide-react';
 
+import '@/client/styles/components/ui/table/table.scss';
+
 import ButtonPrimary from '@/client/components/ui/Button/ButtonPrimary';
 
 export default function ExpensesPage() {
@@ -9,7 +11,7 @@ export default function ExpensesPage() {
       <h2 className='layout__title-with-icon'>
         <Wallet size={22} /> Dépenses
       </h2>
-      <div>
+      <div className='flex gap-2'>
         <ButtonPrimary>
           <Upload size={16} /> Importer
         </ButtonPrimary>
@@ -27,7 +29,7 @@ export default function ExpensesPage() {
           </ButtonPrimary>
         </Dropdown>
       </div>
-      <table>
+      <table className='table'>
         <thead>
           <tr>
             <th>Date</th>

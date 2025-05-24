@@ -1,10 +1,9 @@
 'use client';
 
+import { signUp } from '@lib/auth-client';
 import { Input } from 'antd';
 import { LoaderCircle, Lock, Mail, User } from 'lucide-react';
 import Link from 'next/link';
-
-import { signUp } from '@lib/auth-client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';

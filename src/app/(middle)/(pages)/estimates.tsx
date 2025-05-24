@@ -1,12 +1,14 @@
 import { FileText } from 'lucide-react';
 
+import '@/client/styles/components/ui/table/table.scss';
+
 export default function EstimatesPage() {
   return (
     <section className='estimates'>
       <h2 className='layout__title-with-icon'>
         <FileText size={22} /> Devis
       </h2>
-      <table>
+      <table className='table'>
         <thead>
           <tr>
             <th>Numéro</th>

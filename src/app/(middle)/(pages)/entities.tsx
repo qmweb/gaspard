@@ -1,12 +1,14 @@
 import { Building2 } from 'lucide-react';
 
+import '@/client/styles/components/ui/table/table.scss';
+
 export default function EntitiesPage() {
   return (
     <section className='entities'>
       <h2 className='layout__title-with-icon'>
         <Building2 size={22} /> Entités
       </h2>
-      <table>
+      <table className='table'>
         <thead>
           <tr>
             <th>Nom</th>
