@@ -1,8 +1,5 @@
 @use './mixins' as *;
 @use './variables' as *;
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 ::-moz-selection {
   -webkit-text-fill-color: $select-color;
