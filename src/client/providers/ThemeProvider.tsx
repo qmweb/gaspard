@@ -23,19 +23,21 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>('light');
 
   useEffect(() => {
+    // Load saved theme preference
+    const savedTheme = localStorage.getItem('theme') as Theme;
+    if (savedTheme) {
+      setTheme(savedTheme);
+    } else {
+      setTheme('light');
+    }
+  }, []);
+
+  useEffect(() => {
     // Apply theme to html element since :root is html
     document.documentElement.setAttribute('data-theme', theme);
     // Store theme preference
     localStorage.setItem('theme', theme);
   }, [theme]);
-
-  useEffect(() => {
-    // Load saved theme preference
-    const savedTheme = localStorage.getItem('theme') as Theme;
-    if (savedTheme) {
-      setTheme(savedTheme);
-    }
-  }, []);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
