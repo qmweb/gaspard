@@ -5,7 +5,7 @@ import '@/styles/pages/middle/dashboard/index.scss';
 export default function DashboardPage() {
   return (
     <section className='dashboard'>
-      <h2 className='layout__title-with-icon'>
+      <h2 className='layout__title-with-icon text-3xl font-bold underline'>
         <Home size={22} /> Tableau de bord
       </h2>
       <div style={{ display: 'flex', gap: 24 }}>

@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from 'next';
-import Script from 'next/script';
 import { ReactNode } from 'react';
 
 import { APP_URL } from '@/utils/constants/config';
@@ -54,13 +53,6 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang='fr' data-theme='light'>
-      <head>
-        <Script
-          strategy='lazyOnload'
-          src='https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4'
-        />
-      </head>
-
       <body className={`${Inter.variable}`}>
         <ReactQueryProvider>
           <ThemeProvider>{children}</ThemeProvider>
