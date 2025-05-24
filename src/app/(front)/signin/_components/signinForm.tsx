@@ -1,6 +1,5 @@
 'use client';
 
-import { signIn } from '@lib/auth-client';
 import { Input } from 'antd';
 import { LoaderCircle, Lock, Mail } from 'lucide-react';
 import Link from 'next/link';
@@ -9,6 +8,7 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 
 import ButtonPrimary from '@/app/_components/ui/Button/ButtonPrimary';
+import { signIn } from '@/utils/lib/better-auth/auth-client';
 
 import Logo from '~/images/logo_dark.svg';
 
