@@ -1,7 +1,6 @@
 'use client';
 
 import { DownOutlined } from '@ant-design/icons';
-import { signOut, useSession } from '@lib/auth-client';
 import { Breadcrumb, Dropdown, Layout as AntLayout, Menu, Space } from 'antd';
 import { useRouter } from 'next/navigation';
 import React, { lazy, ReactNode, Suspense, useEffect, useState } from 'react';
@@ -16,6 +15,7 @@ import Dialog from '@/app/_components/ui/Dialog/Dialog';
 import Loader from '@/app/_components/ui/Loader/Loader';
 import { Membership } from '@/app/generated/prisma';
 import { MENU_ITEMS } from '@/utils/constants/menu';
+import { signOut, useSession } from '@/utils/lib/better-auth/auth-client';
 import useMenuStore from '@/utils/stores/menuStore';
 
 import Logo from '~/images/logo_dark.svg';
