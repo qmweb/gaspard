@@ -43,7 +43,7 @@ export default function useMenuItems({
 }: UseMenuItemsProps): MenuItemType[] {
   const userName = [firstName, lastName].filter(Boolean).join(' ');
   return injectUserName(
-    getMenuItems(firstName, lastName, setCurrentPage, onUserInfoClick),
+    getMenuItems(firstName, lastName),
     userName,
     setCurrentPage,
   );
