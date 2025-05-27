@@ -36,38 +36,33 @@ export default function Layout({ children }: { children: ReactNode }) {
   }
 
   const [userDialogOpen, setUserDialogOpen] = React.useState(false);
-  const items = useMenuItems(firstName, lastName, setCurrentPage, () =>
-    setUserDialogOpen(true),
-  );
+  const items = useMenuItems(firstName, lastName);
 
   // Centralized breadcrumb meta from menu
-  const pageMeta = useMenuItems(firstName, lastName, setCurrentPage, () =>
-    setUserDialogOpen(true),
-  ).reduce<Record<string, { label: string; icon: React.ReactNode }>>(
-    (acc, item) => {
-      if (item.type === 'group' && item.children) {
-        item.children.forEach((child) => {
-          if (child && !child.type && child.label && child.icon) {
-            acc[String(child.key)] = {
-              label: typeof child.label === 'string' ? child.label : '',
-              icon: React.cloneElement(child.icon as React.ReactElement, {
-                size: 16,
-              }),
-            };
-          }
-        });
-      } else if (!item.type && item.label && item.icon) {
-        acc[String(item.key)] = {
-          label: typeof item.label === 'string' ? item.label : '',
-          icon: React.cloneElement(item.icon as React.ReactElement, {
-            size: 16,
-          }),
-        };
-      }
-      return acc;
-    },
-    {},
-  );
+  const pageMeta = useMenuItems(firstName, lastName).reduce<
+    Record<string, { label: string; icon: React.ReactNode }>
+  >((acc, item) => {
+    if (item.type === 'group' && item.children) {
+      item.children.forEach((child) => {
+        if (child && !child.type && child.label && child.icon) {
+          acc[String(child.key)] = {
+            label: typeof child.label === 'string' ? child.label : '',
+            icon: React.cloneElement(child.icon as React.ReactElement, {
+              size: 16,
+            }),
+          };
+        }
+      });
+    } else if (!item.type && item.label && item.icon) {
+      acc[String(item.key)] = {
+        label: typeof item.label === 'string' ? item.label : '',
+        icon: React.cloneElement(item.icon as React.ReactElement, {
+          size: 16,
+        }),
+      };
+    }
+    return acc;
+  }, {});
 
   // Dynamic import for each page
   const pageComponents: Record<
