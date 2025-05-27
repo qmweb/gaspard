@@ -3,11 +3,14 @@ import { Building2 } from 'lucide-react';
 import '@/styles/pages/middle/entities/index.scss';
 import '@/styles/ui/table/table.scss';
 
+import { useTranslation } from '@/hooks/useTranslation';
+
 export default function EntitiesPage() {
+  const { t } = useTranslation();
   return (
     <section className='entities'>
       <h2 className='layout__title-with-icon'>
-        <Building2 size={22} /> Entités
+        <Building2 size={22} /> {t('navigation.entities')}
       </h2>
       <table className='table'>
         <thead>

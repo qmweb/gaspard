@@ -1,8 +1,9 @@
 'use client';
 
-import { Button, Modal, Select } from 'antd';
-import React, { useState } from 'react';
+import { Button, Modal } from 'antd';
+import React from 'react';
 
+import { LanguageSwitcher } from '@/app/_components/layout/middle/LanguageSwitcher';
 import ButtonPrimary from '@/app/_components/ui/Button/ButtonPrimary';
 import { useSession } from '@/utils/lib/better-auth/auth-client';
 import { useTheme } from '@/utils/providers/ThemeProvider';
@@ -11,11 +12,6 @@ interface UserMenuDialogProps {
   open: boolean;
   onClose: () => void;
 }
-
-const languages = [
-  { label: 'Français', value: 'fr' },
-  { label: 'English', value: 'en' },
-];
 
 export default function UserMenuDialog({ open, onClose }: UserMenuDialogProps) {
   const { data: session } = useSession();
@@ -28,9 +24,7 @@ export default function UserMenuDialog({ open, onClose }: UserMenuDialogProps) {
     firstName = parts[0];
     lastName = parts.slice(1).join(' ');
   }
-  const [language, setLanguage] = React.useState('fr');
   const { theme, setTheme } = useTheme();
-  const [loading, setLoading] = useState(true);
 
   return (
     <Modal
@@ -43,12 +37,7 @@ export default function UserMenuDialog({ open, onClose }: UserMenuDialogProps) {
       <div style={{ display: 'flex', flexDirection: 'row', gap: 4 }}>
         <div>
           <div style={{ marginBottom: 4 }}>Langue</div>
-          <Select
-            value={language}
-            onChange={setLanguage}
-            options={languages}
-            style={{ width: 120 }}
-          />
+          <LanguageSwitcher />
         </div>
         <div>
           <div style={{ marginBottom: 4 }}>Thème</div>
@@ -73,7 +62,7 @@ export default function UserMenuDialog({ open, onClose }: UserMenuDialogProps) {
           <strong>Mot de passe :</strong> ***********
         </li>
       </ul>
-      <ButtonPrimary>Valider</ButtonPrimary>
+      <ButtonPrimary onClick={onClose}>Valider</ButtonPrimary>
     </Modal>
   );
 }
