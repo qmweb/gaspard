@@ -1,0 +1,46 @@
+{
+  "common": {
+    "welcome": "Bienvenido",
+    "signIn": "Iniciar sesión",
+    "signOut": "Cerrar sesión",
+    "loading": "Cargando...",
+    "error": "Ha ocurrido un error",
+    "success": "¡Éxito!",
+    "dashboard": "Panel de control"
+  },
+  "navigation": {
+    "dashboard": "Panel de control",
+    "expenses": "Gastos",
+    "incomes": "Ingresos",
+    "quotes": "Cotizaciones",
+    "bills": "Facturas",
+    "entities": "Entidades",
+    "reports": "Reportes",
+    "users": "Usuarios"
+  },
+  "navigationGroups": {
+    "finance": "Finanzas",
+    "settings": "Configuración"
+  },
+  "auth": {
+    "emailPlaceholder": "Ingrese su correo electrónico",
+    "passwordPlaceholder": "Ingrese su contraseña",
+    "loginButton": "Entrar",
+    "registerButton": "Registrarse"
+  },
+  "dashboard": {
+    "title": "Panel de control",
+    "balance": "Saldo actual",
+    "transactions": "Transacciones",
+    "categories": "Categorías",
+    "settings": "Configuración",
+    "pendingInvoices": "Facturas pendientes",
+    "pendingBills": "Facturas pendientes",
+    "totalExpenses": "Total de gastos",
+    "totalRecettes": "Total de ingresos",
+    "totalPendingInvoices": "Total de facturas pendientes",
+    "totalPendingBills": "Total de facturas pendientes",
+    "totalPendingInvoicesAmount": "Total de facturas pendientes",
+    "totalPendingBillsAmount": "Total de facturas pendientes"
+  }
+}

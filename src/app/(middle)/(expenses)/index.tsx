@@ -4,13 +4,16 @@ import { Plus, Upload, Wallet } from 'lucide-react';
 import '@/styles/pages/middle/expenses/index.scss';
 import '@/styles/ui/table/table.scss';
 
+import { useTranslation } from '@/hooks/useTranslation';
+
 import ButtonPrimary from '@/app/_components/ui/Button/ButtonPrimary';
 
 export default function ExpensesPage() {
+  const { t } = useTranslation();
   return (
     <section className='expenses'>
       <h2 className='layout__title-with-icon'>
-        <Wallet size={22} /> Dépenses
+        <Wallet size={22} /> {t('navigation.expenses')}
       </h2>
       <div className='flex gap-2'>
         <ButtonPrimary>

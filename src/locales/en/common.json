@@ -1,0 +1,46 @@
+{
+  "common": {
+    "welcome": "Welcome",
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success!",
+    "dashboard": "Dashboard"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "expenses": "Expenses",
+    "incomes": "Incomes",
+    "quotes": "Quotes",
+    "bills": "Bills",
+    "entities": "Entities",
+    "reports": "Reports",
+    "users": "Users"
+  },
+  "navigationGroups": {
+    "finance": "Finance",
+    "settings": "Settings"
+  },
+  "auth": {
+    "emailPlaceholder": "Enter your email",
+    "passwordPlaceholder": "Enter your password",
+    "loginButton": "Login",
+    "registerButton": "Register"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "balance": "Current Balance",
+    "transactions": "Transactions",
+    "categories": "Categories",
+    "settings": "Settings",
+    "pendingInvoices": "Pending Invoices",
+    "pendingBills": "Pending Bills",
+    "totalExpenses": "Total Expenses",
+    "totalRecettes": "Total Recettes",
+    "totalPendingInvoices": "Total Pending Invoices",
+    "totalPendingBills": "Total Pending Bills",
+    "totalPendingInvoicesAmount": "Total Pending Invoices Amount",
+    "totalPendingBillsAmount": "Total Pending Bills Amount"
+  }
+}

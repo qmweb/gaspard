@@ -1,0 +1,46 @@
+{
+  "common": {
+    "welcome": "Bienvenue",
+    "signIn": "Se connecter",
+    "signOut": "Se déconnecter",
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue",
+    "success": "Succès !",
+    "dashboard": "Tableau de bord"
+  },
+  "navigation": {
+    "dashboard": "Tableau de bord",
+    "expenses": "Dépenses",
+    "incomes": "Recettes",
+    "quotes": "Devis",
+    "bills": "Factures",
+    "entities": "Entités",
+    "reports": "Rapports",
+    "users": "Utilisateurs"
+  },
+  "navigationGroups": {
+    "finance": "Finances",
+    "settings": "Paramètres"
+  },
+  "auth": {
+    "emailPlaceholder": "Entrez votre email",
+    "passwordPlaceholder": "Entrez votre mot de passe",
+    "loginButton": "Connexion",
+    "registerButton": "S'inscrire"
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "balance": "Solde actuel",
+    "transactions": "Transactions",
+    "categories": "Catégories",
+    "settings": "Paramètres",
+    "pendingInvoices": "Devis en attente",
+    "pendingBills": "Factures en attente",
+    "totalExpenses": "Total des dépenses",
+    "totalRecettes": "Total des recettes",
+    "totalPendingInvoices": "Total des devis en attente",
+    "totalPendingBills": "Total des factures en attente",
+    "totalPendingInvoicesAmount": "Total des devis en attente",
+    "totalPendingBillsAmount": "Total des factures en attente"
+  }
+}

@@ -1,4 +1,7 @@
-import { MENU_ITEMS, MenuItemType } from '@/utils/constants/menu';
+import {
+  MenuItemType,
+  useMenuItems as getMenuItems,
+} from '@/utils/constants/menu';
 
 interface UseMenuItemsProps {
   firstName: string;
@@ -36,7 +39,12 @@ export default function useMenuItems({
   firstName,
   lastName,
   setCurrentPage,
+  onUserInfoClick,
 }: UseMenuItemsProps): MenuItemType[] {
   const userName = [firstName, lastName].filter(Boolean).join(' ');
-  return injectUserName(MENU_ITEMS, userName, setCurrentPage);
+  return injectUserName(
+    getMenuItems(firstName, lastName, setCurrentPage, onUserInfoClick),
+    userName,
+    setCurrentPage,
+  );
 }

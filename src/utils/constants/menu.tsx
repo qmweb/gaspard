@@ -13,6 +13,8 @@ import {
 } from 'lucide-react';
 import { ReactNode } from 'react';
 
+import { useTranslation } from '@/hooks/useTranslation';
+
 type AntMenuItemType = Required<MenuProps>['items'][number];
 
 export type MenuItemType = AntMenuItemType & {
@@ -23,35 +25,69 @@ export type MenuItemType = AntMenuItemType & {
   children?: MenuItemType[];
 };
 
-export const MENU_ITEMS: MenuItemType[] = [
-  {
-    key: 'dashboard',
-    icon: <Home size={18} />,
-    label: 'Tableau de bord',
-  },
-  {
-    type: 'group',
-    label: 'Finances',
-    key: 'group-finances',
-    children: [
-      { key: 'expenses', icon: <Wallet size={18} />, label: 'Dépenses' },
-      { key: 'incomes', icon: <TrendingUp size={18} />, label: 'Recettes' },
-      { key: 'estimates', icon: <FileText size={18} />, label: 'Devis' },
-      { key: 'invoices', icon: <Receipt size={18} />, label: 'Factures' },
-    ],
-  },
-  {
-    type: 'group',
-    label: 'Paramètres',
-    key: 'group-settings',
-    children: [
-      { key: 'entities', icon: <Building2 size={18} />, label: 'Entités' },
-      { key: 'reports', icon: <BarChart size={18} />, label: 'Rapports' },
-    ],
-  },
+export function useMenuItems(
+  firstName: string,
+  lastName: string,
+): MenuItemType[] {
+  const { t } = useTranslation();
 
-  { type: 'divider', key: 'divider-user' },
-  { key: 'users', icon: <Users size={18} />, label: 'Utilisateurs' },
-  { key: 'user-info', icon: <User size={18} />, label: '' },
-  { key: 'logout', icon: <LogOut size={18} />, label: 'Déconnexion' },
-];
+  return [
+    {
+      key: 'dashboard',
+      icon: <Home size={18} />,
+      label: t('navigation.dashboard'),
+    },
+    {
+      type: 'group',
+      label: t('navigationGroups.finance'),
+      key: 'group-finances',
+      children: [
+        {
+          key: 'expenses',
+          icon: <Wallet size={18} />,
+          label: t('navigation.expenses'),
+        },
+        {
+          key: 'incomes',
+          icon: <TrendingUp size={18} />,
+          label: t('navigation.incomes'),
+        },
+        {
+          key: 'estimates',
+          icon: <FileText size={18} />,
+          label: t('navigation.quotes'),
+        },
+        {
+          key: 'invoices',
+          icon: <Receipt size={18} />,
+          label: t('navigation.bills'),
+        },
+      ],
+    },
+    {
+      type: 'group',
+      label: t('navigationGroups.settings'),
+      key: 'group-settings',
+      children: [
+        {
+          key: 'entities',
+          icon: <Building2 size={18} />,
+          label: t('navigation.entities'),
+        },
+        {
+          key: 'reports',
+          icon: <BarChart size={18} />,
+          label: t('navigation.reports'),
+        },
+      ],
+    },
+    { type: 'divider', key: 'divider-user' },
+    { key: 'users', icon: <Users size={18} />, label: t('navigation.users') },
+    {
+      key: 'user-info',
+      icon: <User size={18} />,
+      label: `${firstName} ${lastName}`,
+    },
+    { key: 'logout', icon: <LogOut size={18} />, label: t('common.signOut') },
+  ];
+}

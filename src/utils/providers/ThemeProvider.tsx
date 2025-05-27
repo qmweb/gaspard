@@ -20,24 +20,35 @@ export function useTheme() {
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const [mounted, setMounted] = useState(false);
   const [theme, setTheme] = useState<Theme>('light');
 
+  // Only run once on mount
   useEffect(() => {
+    setMounted(true);
     // Load saved theme preference
     const savedTheme = localStorage.getItem('theme') as Theme;
     if (savedTheme) {
       setTheme(savedTheme);
-    } else {
-      setTheme('light');
     }
   }, []);
 
   useEffect(() => {
+    if (!mounted) return;
     // Apply theme to html element since :root is html
     document.documentElement.setAttribute('data-theme', theme);
     // Store theme preference
     localStorage.setItem('theme', theme);
-  }, [theme]);
+  }, [theme, mounted]);
+
+  // Prevent hydration mismatch by using initial theme for SSR
+  if (!mounted) {
+    return (
+      <ThemeContext.Provider value={{ theme: 'light', setTheme }}>
+        {children}
+      </ThemeContext.Provider>
+    );
+  }
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
