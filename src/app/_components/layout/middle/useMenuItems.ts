@@ -14,18 +14,25 @@ function injectUserName(
   items: MenuItemType[],
   userName: string,
   setCurrentPage: (key: string) => void,
+  onUserInfoClick: () => void,
 ): MenuItemType[] {
   return items.map((item) => {
     if (item.type === 'group' && item.children) {
       return {
         ...item,
-        children: injectUserName(item.children, userName, setCurrentPage),
+        children: injectUserName(
+          item.children,
+          userName,
+          setCurrentPage,
+          onUserInfoClick,
+        ),
       };
     }
     if (item.key === 'user-info') {
       return {
         ...item,
         label: userName,
+        onClick: onUserInfoClick,
       };
     }
     if (!item.type) {
@@ -46,5 +53,6 @@ export default function useMenuItems({
     getMenuItems(firstName, lastName),
     userName,
     setCurrentPage,
+    onUserInfoClick,
   );
 }

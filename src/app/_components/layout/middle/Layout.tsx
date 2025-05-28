@@ -39,7 +39,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   const items = useMenuItems(firstName, lastName);
 
   // Centralized breadcrumb meta from menu
-  const pageMeta = useMenuItems(firstName, lastName).reduce<
+  const pageMeta = items.reduce<
     Record<string, { label: string; icon: React.ReactNode }>
   >((acc, item) => {
     if (item.type === 'group' && item.children) {

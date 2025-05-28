@@ -1,8 +1,16 @@
-type TranslationSection = 'common' | 'navigation';
+type TranslationSection =
+  | 'common'
+  | 'navigation'
+  | 'navigationGroups'
+  | 'auth'
+  | 'dashboard';
 
 export interface TranslationsType {
   common?: Record<string, string>;
   navigation?: Record<string, string>;
+  navigationGroups?: Record<string, string>;
+  auth?: Record<string, string>;
+  dashboard?: Record<string, string>;
 }
 
 export async function getTranslations(
