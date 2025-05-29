@@ -15,13 +15,16 @@ import Loader from '@/app/_components/ui/Loader/Loader';
 import { Membership } from '@/app/generated/prisma';
 import { useMenuItems } from '@/utils/constants/menu';
 import { signOut, useSession } from '@/utils/lib/better-auth/auth-client';
+import { useTheme } from '@/utils/providers/ThemeProvider';
 import useMenuStore from '@/utils/stores/menuStore';
 
 import Logo from '~/images/logo_dark.svg';
+import LogoLight from '~/images/logo_light.svg';
 
 const { Content, Sider } = AntLayout;
 
 export default function Layout({ children }: { children: ReactNode }) {
+  const { theme } = useTheme();
   const currentPage = useMenuStore((state) => state.currentKey);
   const setCurrentPage = useMenuStore((state) => state.setCurrentKey);
   const { data: session } = useSession();
@@ -125,7 +128,14 @@ export default function Layout({ children }: { children: ReactNode }) {
     <>
       <AntLayout className='layout' hasSider>
         <Sider className='layout__sidebar'>
-          <Logo className='layout__sidebar__logo' />
+          <div className='layout__sidebar__logo-container'>
+            {theme === 'dark' ? (
+              <LogoLight className='layout__sidebar__logo' />
+            ) : (
+              <Logo className='layout__sidebar__logo' />
+            )}
+          </div>
+
           <div
             className='ant-menu-item'
             style={{ padding: 0, marginBottom: 0 }}

@@ -9,10 +9,13 @@ import { toast } from 'sonner';
 
 import ButtonPrimary from '@/app/_components/ui/Button/ButtonPrimary';
 import { signUp } from '@/utils/lib/better-auth/auth-client';
+import { useTheme } from '@/utils/providers/ThemeProvider';
 
 import Logo from '~/images/logo_dark.svg';
+import LogoLight from '~/images/logo_light.svg';
 
 export default function SignUp() {
+  const { theme } = useTheme();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -39,7 +42,11 @@ export default function SignUp() {
     <div className='signup'>
       <div className='signup__container'>
         <div className='signup__logo-container'>
-          <Logo className='signup__logo' />
+          {theme === 'dark' ? (
+            <LogoLight className='signup__logo' />
+          ) : (
+            <Logo className='signup__logo' />
+          )}
         </div>
         <div>
           <h2 className='text-lg md:text-xl'>Créer mon compte</h2>
