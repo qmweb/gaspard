@@ -7,6 +7,8 @@ import { Inter } from '@/utils/fonts';
 import { ReactQueryProvider } from '@/utils/providers/ReactQueryProvider';
 import { ThemeProvider } from '@/utils/providers/ThemeProvider';
 
+import { OrganizationProvider } from '../utils/providers/OrganizationProvider';
+
 export const revalidate = 300; // 5 minutes
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -55,11 +57,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang='fr' data-theme='light'>
       <body className={`${Inter.variable}`}>
-        <LanguageProvider>
-          <ReactQueryProvider>
-            <ThemeProvider>{children}</ThemeProvider>
-          </ReactQueryProvider>
-        </LanguageProvider>
+        <OrganizationProvider>
+          <LanguageProvider>
+            <ReactQueryProvider>
+              <ThemeProvider>{children}</ThemeProvider>
+            </ReactQueryProvider>
+          </LanguageProvider>
+        </OrganizationProvider>
       </body>
     </html>
   );

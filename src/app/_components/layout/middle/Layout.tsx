@@ -3,7 +3,7 @@
 import { DownOutlined } from '@ant-design/icons';
 import { Breadcrumb, Dropdown, Layout as AntLayout, Menu, Space } from 'antd';
 import { useRouter } from 'next/navigation';
-import React, { lazy, ReactNode, Suspense, useEffect, useState } from 'react';
+import React, { lazy, ReactNode, Suspense, useState } from 'react';
 import { Toaster } from 'sonner';
 
 import '@/styles/layout/layout.scss';
@@ -12,9 +12,9 @@ import UserMenuDialog from '@/app/_components/layout/middle/UserMenuDialog';
 import ButtonPrimary from '@/app/_components/ui/Button/ButtonPrimary';
 import Dialog from '@/app/_components/ui/Dialog/Dialog';
 import Loader from '@/app/_components/ui/Loader/Loader';
-import { Membership } from '@/app/generated/prisma';
 import { useMenuItems } from '@/utils/constants/menu';
 import { signOut, useSession } from '@/utils/lib/better-auth/auth-client';
+import { useOrganization } from '@/utils/providers/OrganizationProvider';
 import { useTheme } from '@/utils/providers/ThemeProvider';
 import useMenuStore from '@/utils/stores/menuStore';
 
@@ -84,45 +84,33 @@ export default function Layout({ children }: { children: ReactNode }) {
   const PageComponent = pageComponents[currentPage];
   const router = useRouter();
 
-  const [memberships, setMemberships] = useState<
-    (Membership & { organization: { id: string; name: string } })[]
-  >([]);
   const [orgDialogOpen, setOrgDialogOpen] = useState(false);
   const [orgName, setOrgName] = useState('');
   const [loading, setLoading] = useState(false);
+  const { memberships, currentOrganization, setCurrentOrganization } =
+    useOrganization();
 
-  useEffect(() => {
-    async function fetchMemberships() {
-      const res = await fetch('/api/memberships');
-      if (res.ok) {
-        const data = await res.json();
-        setMemberships(data);
-      }
-    }
-    fetchMemberships();
-  }, []);
-
-  // Handler for creating organization
-  async function handleCreateOrg() {
+  const handleCreateOrg = async () => {
     if (!orgName.trim()) return;
     setLoading(true);
-    const res = await fetch('/api/organizations', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: orgName }),
-    });
-    setLoading(false);
-    if (res.ok) {
-      setOrgDialogOpen(false);
-      setOrgName('');
-      // Refresh memberships
-      const membershipsRes = await fetch('/api/memberships');
-      if (membershipsRes.ok) {
-        const data = await membershipsRes.json();
-        setMemberships(data);
+    try {
+      const res = await fetch('/api/organizations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: orgName.trim() }),
+      });
+      if (res.ok) {
+        setOrgDialogOpen(false);
+        setOrgName('');
+        // Refresh the page to update memberships
+        window.location.reload();
       }
+    } catch (error) {
+      console.error('Failed to create organization:', error);
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <>
@@ -146,23 +134,30 @@ export default function Layout({ children }: { children: ReactNode }) {
                   ?.map((membership) => ({
                     label: <span>{membership.organization.name}</span>,
                     key: membership.organization.id,
+                    onClick: () =>
+                      setCurrentOrganization(membership.organization),
                   }))
                   .concat([
                     {
                       label: (
-                        <span onClick={() => setOrgDialogOpen(true)}>
+                        <span
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setOrgDialogOpen(true);
+                          }}
+                        >
                           Ajouter
                         </span>
                       ),
                       key: 'add-org',
+                      onClick: () => {}, // Add empty onClick to satisfy type
                     },
                   ]),
               }}
               trigger={['click']}
             >
               <Space>
-                {memberships?.[0]?.organization?.name ||
-                  'Sélectionner une organisation'}
+                {currentOrganization?.name || 'Sélectionner une organisation'}
                 <DownOutlined />
               </Space>
             </Dropdown>
