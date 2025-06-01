@@ -16,6 +16,7 @@ import LogoLight from '~/images/logo_light.svg';
 
 export default function SignUp() {
   const { theme } = useTheme();
+
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');

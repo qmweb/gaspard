@@ -135,7 +135,6 @@ export default function Layout({ children }: { children: ReactNode }) {
               <Logo className='layout__sidebar__logo' />
             )}
           </div>
-
           <div
             className='ant-menu-item'
             style={{ padding: 0, marginBottom: 0 }}
