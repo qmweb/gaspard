@@ -3,7 +3,6 @@ import { Home } from 'lucide-react';
 import '@/styles/pages/middle/dashboard/index.scss';
 
 import { useTranslation } from '@/hooks/useTranslation';
-
 import { FetchExpensesDashboard } from '@/app/_components/fetch/expenses';
 import { formatNumberToFrench } from '@/utils/helpers/number';
 

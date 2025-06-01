@@ -6,7 +6,6 @@ import { APP_URL } from '@/utils/constants/config';
 import { Inter } from '@/utils/fonts';
 import { ReactQueryProvider } from '@/utils/providers/ReactQueryProvider';
 import { ThemeProvider } from '@/utils/providers/ThemeProvider';
-
 import { OrganizationProvider } from '../utils/providers/OrganizationProvider';
 
 export const revalidate = 300; // 5 minutes

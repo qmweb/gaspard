@@ -83,7 +83,6 @@ export default function Layout({ children }: { children: ReactNode }) {
   };
   const PageComponent = pageComponents[currentPage];
   const router = useRouter();
-
   const [orgDialogOpen, setOrgDialogOpen] = useState(false);
   const [orgName, setOrgName] = useState('');
   const [loading, setLoading] = useState(false);
@@ -112,6 +111,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     }
   };
 
+
   return (
     <>
       <AntLayout className='layout' hasSider>
@@ -123,7 +123,6 @@ export default function Layout({ children }: { children: ReactNode }) {
               <Logo className='layout__sidebar__logo' />
             )}
           </div>
-
           <div
             className='ant-menu-item'
             style={{ padding: 0, marginBottom: 0 }}
@@ -136,6 +135,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                     key: membership.organization.id,
                     onClick: () =>
                       setCurrentOrganization(membership.organization),
+
                   }))
                   .concat([
                     {
