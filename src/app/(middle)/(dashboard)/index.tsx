@@ -3,9 +3,12 @@ import { Home } from 'lucide-react';
 import '@/styles/pages/middle/dashboard/index.scss';
 
 import { useTranslation } from '@/hooks/useTranslation';
+import { FetchExpensesDashboard } from '@/app/_components/fetch/expenses';
+import { formatNumberToFrench } from '@/utils/helpers/number';
 
 export default function DashboardPage() {
   const { t } = useTranslation();
+  const { expenses, loading } = FetchExpensesDashboard(0);
   return (
     <section className='dashboard'>
       <h2 className='layout__title-with-icon text-3xl font-bold underline'>
@@ -30,7 +33,18 @@ export default function DashboardPage() {
           }}
         >
           <h3>{t('dashboard.totalExpenses')}</h3>
-          <p>3 200 €</p>
+          {loading ? (
+            <p>Chargement...</p>
+          ) : expenses.length > 0 ? (
+            <p>
+              {formatNumberToFrench(
+                expenses.reduce((acc, expense) => acc + expense.amount, 0),
+              )}{' '}
+              €
+            </p>
+          ) : (
+            <p>Aucune dépense réalisée</p>
+          )}
         </div>
         <div
           style={{

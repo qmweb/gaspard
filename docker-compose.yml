@@ -5,6 +5,7 @@ services:
       dockerfile: docker/Dockerfile.${BUILD_TARGET}
     ports:
       - '${PORT:-3000}:3000'
+      - '5555:5555'
     restart: on-failure:3
     volumes:
       - .:/app:delegated
