@@ -3,6 +3,7 @@ import { Home } from 'lucide-react';
 import '@/styles/pages/middle/dashboard/index.scss';
 
 import { useTranslation } from '@/hooks/useTranslation';
+
 import { FetchExpensesDashboard } from '@/app/_components/fetch/expenses';
 import { formatNumberToFrench } from '@/utils/helpers/number';
 
@@ -11,7 +12,7 @@ export default function DashboardPage() {
   const { expenses, loading } = FetchExpensesDashboard(0);
   return (
     <section className='dashboard'>
-      <h2 className='layout__title-with-icon text-3xl font-bold underline'>
+      <h2 className='layout__title-with-icon'>
         <Home size={22} /> {t('common.dashboard')}
       </h2>
       <div style={{ display: 'flex', gap: 24 }}>
