@@ -2,18 +2,16 @@ services:
   app:
     build:
       context: .
-      dockerfile: docker/Dockerfile.dev
-    ports:
-      - '3000:3000'
-      - '5555:5555'
+      dockerfile: docker/Dockerfile.prod
+      args:
+        NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+        NEXT_PUBLIC_APP_URL_CANONICAL: ${NEXT_PUBLIC_APP_URL_CANONICAL}
     restart: on-failure:1
-    volumes:
-      - .:/app
-      - /app/node_modules
-      - /app/.next
+    ports:
+      - 3000
     env_file:
       - ./.env
-    command: yarn run start:dev
+    command: yarn run start:prod
     depends_on:
       - postgres
 
