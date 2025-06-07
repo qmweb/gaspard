@@ -1,9 +1,11 @@
 import MiddleLayout from '@/app/(middle)/layout';
 
-export default async function Home() {
+import MainContent from './_components/shared/main-content';
+
+export default function Home() {
   return (
     <MiddleLayout>
-      <section className='home__hero'></section>
+      <MainContent />
     </MiddleLayout>
   );
 }

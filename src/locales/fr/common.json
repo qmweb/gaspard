@@ -11,22 +11,26 @@
   "navigation": {
     "dashboard": "Tableau de bord",
     "expenses": "Dépenses",
-    "incomes": "Recettes",
-    "quotes": "Devis",
-    "bills": "Factures",
+    "incomes": "Revenus",
+    "estimates": "Devis",
+    "invoices": "Factures",
     "entities": "Entités",
     "reports": "Rapports",
-    "users": "Utilisateurs"
+    "users": "Utilisateurs",
+    "upgradeToPro": "Passer à Pro",
+    "account": "Compte",
+    "billing": "Facturation",
+    "notifications": "Notifications"
   },
   "navigationGroups": {
-    "finance": "Finances",
+    "finance": "Finance",
     "settings": "Paramètres"
   },
   "auth": {
     "emailPlaceholder": "Entrez votre email",
     "passwordPlaceholder": "Entrez votre mot de passe",
     "loginButton": "Connexion",
-    "registerButton": "S'inscrire"
+    "registerButton": "Inscription"
   },
   "dashboard": {
     "title": "Tableau de bord",
@@ -34,13 +38,13 @@
     "transactions": "Transactions",
     "categories": "Catégories",
     "settings": "Paramètres",
-    "pendingInvoices": "Devis en attente",
+    "pendingInvoices": "Factures en attente",
     "pendingBills": "Factures en attente",
     "totalExpenses": "Total des dépenses",
-    "totalRecettes": "Total des recettes",
-    "totalPendingInvoices": "Total des devis en attente",
+    "totalRecettes": "Total des revenus",
+    "totalPendingInvoices": "Total des factures en attente",
     "totalPendingBills": "Total des factures en attente",
-    "totalPendingInvoicesAmount": "Total des devis en attente",
-    "totalPendingBillsAmount": "Total des factures en attente"
+    "totalPendingInvoicesAmount": "Montant total des factures en attente",
+    "totalPendingBillsAmount": "Montant total des factures en attente"
   }
 }

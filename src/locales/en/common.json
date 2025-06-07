@@ -12,11 +12,15 @@
     "dashboard": "Dashboard",
     "expenses": "Expenses",
     "incomes": "Incomes",
-    "quotes": "Quotes",
-    "bills": "Bills",
+    "estimates": "Estimates",
+    "invoices": "Invoices",
     "entities": "Entities",
     "reports": "Reports",
-    "users": "Users"
+    "users": "Users",
+    "upgradeToPro": "Upgrade to Pro",
+    "account": "Account",
+    "billing": "Billing",
+    "notifications": "Notifications"
   },
   "navigationGroups": {
     "finance": "Finance",
