@@ -1,12 +1,10 @@
 import { create } from 'zustand';
 
-interface MenuState {
-  currentKey: string;
-  setCurrentKey: (key: string) => void;
-}
+import { MENU } from '@/utils/constants/menu';
+import { MenuState } from '@/utils/types/main.interface';
 
 const useMenuStore = create<MenuState>((set) => ({
-  currentKey: 'dashboard',
+  currentKey: MENU.DASHBOARD.key,
   setCurrentKey: (key) => set({ currentKey: String(key) }),
 }));
 
