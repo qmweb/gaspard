@@ -12,8 +12,8 @@
     "dashboard": "Panel de control",
     "expenses": "Gastos",
     "incomes": "Ingresos",
-    "quotes": "Cotizaciones",
-    "bills": "Facturas",
+    "estimates": "Cotizaciones",
+    "invoices": "Facturas",
     "entities": "Entidades",
     "reports": "Reportes",
     "users": "Usuarios"
