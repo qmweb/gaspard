@@ -118,7 +118,7 @@ export default function UniqueExpenseDialog({
   return (
     <>
       <DropdownMenu>
-        <DropdownMenuTrigger>
+        <DropdownMenuTrigger asChild>
           <Button>
             <Plus size={16} /> Créer
           </Button>
