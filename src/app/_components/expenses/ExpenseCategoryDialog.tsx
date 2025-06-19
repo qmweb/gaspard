@@ -4,7 +4,8 @@ import { Modal } from 'antd';
 import React, { useState } from 'react';
 import { toast } from 'sonner';
 
-import ButtonPrimary from '@/app/_components/ui/Button/ButtonPrimary';
+import { Button } from '@/app/_components/ui/button';
+import { Input } from '@/app/_components/ui/input';
 import { useOrganization } from '@/utils/providers/OrganizationProvider';
 
 interface ExpenseCategoryDialogProps {
@@ -54,19 +55,20 @@ export default function ExpenseCategoryDialog({
       title='Nouvelle catégorie'
     >
       <form onSubmit={handleSubmit}>
-        <div className='flex flex-col gap-2'>
+        <div className='flex flex-col gap-4'>
           <label htmlFor='Name' className='text-sm font-medium'>
             Nom
           </label>
-          <input
+          <Input
+            placeholder='Entrez le nom de la catégorie'
             type='text'
             name='Name'
             id='Name'
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
+          <Button type='submit'>Valider</Button>
         </div>
-        <ButtonPrimary type='submit'>Valider</ButtonPrimary>
       </form>
     </Modal>
   );

@@ -1,8 +1,5 @@
 import { FileText } from 'lucide-react';
 
-import '@/styles/pages/middle/estimates/index.scss';
-import '@/styles/ui/table/table.scss';
-
 export default function EstimatesPage() {
   return (
     <section className='estimates'>

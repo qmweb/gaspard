@@ -1,9 +1,6 @@
 import { Dropdown } from 'antd';
 import { Plus, TrendingUp, Upload } from 'lucide-react';
 
-import '@/styles/pages/middle/incomes/index.scss';
-import '@/styles/ui/table/table.scss';
-
 import ButtonPrimary from '@/app/_components/ui/Button/ButtonPrimary';
 
 export default function IncomesPage() {

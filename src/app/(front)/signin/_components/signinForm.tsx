@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
-import ButtonPrimary from '@/app/_components/ui/Button/ButtonPrimary';
+import { Button } from '@/app/_components/ui/button';
 import { signIn } from '@/utils/lib/better-auth/auth-client';
 import { useTheme } from '@/utils/providers/ThemeProvider';
 
@@ -89,9 +89,8 @@ export default function SignIn() {
                 prefix={<Lock />}
               />
             </div>
-            <ButtonPrimary
+            <Button
               type='submit'
-              className='button-primary__login'
               disabled={loading}
               onClick={async () => {
                 await signIn.email(
@@ -121,13 +120,13 @@ export default function SignIn() {
               }}
             >
               {loading ? (
-                <p className='button-primary_loading--text'>
+                <>
                   <LoaderCircle className='animate-spin' /> Chargement...
-                </p>
+                </>
               ) : (
-                <p className='button-primary_static--text'> Connexion </p>
+                <>Connexion</>
               )}
-            </ButtonPrimary>
+            </Button>
             <div className='signin__contact-admin'>
               <p>
                 Pas encore de compte ?{' '}

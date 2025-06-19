@@ -1,8 +1,6 @@
 import { Modal, ModalProps } from 'antd';
 import React, { useState } from 'react';
 
-import '@/styles/ui/dialog/dialog.scss';
-
 interface DialogProps extends ModalProps {
   children: React.ReactNode;
   trigger: React.ReactNode;
