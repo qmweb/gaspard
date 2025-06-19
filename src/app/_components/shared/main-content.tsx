@@ -42,11 +42,7 @@ const MainContent = () => {
     }
   };
 
-  return (
-    <main className='flex-1 p-6 overflow-auto'>
-      <Suspense fallback={<Loader />}>{renderContent()}</Suspense>
-    </main>
-  );
+  return <Suspense fallback={<Loader />}>{renderContent()}</Suspense>;
 };
 
 export default MainContent;

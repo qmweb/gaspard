@@ -1,7 +1,5 @@
 import React from 'react';
 
-import '@/styles/ui/button/primary.scss';
-
 interface ButtonPrimaryProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;

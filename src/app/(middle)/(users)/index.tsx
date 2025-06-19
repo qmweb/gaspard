@@ -1,8 +1,5 @@
 import { Plus, Users } from 'lucide-react';
 
-import '@/styles/pages/middle/users/index.scss';
-import '@/styles/ui/table/table.scss';
-
 import ButtonPrimary from '@/app/_components/ui/Button/ButtonPrimary';
 
 export default function UsersPage() {
