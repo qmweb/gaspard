@@ -1,23 +1,28 @@
 'use client';
 
-import { Modal } from 'antd';
-import React, { useState } from 'react';
+import { ListPlus } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 import { Button } from '@/app/_components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/app/_components/ui/dialog';
 import { Input } from '@/app/_components/ui/input';
 import { useOrganization } from '@/utils/providers/OrganizationProvider';
 
 interface ExpenseCategoryDialogProps {
-  open: boolean;
-  onClose: () => void;
+  onSuccess?: () => void;
 }
 
 export default function ExpenseCategoryDialog({
-  open,
-  onClose,
+  onSuccess,
 }: ExpenseCategoryDialogProps) {
   const [name, setName] = useState<string>('');
+  const [expenseCategory, setExpenseCategory] = useState<boolean>(false);
   const { currentOrganization } = useOrganization();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,39 +42,50 @@ export default function ExpenseCategoryDialog({
 
       if (response.ok) {
         // Reset form and close dialog
-        onClose();
-        setName('');
+        setExpenseCategory(false);
         toast.success('Catégorie créée avec succès');
+        if (onSuccess) onSuccess();
       }
     } catch (error) {
       console.error('Failed to create category:', error);
     }
   };
 
+  useEffect(() => {
+    if (expenseCategory) {
+      setName('');
+    }
+  }, [expenseCategory]);
+
   return (
-    <Modal
-      open={open}
-      onCancel={onClose}
-      footer={null}
-      centered
-      title='Nouvelle catégorie'
-    >
-      <form onSubmit={handleSubmit}>
-        <div className='flex flex-col gap-4'>
-          <label htmlFor='Name' className='text-sm font-medium'>
-            Nom
-          </label>
-          <Input
-            placeholder='Entrez le nom de la catégorie'
-            type='text'
-            name='Name'
-            id='Name'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <Button type='submit'>Valider</Button>
-        </div>
-      </form>
-    </Modal>
+    <>
+      <Button onClick={() => setExpenseCategory(true)}>
+        <ListPlus size={16} /> Créer une catégorie
+      </Button>
+
+      <Dialog open={expenseCategory} onOpenChange={setExpenseCategory}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Créer une catégorie</DialogTitle>
+            <form onSubmit={handleSubmit}>
+              <div className='flex flex-col gap-4'>
+                <label htmlFor='Name' className='text-sm font-medium'>
+                  Nom
+                </label>
+                <Input
+                  placeholder='Entrez le nom de la catégorie'
+                  type='text'
+                  name='Name'
+                  id='Name'
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <Button type='submit'>Valider</Button>
+              </div>
+            </form>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }

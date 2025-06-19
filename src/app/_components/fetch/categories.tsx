@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { ExpenseCategory } from '@/app/generated/prisma';
 import { useOrganization } from '@/utils/providers/OrganizationProvider';
 
-export default function FetchCategories() {
+export default function FetchCategories(refreshTrigger = 0) {
   const [categories, setCategories] = useState<ExpenseCategory[]>([]);
   const [loading, setLoading] = useState(false);
   const { currentOrganization } = useOrganization();
@@ -23,7 +23,7 @@ export default function FetchCategories() {
       setLoading(false);
     }
     fetchCategories();
-  }, [currentOrganization]);
+  }, [currentOrganization, refreshTrigger]);
 
   return { categories, loading };
 }

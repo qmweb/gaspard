@@ -44,16 +44,23 @@ import { Textarea } from '@/app/_components/ui/textarea';
 import { cn } from '@/utils/helpers/shadcn-ui';
 import { useOrganization } from '@/utils/providers/OrganizationProvider';
 
-export default function UniqueExpenseDialog() {
+interface UniqueExpenseDialogProps {
+  onSuccess?: () => void;
+  refreshTrigger?: number;
+}
+
+export default function UniqueExpenseDialog({
+  onSuccess,
+  refreshTrigger,
+}: UniqueExpenseDialogProps) {
   const [category, setCategory] = useState<string>('');
   const [amount, setAmount] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [date, setDate] = useState<Date | undefined>(new Date());
   const { currentOrganization } = useOrganization();
-  const { categories, loading } = FetchCategories();
+  const { categories, loading } = FetchCategories(refreshTrigger);
   const [singleExpense, setSingleExpense] = useState(false);
   const [recursiveExpense, setrecursiveExpense] = useState(false);
-
   // Set initial category when categories are loaded
   useEffect(() => {
     if (categories.length > 0 && !category) {
@@ -92,6 +99,7 @@ export default function UniqueExpenseDialog() {
         // Reset form and close dialog
         setSingleExpense(false);
         toast.success('Dépense créée avec succès');
+        if (onSuccess) onSuccess(); // 🔥 Refresh trigger !
       }
     } catch (error) {
       console.error('Failed to create expense:', error);
