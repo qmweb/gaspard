@@ -1,8 +1,5 @@
 import { Receipt } from 'lucide-react';
 
-import '@/styles/pages/middle/invoices/index.scss';
-import '@/styles/ui/table/table.scss';
-
 export default function InvoicesPage() {
   return (
     <section className='invoices'>

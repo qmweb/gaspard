@@ -1,8 +1,5 @@
 import { Building2 } from 'lucide-react';
 
-import '@/styles/pages/middle/entities/index.scss';
-import '@/styles/ui/table/table.scss';
-
 import { useTranslation } from '@/hooks/useTranslation';
 
 export default function EntitiesPage() {

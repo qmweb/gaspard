@@ -1,8 +1,5 @@
 import { FileText } from 'lucide-react';
 
-import '@/styles/pages/middle/reports/index.scss';
-import '@/styles/ui/table/table.scss';
-
 export default function ReportsPage() {
   return (
     <section className='reports'>

@@ -39,6 +39,9 @@ export async function GET(req: Request) {
       },
       organization: true,
     },
+    orderBy: {
+      date: 'desc',
+    },
   });
 
   await prisma.$disconnect();

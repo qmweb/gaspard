@@ -58,7 +58,7 @@ export function TeamSwitcher({
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end' className='w-56'>
-            <DropdownMenuLabel>Organizations</DropdownMenuLabel>
+            <DropdownMenuLabel>Mes entitées</DropdownMenuLabel>
             <DropdownMenuSeparator />
             {teams.map((team) => (
               <DropdownMenuItem
@@ -84,7 +84,7 @@ export function TeamSwitcher({
             <DropdownMenuSeparator />
             <DropdownMenuItem>
               <Plus className='mr-2 size-4' />
-              Add Organization
+              Ajouter une entité
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
