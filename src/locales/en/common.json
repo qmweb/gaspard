@@ -6,7 +6,13 @@
     "loading": "Loading...",
     "error": "An error occurred",
     "success": "Success!",
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "selectLanguage": "Select Language",
+    "lightMode": "Light",
+    "darkMode": "Dark",
+    "selectTheme": "Select Theme",
+    "selectOrganization": "Select an organization",
+    "myEntities": "My Entities"
   },
   "navigation": {
     "dashboard": "Dashboard",

@@ -6,7 +6,13 @@
     "loading": "Cargando...",
     "error": "Ha ocurrido un error",
     "success": "¡Éxito!",
-    "dashboard": "Panel de control"
+    "dashboard": "Panel de control",
+    "selectLanguage": "Seleccionar idioma",
+    "lightMode": "Claro",
+    "darkMode": "Oscuro",
+    "selectTheme": "Seleccionar tema",
+    "selectOrganization": "Seleccionar una organización",
+    "myEntities": "Mis Entidades"
   },
   "navigation": {
     "dashboard": "Panel de control",
@@ -16,7 +22,8 @@
     "invoices": "Facturas",
     "entities": "Entidades",
     "reports": "Reportes",
-    "users": "Usuarios"
+    "users": "Usuarios",
+    "account": "Cuenta"
   },
   "navigationGroups": {
     "finance": "Finanzas",

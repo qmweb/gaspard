@@ -1,5 +1,6 @@
 'use client';
-import { ListPlus, Upload, Wallet } from 'lucide-react';
+import { Upload, Wallet } from 'lucide-react';
+
 import { useState } from 'react';
 
 import {
@@ -28,15 +29,10 @@ import { FetchExpenses } from '@/app/_components/fetch/expenses';
 import { Button } from '@/app/_components/ui/button';
 export default function ExpensesPage() {
   const { t } = useTranslation();
-  const [newExpenseCategoryDialogOpen, setNewExpenseCategoryDialogOpen] =
-    useState(false);
-  const [refreshTrigger, setRefreshTrigger] = useState(0);
-  const { expenses, loading } = FetchExpenses(refreshTrigger);
 
-  const handleExpenseCategoryDialogClose = () => {
-    setNewExpenseCategoryDialogOpen(false);
-    setRefreshTrigger((prev) => prev + 1); // Trigger a refresh when dialog closes
-  };
+const [refreshTrigger, setRefreshTrigger] = useState(0);
+  const [refreshCategoriesTrigger, setRefreshCategoriesTrigger] = useState(0);
+  const { expenses, loading } = FetchExpenses(refreshTrigger);
 
   return (
     <section className='flex flex-col gap-4 p-4'>
@@ -47,10 +43,13 @@ export default function ExpensesPage() {
         <Button>
           <Upload size={16} /> Importer
         </Button>
-        <UniqueExpenseDialog />
-        <Button onClick={() => setNewExpenseCategoryDialogOpen(true)}>
-          <ListPlus size={16} /> Créer une catégorie
-        </Button>
+        <UniqueExpenseDialog
+          onSuccess={() => setRefreshTrigger((prev) => prev + 1)}
+          refreshTrigger={refreshCategoriesTrigger}
+        />
+        <ExpenseCategoryDialog
+          onSuccess={() => setRefreshCategoriesTrigger((prev) => prev + 1)}
+        />
       </div>
       <Table>
         <TableCaption>La liste de vos dernières dépenses</TableCaption>
@@ -97,11 +96,6 @@ export default function ExpensesPage() {
           </TableRow>
         </TableFooter>
       </Table>
-
-      <ExpenseCategoryDialog
-        open={newExpenseCategoryDialogOpen}
-        onClose={handleExpenseCategoryDialogClose}
-      />
     </section>
   );
 }

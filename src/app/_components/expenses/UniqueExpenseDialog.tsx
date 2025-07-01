@@ -44,13 +44,22 @@ import { Textarea } from '@/app/_components/ui/textarea';
 import { cn } from '@/utils/helpers/shadcn-ui';
 import { useOrganization } from '@/utils/providers/OrganizationProvider';
 
-export default function UniqueExpenseDialog() {
+
+interface UniqueExpenseDialogProps {
+  onSuccess?: () => void;
+  refreshTrigger?: number;
+}
+
+export default function UniqueExpenseDialog({
+  onSuccess,
+  refreshTrigger,
+}: UniqueExpenseDialogProps) {
   const [category, setCategory] = useState<string>('');
   const [amount, setAmount] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [date, setDate] = useState<Date | undefined>(new Date());
   const { currentOrganization } = useOrganization();
-  const { categories, loading } = FetchCategories();
+  const { categories, loading } = FetchCategories(refreshTrigger);
   const [singleExpense, setSingleExpense] = useState(false);
   const [recursiveExpense, setrecursiveExpense] = useState(false);
 
@@ -92,6 +101,8 @@ export default function UniqueExpenseDialog() {
         // Reset form and close dialog
         setSingleExpense(false);
         toast.success('Dépense créée avec succès');
+        if (onSuccess) onSuccess(); // 🔥 Refresh trigger !
+
       }
     } catch (error) {
       console.error('Failed to create expense:', error);
@@ -110,7 +121,7 @@ export default function UniqueExpenseDialog() {
   return (
     <>
       <DropdownMenu>
-        <DropdownMenuTrigger>
+        <DropdownMenuTrigger asChild>
           <Button>
             <Plus size={16} /> Créer
           </Button>
@@ -233,13 +244,12 @@ export default function UniqueExpenseDialog() {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Reccursive</DialogTitle>
-            <DialogDescription>
-              This action cannot be undone. Are you sure you want to permanently
-              delete this file from our servers?
-            </DialogDescription>
+            <DialogDescription>En cours de développement...</DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button type='submit'>Confirm</Button>
+            <Button onClick={() => setrecursiveExpense(false)}>
+              D'accord, à plus tard !
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

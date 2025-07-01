@@ -3,6 +3,7 @@ import {
   FileText,
   Home,
   Receipt,
+  User,
   Users,
   Wallet,
 } from 'lucide-react';
@@ -47,5 +48,10 @@ export const MENU = {
     title: 'navigation.users',
     key: 'users',
     icon: Users,
+  },
+  ACCOUNT: {
+    title: 'navigation.account',
+    key: 'account',
+    icon: User,
   },
 };
