@@ -38,6 +38,19 @@ export function OrganizationProvider({ children }: { children: ReactNode }) {
     (Membership & { organization: Organization })[]
   >([]);
   const [loading, setLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
+
+  // Enhanced setCurrentOrganization to save to localStorage
+  const handleSetCurrentOrganization = (org: Organization) => {
+    setCurrentOrganization(org);
+    if (mounted) {
+      localStorage.setItem('selectedOrganizationId', org.id);
+    }
+  };
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     async function fetchMemberships() {
@@ -46,9 +59,29 @@ export function OrganizationProvider({ children }: { children: ReactNode }) {
         if (response.ok) {
           const data = await response.json();
           setMemberships(data);
-          // Set the first organization as current if none is selected
-          if (!currentOrganization && data.length > 0) {
-            setCurrentOrganization(data[0].organization);
+
+          // Try to restore previously selected organization
+          if (mounted && data.length > 0) {
+            const savedOrganizationId = localStorage.getItem(
+              'selectedOrganizationId',
+            );
+            let organizationToSet = null;
+
+            if (savedOrganizationId) {
+              // Find the saved organization in the memberships
+              const savedOrganization = data.find(
+                (membership: Membership & { organization: Organization }) =>
+                  membership.organization.id === savedOrganizationId,
+              );
+              organizationToSet = savedOrganization?.organization;
+            }
+
+            // If no saved organization found or doesn't exist in memberships, use the first one
+            if (!organizationToSet) {
+              organizationToSet = data[0].organization;
+            }
+
+            setCurrentOrganization(organizationToSet);
           }
         }
       } catch (error) {
@@ -58,14 +91,16 @@ export function OrganizationProvider({ children }: { children: ReactNode }) {
       }
     }
 
-    fetchMemberships();
-  }, []);
+    if (mounted) {
+      fetchMemberships();
+    }
+  }, [mounted]);
 
   return (
     <OrganizationContext.Provider
       value={{
         currentOrganization,
-        setCurrentOrganization,
+        setCurrentOrganization: handleSetCurrentOrganization,
         memberships,
         loading,
       }}

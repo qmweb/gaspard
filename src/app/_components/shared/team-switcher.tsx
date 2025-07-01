@@ -1,8 +1,11 @@
 'use client';
 
-import { Building2, ChevronsUpDown, Plus } from 'lucide-react';
+import { Building2, ChevronsUpDown } from 'lucide-react';
 import * as React from 'react';
 
+import { useTranslation } from '@/hooks/useTranslation';
+
+import NewEntityDialog from '@/app/_components/account/NewEntityDialog';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,6 +26,7 @@ export function TeamSwitcher({
   teams,
 }: {
   teams: {
+    id: string;
     name: string;
     logo: React.ElementType;
     plan: string;
@@ -30,6 +34,7 @@ export function TeamSwitcher({
 }) {
   const { isMobile } = useSidebar();
   const { currentOrganization, setCurrentOrganization } = useOrganization();
+  const { t } = useTranslation();
   const [open, setOpen] = React.useState(false);
 
   if (!teams.length) {
@@ -50,7 +55,7 @@ export function TeamSwitcher({
               </div>
               <div className='grid flex-1 text-left text-sm leading-tight'>
                 <span className='truncate font-medium'>
-                  {currentOrganization?.name || 'Select an organization'}
+                  {currentOrganization?.name || t('common.selectOrganization')}
                 </span>
                 <span className='truncate text-xs'>Enterprise</span>
               </div>
@@ -58,14 +63,14 @@ export function TeamSwitcher({
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end' className='w-56'>
-            <DropdownMenuLabel>Mes entitées</DropdownMenuLabel>
+            <DropdownMenuLabel>{t('common.myEntities')}</DropdownMenuLabel>
             <DropdownMenuSeparator />
             {teams.map((team) => (
               <DropdownMenuItem
                 key={team.name}
                 onClick={() =>
                   setCurrentOrganization({
-                    id: team.name,
+                    id: team.id,
                     name: team.name,
                     createdAt: new Date(),
                     updatedAt: new Date(),
@@ -82,9 +87,8 @@ export function TeamSwitcher({
               </DropdownMenuItem>
             ))}
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Plus className='mr-2 size-4' />
-              Ajouter une entité
+            <DropdownMenuItem asChild>
+              <NewEntityDialog />
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

@@ -15,6 +15,7 @@ const Invoices = dynamic(() => import('@/app/(middle)/(invoices)/index'));
 const Entities = dynamic(() => import('@/app/(middle)/(entities)/index'));
 const Reports = dynamic(() => import('@/app/(middle)/(reports)/index'));
 const Users = dynamic(() => import('@/app/(middle)/(users)/index'));
+const Account = dynamic(() => import('@/app/(middle)/(account)/index'));
 
 const MainContent = () => {
   const { currentKey } = useMenuStore();
@@ -37,6 +38,8 @@ const MainContent = () => {
         return <Reports />;
       case MENU.USERS.key:
         return <Users />;
+      case MENU.ACCOUNT.key:
+        return <Account />;
       default:
         return <Dashboard />;
     }

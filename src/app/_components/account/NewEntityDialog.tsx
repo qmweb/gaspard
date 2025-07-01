@@ -1,6 +1,6 @@
 'use client';
 
-import { ListPlus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
@@ -18,59 +18,65 @@ interface ExpenseCategoryDialogProps {
   onSuccess?: () => void;
 }
 
-export default function ExpenseCategoryDialog({
+export default function NewEntityDialog({
   onSuccess,
 }: ExpenseCategoryDialogProps) {
   const [name, setName] = useState<string>('');
-  const [expenseCategory, setExpenseCategory] = useState<boolean>(false);
+  const [newEntity, setNewEntity] = useState<boolean>(false);
   const { currentOrganization } = useOrganization();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!currentOrganization) return;
 
     try {
-      const response = await fetch('/api/categories', {
+      const response = await fetch('/api/organizations', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           name,
-          organizationId: currentOrganization.id,
         }),
       });
 
       if (response.ok) {
         // Reset form and close dialog
-        setExpenseCategory(false);
-        toast.success('Catégorie créée avec succès');
+        setNewEntity(false);
+        toast.success('Entité créée avec succès');
         if (onSuccess) onSuccess();
       }
     } catch (error) {
-      console.error('Failed to create category:', error);
+      console.error('Failed to create entity:', error);
     }
   };
 
   useEffect(() => {
-    if (expenseCategory) {
+    if (newEntity) {
       setName('');
     }
-  }, [expenseCategory]);
+  }, [newEntity]);
 
   return (
     <>
-      <Button onClick={() => setExpenseCategory(true)}>
-        <ListPlus size={16} /> Créer une catégorie
+      <Button
+        variant='ghost'
+        className='w-full'
+        onClick={() => setNewEntity(true)}
+      >
+        <Plus size={16} /> Ajouter une entité
       </Button>
 
-      <Dialog open={expenseCategory} onOpenChange={setExpenseCategory}>
+      <Dialog open={newEntity} onOpenChange={setNewEntity}>
         <DialogContent>
-          <DialogHeader className='flex flex-col gap-4'>
-            <DialogTitle>Créer une catégorie</DialogTitle>
+          <DialogHeader>
+            <DialogTitle>Créer une entité</DialogTitle>
             <form onSubmit={handleSubmit}>
-              <div className='flex flex-col gap-2'>
+              <div className='flex flex-col gap-4'>
+                <label htmlFor='Name' className='text-sm font-medium'>
+                  Nom
+                </label>
                 <Input
-                  placeholder='Entrez le nom de la catégorie'
+                  placeholder="Entrez le nom de l'entité"
                   type='text'
                   name='Name'
                   id='Name'

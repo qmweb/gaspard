@@ -1,12 +1,12 @@
 'use client';
 
 import {
-  BadgeCheck,
   Bell,
   ChevronsUpDown,
   CreditCard,
   LogOut,
   Sparkles,
+  User,
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
@@ -33,6 +33,7 @@ import {
   useSidebar,
 } from '@/app/_components/ui/sidebar';
 import { signOut } from '@/utils/lib/better-auth/auth-client';
+import useMenuStore from '@/utils/stores/menuStore';
 
 export function NavUser({
   user,
@@ -46,11 +47,14 @@ export function NavUser({
   const { isMobile } = useSidebar();
   const router = useRouter();
   const { t } = useTranslation();
+  const initiales = user?.name?.match(/\b\w/g)?.join('');
 
   const handleSignOut = async () => {
     await signOut();
     router.replace('/signin');
   };
+
+  const menuStore = useMenuStore();
 
   return (
     <SidebarMenu>
@@ -63,7 +67,9 @@ export function NavUser({
             >
               <Avatar className='h-8 w-8 rounded-lg'>
                 <AvatarImage src={user.avatar} alt={user.name} />
-                <AvatarFallback className='rounded-lg'>CN</AvatarFallback>
+                <AvatarFallback className='rounded-lg'>
+                  {initiales || 'CN'}
+                </AvatarFallback>
               </Avatar>
               <div className='grid flex-1 text-left text-sm leading-tight'>
                 <span className='truncate font-medium'>{user.name}</span>
@@ -82,7 +88,9 @@ export function NavUser({
               <div className='flex items-center gap-2 px-1 py-1.5 text-left text-sm'>
                 <Avatar className='h-8 w-8 rounded-lg'>
                   <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback className='rounded-lg'>CN</AvatarFallback>
+                  <AvatarFallback className='rounded-lg'>
+                    {initiales || 'CN'}
+                  </AvatarFallback>
                 </Avatar>
                 <div className='grid flex-1 text-left text-sm leading-tight'>
                   <span className='truncate font-medium'>{user.name}</span>
@@ -99,8 +107,10 @@ export function NavUser({
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <BadgeCheck />
+              <DropdownMenuItem
+                onClick={() => menuStore.setCurrentKey('account')}
+              >
+                <User />
                 {t('navigation.account')}
               </DropdownMenuItem>
               <DropdownMenuItem>

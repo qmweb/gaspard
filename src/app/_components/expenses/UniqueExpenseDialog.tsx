@@ -241,13 +241,12 @@ export default function UniqueExpenseDialog({
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Reccursive</DialogTitle>
-            <DialogDescription>
-              This action cannot be undone. Are you sure you want to permanently
-              delete this file from our servers?
-            </DialogDescription>
+            <DialogDescription>En cours de développement...</DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button type='submit'>Confirm</Button>
+            <Button onClick={() => setrecursiveExpense(false)}>
+              D'accord, à plus tard !
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

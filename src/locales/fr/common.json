@@ -6,7 +6,13 @@
     "loading": "Chargement...",
     "error": "Une erreur est survenue",
     "success": "Succès !",
-    "dashboard": "Tableau de bord"
+    "dashboard": "Tableau de bord",
+    "selectLanguage": "Sélectionner la langue",
+    "lightMode": "Clair",
+    "darkMode": "Sombre",
+    "selectTheme": "Sélectionner le thème",
+    "selectOrganization": "Sélectionner une organisation",
+    "myEntities": "Mes entités"
   },
   "navigation": {
     "dashboard": "Tableau de bord",
