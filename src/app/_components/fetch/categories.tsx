@@ -4,6 +4,7 @@ import { ExpenseCategory } from '@/app/generated/prisma';
 import { useOrganization } from '@/utils/providers/OrganizationProvider';
 
 export default function FetchCategories(refreshTrigger = 0) {
+
   const [categories, setCategories] = useState<ExpenseCategory[]>([]);
   const [loading, setLoading] = useState(false);
   const { currentOrganization } = useOrganization();

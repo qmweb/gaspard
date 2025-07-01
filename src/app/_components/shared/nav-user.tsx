@@ -35,6 +35,7 @@ import {
 import { signOut } from '@/utils/lib/better-auth/auth-client';
 import useMenuStore from '@/utils/stores/menuStore';
 
+
 export function NavUser({
   user,
 }: {
@@ -49,12 +50,14 @@ export function NavUser({
   const { t } = useTranslation();
   const initiales = user?.name?.match(/\b\w/g)?.join('');
 
+
   const handleSignOut = async () => {
     await signOut();
     router.replace('/signin');
   };
 
   const menuStore = useMenuStore();
+
 
   return (
     <SidebarMenu>

@@ -1,5 +1,6 @@
 'use client';
 
+
 import { ListPlus } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'sonner';
@@ -11,6 +12,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/app/_components/ui/dialog';
+
 import { Input } from '@/app/_components/ui/input';
 import { useOrganization } from '@/utils/providers/OrganizationProvider';
 
@@ -23,6 +25,7 @@ export default function ExpenseCategoryDialog({
 }: ExpenseCategoryDialogProps) {
   const [name, setName] = useState<string>('');
   const [expenseCategory, setExpenseCategory] = useState<boolean>(false);
+
   const { currentOrganization } = useOrganization();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

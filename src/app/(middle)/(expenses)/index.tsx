@@ -1,5 +1,6 @@
 'use client';
 import { Upload, Wallet } from 'lucide-react';
+
 import { useState } from 'react';
 
 import {
@@ -28,7 +29,8 @@ import { FetchExpenses } from '@/app/_components/fetch/expenses';
 import { Button } from '@/app/_components/ui/button';
 export default function ExpensesPage() {
   const { t } = useTranslation();
-  const [refreshTrigger, setRefreshTrigger] = useState(0);
+
+const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [refreshCategoriesTrigger, setRefreshCategoriesTrigger] = useState(0);
   const { expenses, loading } = FetchExpenses(refreshTrigger);
 

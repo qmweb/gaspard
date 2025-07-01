@@ -40,6 +40,7 @@ const MainContent = () => {
         return <Users />;
       case MENU.ACCOUNT.key:
         return <Account />;
+
       default:
         return <Dashboard />;
     }
