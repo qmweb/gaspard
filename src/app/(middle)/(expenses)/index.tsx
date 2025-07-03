@@ -1,6 +1,5 @@
 'use client';
-import { Upload, Wallet } from 'lucide-react';
-
+import { Ellipsis, Upload, Wallet } from 'lucide-react';
 import { useState } from 'react';
 
 import {
@@ -30,7 +29,7 @@ import { Button } from '@/app/_components/ui/button';
 export default function ExpensesPage() {
   const { t } = useTranslation();
 
-const [refreshTrigger, setRefreshTrigger] = useState(0);
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [refreshCategoriesTrigger, setRefreshCategoriesTrigger] = useState(0);
   const { expenses, loading } = FetchExpenses(refreshTrigger);
 
@@ -72,6 +71,17 @@ const [refreshTrigger, setRefreshTrigger] = useState(0);
               <TableCell className='text-right'>
                 {formatNumberToFrench(expense.amount)} €
               </TableCell>
+              <TableCell className='text-right w-[25px]'>
+                <Button
+                  variant='ghost'
+                  size='icon'
+                  onClick={() => {
+                    // Handle edit action here
+                  }}
+                >
+                  <Ellipsis size={16} />
+                </Button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -93,6 +103,7 @@ const [refreshTrigger, setRefreshTrigger] = useState(0);
                 <p>Aucune dépense réalisée</p>
               )}
             </TableCell>
+            <TableCell className='text-right w-[25px]'></TableCell>
           </TableRow>
         </TableFooter>
       </Table>

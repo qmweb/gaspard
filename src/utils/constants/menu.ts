@@ -3,6 +3,7 @@ import {
   FileText,
   Home,
   Receipt,
+  TrendingUp,
   User,
   Users,
   Wallet,
@@ -17,12 +18,12 @@ export const MENU = {
   EXPENSES: {
     title: 'navigation.expenses',
     key: 'expenses',
-    icon: Receipt,
+    icon: Wallet,
   },
   INCOMES: {
     title: 'navigation.incomes',
     key: 'incomes',
-    icon: Wallet,
+    icon: TrendingUp,
   },
   ESTIMATES: {
     title: 'navigation.estimates',
