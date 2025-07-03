@@ -1,62 +1,107 @@
-import { Dropdown } from 'antd';
-import { Plus, TrendingUp, Upload } from 'lucide-react';
+import { Ellipsis, TrendingUp, Upload } from 'lucide-react';
+import { useState } from 'react';
 
-import ButtonPrimary from '@/app/_components/ui/Button/ButtonPrimary';
+import { useTranslation } from '@/hooks/useTranslation';
+
+import { FetchIncomes } from '@/app/_components/fetch/incomes';
+import UniqueIncomeDialog from '@/app/_components/incomes/UniqueIncomeDialog';
+import { Button } from '@/app/_components/ui/button';
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/app/_components/ui/table';
+import { Income } from '@/app/generated/prisma';
+import { Entity } from '@/app/generated/prisma';
+import { formatDateToFrenchShort } from '@/utils/helpers/date';
+import { formatNumberToFrench } from '@/utils/helpers/number';
+
+interface IncomeWithRelations extends Income {
+  entity: Entity | null;
+}
 
 export default function IncomesPage() {
+  const { t } = useTranslation();
+
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
+  const [refreshCategoriesTrigger, setRefreshCategoriesTrigger] = useState(0);
+  const { incomes, loading } = FetchIncomes(refreshTrigger);
   return (
-    <section className='incomes'>
-      <h2 className='layout__title-with-icon'>
-        <TrendingUp size={22} /> Recettes
+    <section className='flex flex-col gap-4 p-4'>
+      <h2 className='flex items-center gap-2 text-xl font-semibold text-neutral-800 dark:text-neutral-50'>
+        <TrendingUp size={22} /> {t('navigation.incomes')}
       </h2>
       <div className='flex gap-2'>
-        <ButtonPrimary>
+        <Button>
           <Upload size={16} /> Importer
-        </ButtonPrimary>
-        <Dropdown
-          menu={{
-            items: [
-              { key: 'normal', label: 'Revenu unique' },
-              { key: 'recurrent', label: 'Revenu récurrent' },
-            ],
-          }}
-          trigger={['click']}
-        >
-          <ButtonPrimary>
-            <Plus size={16} /> Créer
-          </ButtonPrimary>
-        </Dropdown>
+        </Button>
+        <UniqueIncomeDialog
+          onSuccess={() => setRefreshTrigger((prev) => prev + 1)}
+          refreshTrigger={refreshCategoriesTrigger}
+        />
       </div>
-      <table className='table'>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Montant</th>
-            <th>Source</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>2024-06-02</td>
-            <td>Vente produit A</td>
-            <td>2 000 €</td>
-            <td>Ventes</td>
-          </tr>
-          <tr>
-            <td>2024-06-04</td>
-            <td>Prestation de service</td>
-            <td>1 500 €</td>
-            <td>Services</td>
-          </tr>
-          <tr>
-            <td>2024-06-06</td>
-            <td>Subvention</td>
-            <td>500 €</td>
-            <td>Subventions</td>
-          </tr>
-        </tbody>
-      </table>
+      <Table>
+        <TableCaption>La liste de vos derniers revenus</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead className='w-[100px]'>Date</TableHead>
+            <TableHead>Entitée</TableHead>
+            <TableHead>Description</TableHead>
+            <TableHead className='text-right'>Montant</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {(incomes as IncomeWithRelations[]).map((income) => (
+            <TableRow key={income.id}>
+              <TableCell className='font-medium'>
+                {formatDateToFrenchShort(income.date.toString())}
+              </TableCell>
+              <TableCell>{income.entity?.name || 'Aucune entitée'}</TableCell>
+              <TableCell>{income.description}</TableCell>
+              <TableCell className='text-right'>
+                {formatNumberToFrench(income.amount)} €
+              </TableCell>
+              <TableCell className='text-right w-[25px]'>
+                <Button
+                  variant='ghost'
+                  size='icon'
+                  onClick={() => {
+                    // Handle edit action here
+                  }}
+                >
+                  <Ellipsis size={16} />
+                </Button>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+        <TableFooter>
+          <TableRow>
+            <TableCell colSpan={3}>Total</TableCell>
+            <TableCell className='text-right'>
+              {' '}
+              {loading ? (
+                <p>Chargement...</p>
+              ) : incomes.length > 0 ? (
+                <p>
+                  {formatNumberToFrench(
+                    incomes.reduce((acc, expense) => acc + expense.amount, 0),
+                  )}{' '}
+                  €
+                </p>
+              ) : (
+                <p>Aucune entrée réalisée</p>
+              )}
+            </TableCell>
+            <TableCell className='text-right w-[25px]'></TableCell>
+          </TableRow>
+        </TableFooter>
+      </Table>
     </section>
   );
 }
