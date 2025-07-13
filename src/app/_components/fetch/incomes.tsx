@@ -28,7 +28,7 @@ export function FetchIncomes(refreshTrigger = 0) {
   return { incomes, loading };
 }
 
-export function FetchincomesDashboard(refreshTrigger = 0) {
+export function FetchIncomesDashboard(refreshTrigger = 0) {
   const [incomes, setincomes] = useState<Income[]>([]);
   const [loading, setLoading] = useState(false);
   const { currentOrganization } = useOrganization();
