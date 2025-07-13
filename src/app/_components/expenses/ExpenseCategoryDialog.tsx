@@ -1,6 +1,5 @@
 'use client';
 
-
 import { ListPlus } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'sonner';
@@ -12,7 +11,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/app/_components/ui/dialog';
-
 import { Input } from '@/app/_components/ui/input';
 import { useOrganization } from '@/utils/providers/OrganizationProvider';
 

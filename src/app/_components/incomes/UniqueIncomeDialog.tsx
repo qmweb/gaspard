@@ -135,7 +135,7 @@ export default function UniqueIncomeDialog({
             <DialogTitle>Créer un revenu unique</DialogTitle>
             <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
               <div className='flex flex-col gap-2'>
-                <label className='text-sm font-medium'>Catégorie</label>
+                <label className='text-sm font-medium'>Entitée</label>
                 <Select onValueChange={setEntities} value={entities}>
                   <SelectTrigger className='w-full'>
                     {entity.length === 0 ? (
@@ -146,7 +146,7 @@ export default function UniqueIncomeDialog({
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
-                      <SelectLabel>Catégories</SelectLabel>
+                      <SelectLabel>Entitées</SelectLabel>
                       {entity.map((entitie) => (
                         <SelectItem key={entitie.id} value={entitie.id}>
                           {entitie.name}
