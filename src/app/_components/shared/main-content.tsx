@@ -17,6 +17,10 @@ const Reports = dynamic(() => import('@/app/(middle)/(reports)/index'));
 const Users = dynamic(() => import('@/app/(middle)/(users)/index'));
 const Account = dynamic(() => import('@/app/(middle)/(account)/index'));
 
+const NewEstimate = dynamic(
+  () => import('@/app/(middle)/(estimates)/(create)/index'),
+);
+
 const MainContent = () => {
   const { currentKey } = useMenuStore();
 
@@ -40,6 +44,8 @@ const MainContent = () => {
         return <Users />;
       case MENU.ACCOUNT.key:
         return <Account />;
+      case MENU.NEW_ESTIMATE.key:
+        return <NewEstimate />;
 
       default:
         return <Dashboard />;

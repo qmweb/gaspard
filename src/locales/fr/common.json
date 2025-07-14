@@ -26,7 +26,8 @@
     "upgradeToPro": "Passer à Pro",
     "account": "Compte",
     "billing": "Facturation",
-    "notifications": "Notifications"
+    "notifications": "Notifications",
+    "newEstimate": "Nouveau devis"
   },
   "navigationGroups": {
     "finance": "Finance",
@@ -52,5 +53,16 @@
     "totalPendingBills": "Total des factures en attente",
     "totalPendingInvoicesAmount": "Montant total des factures en attente",
     "totalPendingBillsAmount": "Montant total des factures en attente"
+  },
+  "status": {
+    "pending": "En attente",
+    "paid": "Payé",
+    "overdue": "En retard",
+    "draft": "Brouillon",
+    "sent": "Envoyé",
+    "cancelled": "Annulé",
+    "accepted": "Accepté",
+    "rejected": "Rejeté",
+    "expired": "Expiré"
   }
 }

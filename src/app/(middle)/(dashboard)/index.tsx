@@ -69,7 +69,7 @@ export default function DashboardPage() {
         </div>
       </div>
       <div className='flex gap-4'>
-        <button onClick={() => menuStore.setCurrentKey('estimates')}>
+        <button onClick={() => menuStore.setCurrentKey('new-estimate')}>
           <div className='bg-violet-300 hover:bg-violet-400 transition-all dark:bg-violet-800 text-neutral-50 dark:text-neutral-800 p-4 rounded-lg flex flex-col justify-center items-start cursor-pointer'>
             <FileText />
             <h3 className='font-bold'>Créer un nouveau devis</h3>
