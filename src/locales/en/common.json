@@ -26,7 +26,8 @@
     "upgradeToPro": "Upgrade to Pro",
     "account": "Account",
     "billing": "Billing",
-    "notifications": "Notifications"
+    "notifications": "Notifications",
+    "newEstimate": "New Estimate"
   },
   "navigationGroups": {
     "finance": "Finance",
@@ -52,5 +53,16 @@
     "totalPendingBills": "Total Pending Bills",
     "totalPendingInvoicesAmount": "Total Pending Invoices Amount",
     "totalPendingBillsAmount": "Total Pending Bills Amount"
+  },
+  "status": {
+    "pending": "Pending",
+    "paid": "Paid",
+    "overdue": "Overdue",
+    "draft": "Draft",
+    "sent": "Sent",
+    "cancelled": "Cancelled",
+    "accepted": "Accepted",
+    "rejected": "Rejected",
+    "expired": "Expired"
   }
 }

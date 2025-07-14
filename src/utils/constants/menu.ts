@@ -55,4 +55,9 @@ export const MENU = {
     key: 'account',
     icon: User,
   },
+  NEW_ESTIMATE: {
+    title: 'navigation.newEstimate',
+    key: 'new-estimate',
+    icon: FileText,
+  },
 };

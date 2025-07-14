@@ -23,7 +23,8 @@
     "entities": "Entidades",
     "reports": "Reportes",
     "users": "Usuarios",
-    "account": "Cuenta"
+    "account": "Cuenta",
+    "newEstimate": "Nueva cotización"
   },
   "navigationGroups": {
     "finance": "Finanzas",
@@ -49,5 +50,16 @@
     "totalPendingBills": "Total de facturas pendientes",
     "totalPendingInvoicesAmount": "Total de facturas pendientes",
     "totalPendingBillsAmount": "Total de facturas pendientes"
+  },
+  "status": {
+    "pending": "Pendiente",
+    "paid": "Pagado",
+    "overdue": "Vencido",
+    "draft": "Borrador",
+    "sent": "Enviado",
+    "cancelled": "Cancelado",
+    "accepted": "Aceptado",
+    "rejected": "Rechazado",
+    "expired": "Expirado"
   }
 }
