@@ -12,7 +12,18 @@
     "darkMode": "Oscuro",
     "selectTheme": "Seleccionar tema",
     "selectOrganization": "Seleccionar una organización",
-    "myEntities": "Mis Entidades"
+    "myEntities": "Mis Entidades",
+    "systemMode": "Sistema",
+    "currentTheme": "Tema actual",
+    "themeSettings": "Configuración de tema",
+    "languageSettings": "Configuración de idioma",
+    "accountSettings": "Configuración de cuenta de",
+    "quantity": "Cantidad",
+    "unitPrice": "Precio unitario",
+    "total": "Total",
+    "enterItemName": "Ingrese el nombre del artículo",
+    "noItems": "No se encontraron artículos",
+    "create": "Crear"
   },
   "navigation": {
     "dashboard": "Panel de control",
@@ -50,6 +61,19 @@
     "totalPendingBills": "Total de facturas pendientes",
     "totalPendingInvoicesAmount": "Total de facturas pendientes",
     "totalPendingBillsAmount": "Total de facturas pendientes"
+  },
+  "estimates": {
+    "client": "Cliente",
+    "selectClientPrompt": "Seleccionar un cliente para crear una cotización",
+    "clickToChange": "Haga clic para cambiar",
+    "date": "Fecha",
+    "expirationDate": "Fecha de vencimiento",
+    "estimateNumber": "Número de cotización",
+    "selectDate": "Seleccionar una fecha",
+    "enterEstimateNumber": "Ingrese el número de cotización",
+    "articleDescription": "Descripción del artículo",
+    "actions": "Acciones",
+    "addArticle": "Agregar artículo"
   },
   "status": {
     "pending": "Pendiente",

@@ -107,6 +107,7 @@ export default function SignIn() {
                     },
                     onSuccess: () => {
                       router.replace('/');
+                      toast.success('Connexion réussie.');
                     },
                     onError: (error) => {
                       setLoading(false);

@@ -1,5 +1,4 @@
 import { Ellipsis, FileText, Upload } from 'lucide-react';
-import { useState } from 'react';
 
 import { useTranslation } from '@/hooks/useTranslation';
 
@@ -28,7 +27,6 @@ export default function EstimatesPage() {
   const { t } = useTranslation();
   const menuStore = useMenuStore();
   const { estimates, loading } = FetchEstimates();
-  const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   return (
     <section className='flex flex-col gap-4 p-4'>

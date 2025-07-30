@@ -12,7 +12,18 @@
     "darkMode": "Dark",
     "selectTheme": "Select Theme",
     "selectOrganization": "Select an organization",
-    "myEntities": "My Entities"
+    "myEntities": "My Entities",
+    "systemMode": "System",
+    "currentTheme": "Current theme",
+    "themeSettings": "Theme Settings",
+    "languageSettings": "Language Settings",
+    "accountSettings": "Account settings for",
+    "quantity": "Quantity",
+    "unitPrice": "Unit Price",
+    "total": "Total",
+    "enterItemName": "Enter item name",
+    "noItems": "No items found",
+    "create": "Create"
   },
   "navigation": {
     "dashboard": "Dashboard",
@@ -53,6 +64,19 @@
     "totalPendingBills": "Total Pending Bills",
     "totalPendingInvoicesAmount": "Total Pending Invoices Amount",
     "totalPendingBillsAmount": "Total Pending Bills Amount"
+  },
+  "estimates": {
+    "client": "Client",
+    "selectClientPrompt": "Select a client to create an estimate",
+    "clickToChange": "Click to change",
+    "date": "Date",
+    "expirationDate": "Expiration Date",
+    "estimateNumber": "Estimate Number",
+    "selectDate": "Select a date",
+    "enterEstimateNumber": "Enter estimate number",
+    "articleDescription": "Article Description",
+    "actions": "Actions",
+    "addArticle": "Add Article"
   },
   "status": {
     "pending": "Pending",

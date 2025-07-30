@@ -12,7 +12,18 @@
     "darkMode": "Sombre",
     "selectTheme": "Sélectionner le thème",
     "selectOrganization": "Sélectionner une organisation",
-    "myEntities": "Mes entités"
+    "myEntities": "Mes entités",
+    "systemMode": "Système",
+    "currentTheme": "Thème actuel",
+    "themeSettings": "Paramètres de thème",
+    "languageSettings": "Paramètres de langue",
+    "accountSettings": "Paramètres du compte de",
+    "quantity": "Quantité",
+    "unitPrice": "Prix unitaire",
+    "total": "Total",
+    "enterItemName": "Entrez le nom de l'article",
+    "noItems": "Aucun article trouvé",
+    "create": "Créer"
   },
   "navigation": {
     "dashboard": "Tableau de bord",
@@ -53,6 +64,19 @@
     "totalPendingBills": "Total des factures en attente",
     "totalPendingInvoicesAmount": "Montant total des factures en attente",
     "totalPendingBillsAmount": "Montant total des factures en attente"
+  },
+  "estimates": {
+    "client": "Client",
+    "selectClientPrompt": "Sélectionner un client pour créer un devis",
+    "clickToChange": "Cliquer pour changer",
+    "date": "Date",
+    "expirationDate": "Date d'expiration",
+    "estimateNumber": "Numéro de devis",
+    "selectDate": "Sélectionner une date",
+    "enterEstimateNumber": "Entrez le numéro de devis",
+    "articleDescription": "Description de l'article",
+    "actions": "Actions",
+    "addArticle": "Ajouter un article"
   },
   "status": {
     "pending": "En attente",
