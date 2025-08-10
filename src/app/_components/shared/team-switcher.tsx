@@ -18,7 +18,6 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar,
 } from '@/app/_components/ui/sidebar';
 import { useOrganization } from '@/utils/providers/OrganizationProvider';
 

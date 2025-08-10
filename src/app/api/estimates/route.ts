@@ -3,6 +3,21 @@ import { NextResponse } from 'next/server';
 import { getUser } from '@/utils/lib/better-auth/auth-session';
 import prisma from '@/utils/lib/prisma/prisma';
 
+interface ArticleItem {
+  name: string;
+  description?: string;
+  quantity: number;
+  unitPrice: number;
+}
+
+interface EstimateRequestBody {
+  organizationId: string;
+  entityId: string;
+  date: string;
+  expirationDate: string;
+  articles: ArticleItem[];
+}
+
 export async function GET(req: Request) {
   const user = await getUser();
   if (!user?.id)
@@ -48,12 +63,13 @@ export async function POST(req: Request) {
   if (!user?.id)
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
-  const body = await req.json();
-  const { organizationId, entityId, title } = body;
+  const body: EstimateRequestBody = await req.json();
+  const { organizationId, entityId, articles } = body;
+  console.log(body);
 
-  if (!organizationId || !entityId || !title) {
+  if (!organizationId || !entityId) {
     return NextResponse.json(
-      { error: 'Organization ID, Entity ID and Title are required' },
+      { error: 'Organization ID and Entity ID are required' },
       { status: 400 },
     );
   }
@@ -63,25 +79,20 @@ export async function POST(req: Request) {
       organizationId,
       entityId,
       status: 'DRAFT',
-      totalAmount: body.items.reduce(
-        (acc: number, item: any) => acc + item.totalPrice,
+      totalAmount: articles.reduce(
+        (acc: number, item: ArticleItem) =>
+          acc + item.quantity * item.unitPrice,
         0,
       ),
+      createdAt: new Date(),
       updatedAt: new Date(),
       items: {
-        create: body.items.map((item: any) => ({
+        create: articles.map((item: ArticleItem) => ({
           name: item.name,
-          description: item.description,
+          description: item.description || '',
           quantity: item.quantity,
           unitPrice: item.unitPrice,
-          totalPrice: item.totalPrice,
-        })),
-      },
-      taxes: {
-        create: body.taxes.map((tax: any) => ({
-          name: tax.name,
-          rate: tax.rate,
-          amount: tax.amount,
+          total: item.quantity * item.unitPrice,
         })),
       },
     },

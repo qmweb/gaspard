@@ -1,36 +1,11 @@
-import { Save, FileText } from 'lucide-react';
-import { useState } from 'react';
-import { useTranslation } from '@/hooks/useTranslation';
-import { Button } from '@/app/_components/ui/button';
-import { Trash2, CalendarIcon, GripVertical } from 'lucide-react';
-import { Calendar } from '@/app/_components/ui/calendar';
-import { Label } from '@/app/_components/ui/label';
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/app/_components/ui/popover';
-
-import {
-  Table,
-  TableHeader,
-  TableRow,
-  TableHead,
-  TableBody,
-  TableCell,
-  TableFooter,
-} from '@/app/_components/ui/table';
-
-import { Input } from '@/app/_components/ui/input';
-import EntitySelect from '@/app/_components/estimates/EntitySelect';
-import {
-  DndContext,
   closestCenter,
+  DndContext,
+  DragEndEvent,
   KeyboardSensor,
   PointerSensor,
   useSensor,
   useSensors,
-  DragEndEvent,
 } from '@dnd-kit/core';
 import {
   arrayMove,
@@ -40,7 +15,35 @@ import {
 } from '@dnd-kit/sortable';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { FileText, Save } from 'lucide-react';
+import { CalendarIcon, GripVertical, Trash2 } from 'lucide-react';
+import { useState } from 'react';
+import { toast } from 'sonner';
+
+import { useTranslation } from '@/hooks/useTranslation';
+
+import EntitySelect from '@/app/_components/estimates/EntitySelect';
+import { Button } from '@/app/_components/ui/button';
+import { Calendar } from '@/app/_components/ui/calendar';
+import { Input } from '@/app/_components/ui/input';
+import { Label } from '@/app/_components/ui/label';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/app/_components/ui/popover';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/app/_components/ui/table';
 import { Textarea } from '@/app/_components/ui/textarea';
+import { useOrganization } from '@/utils/providers/OrganizationProvider';
+import useMenuStore from '@/utils/stores/menuStore';
 
 function formatDate(date: Date | undefined) {
   if (!date) {
@@ -71,10 +74,11 @@ function SortableArticleRow({
     name: string;
     quantity: number;
     unitPrice: number;
+    description: string;
   };
   onArticleChange: (
     id: string,
-    field: 'name' | 'quantity' | 'unitPrice',
+    field: 'name' | 'quantity' | 'unitPrice' | 'description',
     value: string | number,
   ) => void;
   onRemoveArticle: (id: string) => void;
@@ -122,6 +126,10 @@ function SortableArticleRow({
           placeholder={t('estimates.articleDescription')}
           className='w-full'
           rows={2}
+          value={article.description}
+          onChange={(e) =>
+            onArticleChange(article.id, 'description', e.target.value)
+          }
         />
       </TableCell>
       <TableCell className='align-top'>
@@ -152,8 +160,10 @@ function SortableArticleRow({
           </span>
         </div>
       </TableCell>
-      <TableCell className='text-right'>
-        {(article.quantity * article.unitPrice).toFixed(2)}€
+      <TableCell className='relative'>
+        <p className='absolute right-0 '>
+          {(article.quantity * article.unitPrice).toFixed(2).replace('.', ',')}€
+        </p>
       </TableCell>
       <TableCell className='text-right w-[25px]'>
         <Button
@@ -171,6 +181,8 @@ function SortableArticleRow({
 
 export default function EstimatesPage() {
   const { t } = useTranslation();
+  const { currentOrganization } = useOrganization();
+  const menuStore = useMenuStore();
   const [entityDialogOpen, setEntityDialogOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const [openExpirationDate, setOpenExpirationDate] = useState(false);
@@ -198,6 +210,7 @@ export default function EstimatesPage() {
       name: string;
       quantity: number;
       unitPrice: number;
+      description: string;
     }[]
   >([]);
 
@@ -217,15 +230,17 @@ export default function EstimatesPage() {
     const newArticle = {
       id: crypto.randomUUID(),
       name: '',
+      description: '',
       quantity: 1,
       unitPrice: 0,
     };
     setArticles((prev) => [...prev, newArticle]);
+    console.log(articles);
   };
 
   const handleArticleChange = (
     id: string,
-    field: 'name' | 'quantity' | 'unitPrice',
+    field: 'name' | 'quantity' | 'unitPrice' | 'description',
     value: string | number,
   ) => {
     setArticles((prev) =>
@@ -265,6 +280,59 @@ export default function EstimatesPage() {
 
         return arrayMove(items, oldIndex, newIndex);
       });
+    }
+  };
+
+  const handleCreateEstimate = async () => {
+    // Logic to create the estimate
+    const estimateData = {
+      organizationId: currentOrganization?.id,
+      entityId: selectedEntity?.id,
+      date: date ? date.toISOString() : null,
+      expirationDate: expirationDate ? expirationDate.toISOString() : null,
+      articles: articles.map((article) => ({
+        name: article.name,
+        description: article.description,
+        quantity: article.quantity,
+        unitPrice: article.unitPrice,
+      })),
+    };
+    if (!currentOrganization) return;
+
+    try {
+      const response = await fetch('/api/estimates', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(estimateData),
+      });
+
+      if (response.ok) {
+        // Reset form and close dialog
+        toast.success('Devis créée avec succès');
+        menuStore.setCurrentKey('estimates');
+      }
+
+      const data = await response.json();
+      if (data.error) {
+        switch (data.error) {
+          case 'Unauthorized':
+            toast.error("Vous n'êtes pas autorisé à créer un devis");
+            break;
+          case 'Organization ID and Entity ID are required':
+            toast.error('Veuillez sélectionner un client');
+            break;
+          default:
+            toast.error('Erreur lors de la création du devis');
+            break;
+        }
+      } else {
+        // Optionally, handle the created estimate data
+        console.log('Estimate created:', data);
+      }
+    } catch (error) {
+      console.error('Failed to create estimate:', error);
     }
   };
 
@@ -434,7 +502,7 @@ export default function EstimatesPage() {
               <Input
                 id='estimate-number'
                 placeholder={t('estimates.enterEstimateNumber')}
-                value={'DEV-000001'}
+                value='DEV-000001'
               />
             </div>
           </div>
@@ -444,7 +512,7 @@ export default function EstimatesPage() {
             {t('estimates.actions')}
           </Label>
           <div className='relative flex gap-2'>
-            <Button variant='secondary'>
+            <Button variant='secondary' onClick={handleCreateEstimate}>
               <Save /> {t('common.create')}
             </Button>
           </div>

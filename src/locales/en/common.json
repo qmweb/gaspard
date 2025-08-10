@@ -23,7 +23,8 @@
     "total": "Total",
     "enterItemName": "Enter item name",
     "noItems": "No items found",
-    "create": "Create"
+    "create": "Create",
+    "actions": "Actions"
   },
   "navigation": {
     "dashboard": "Dashboard",
@@ -38,7 +39,9 @@
     "account": "Account",
     "billing": "Billing",
     "notifications": "Notifications",
-    "newEstimate": "New Estimate"
+    "newEstimate": "New Estimate",
+    "editEstimate": "Edit Estimate",
+    "deleteEstimate": "Delete Estimate"
   },
   "navigationGroups": {
     "finance": "Finance",

@@ -256,6 +256,7 @@ model EstimateItem {
   id          String    @id @default(uuid())
   estimate    Estimate  @relation(fields: [estimateId], references: [id], onDelete: Cascade)
   estimateId  String
+  name        String
   description String
   quantity    Float      @default(1)
   unitPrice   Float      // Prix unitaire HT
@@ -269,6 +270,7 @@ model InvoiceItem {
   id          String    @id @default(uuid())
   invoice     Invoice   @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
   invoiceId   String
+  name        String
   description String
   quantity    Float      @default(1)
   unitPrice   Float

@@ -23,7 +23,8 @@
     "total": "Total",
     "enterItemName": "Ingrese el nombre del artículo",
     "noItems": "No se encontraron artículos",
-    "create": "Crear"
+    "create": "Crear",
+    "actions": "Acciones"
   },
   "navigation": {
     "dashboard": "Panel de control",
@@ -35,7 +36,9 @@
     "reports": "Reportes",
     "users": "Usuarios",
     "account": "Cuenta",
-    "newEstimate": "Nueva cotización"
+    "newEstimate": "Nueva cotización",
+    "editEstimate": "Editar cotización",
+    "deleteEstimate": "Eliminar cotización"
   },
   "navigationGroups": {
     "finance": "Finanzas",

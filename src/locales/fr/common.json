@@ -23,7 +23,8 @@
     "total": "Total",
     "enterItemName": "Entrez le nom de l'article",
     "noItems": "Aucun article trouvé",
-    "create": "Créer"
+    "create": "Créer",
+    "actions": "Actions"
   },
   "navigation": {
     "dashboard": "Tableau de bord",
@@ -38,7 +39,9 @@
     "account": "Compte",
     "billing": "Facturation",
     "notifications": "Notifications",
-    "newEstimate": "Nouveau devis"
+    "newEstimate": "Nouveau devis",
+    "editEstimate": "Modifier le devis",
+    "deleteEstimate": "Supprimer le devis"
   },
   "navigationGroups": {
     "finance": "Finance",
