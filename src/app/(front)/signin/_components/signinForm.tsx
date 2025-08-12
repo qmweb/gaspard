@@ -38,106 +38,107 @@ export default function SignIn() {
   };
 
   return (
-    <div className='signin'>
-      <div className='signin__container'>
-        <div className='signin__logo-container'>
+    <main className='signin w-full h-screen flex justify-center items-center'>
+      <section className='signin__content'>
+        <div className='flex justify-center items-center'>
           {theme === 'dark' ? (
             <LogoLight className='signin__logo' />
           ) : (
             <Logo className='signin__logo' />
           )}
         </div>
-        <div>
-          <h2 className='text-lg md:text-xl'>{t('auth.signInTitle')}</h2>
-          <p className='text-xs md:text-sm'>{t('auth.signInSubtitle')}</p>
-        </div>
-        <div>
-          <div className='grid gap-4'>
-            <div className='grid gap-2'>
-              <label htmlFor='email'>{t('auth.email')}</label>
-              <Input
-                id='email'
-                type='email'
-                placeholder={t('auth.emailPlaceholder')}
-                required
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-                value={email}
-                size='large'
-                prefix={<Mail />}
-              />
-            </div>
-
-            <div className='grid gap-2'>
-              <div className='flex items-center'>
-                <label htmlFor='password'>{t('auth.password')}</label>
-              </div>
-
-              <Input.Password
-                visibilityToggle={{
-                  visible: passwordVisible,
-                  onVisibleChange: setPasswordVisible,
-                }}
-                id='password'
-                type='password'
-                placeholder={t('auth.passwordPlaceholder')}
-                autoComplete='password'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                size='large'
-                prefix={<Lock />}
-              />
-            </div>
-            <Button
-              type='submit'
-              disabled={loading}
-              onClick={async () => {
-                await signIn.email(
-                  {
-                    email,
-                    password,
-                  },
-                  {
-                    onRequest: () => {
-                      setLoading(true);
-                    },
-                    onResponse: () => {
-                      setLoading(false);
-                    },
-                    onSuccess: () => {
-                      router.replace('/');
-                    },
-                    onError: (error) => {
-                      setLoading(false);
-                      const errorMessage =
-                        errorMessagesMap[error.error.message] ||
-                        t('auth.genericError');
-                      toast.error(errorMessage);
-                    },
-                  },
-                );
+        <div className='grid gap-3 mt-6'>
+          <div className='grid gap-1'>
+            <label className='text-base font-medium' htmlFor='email'>
+              {t('auth.email')}
+            </label>
+            <Input
+              id='email'
+              type='email'
+              placeholder={t('auth.emailPlaceholder')}
+              required
+              onChange={(e) => {
+                setEmail(e.target.value);
               }}
-            >
-              {loading ? (
-                <>
-                  <LoaderCircle className='animate-spin' /> {t('auth.loading')}
-                </>
-              ) : (
-                <>{t('auth.loginButton')}</>
-              )}
-            </Button>
-            <div className='signin__contact-admin'>
-              <p>
-                {t('auth.noAccountYet')}{' '}
-                <Link replace={true} href='/signup'>
-                  {t('auth.contactAdmin')}
-                </Link>
-              </p>
-            </div>
+              value={email}
+              size='large'
+              prefix={<Mail className='mt-0.5 me-1.5' color='gray' size={16} />}
+            />
           </div>
+
+          <div className='grid gap-1'>
+            <label className='text-base font-medium' htmlFor='password'>
+              {t('auth.password')}
+            </label>
+
+            <Input.Password
+              visibilityToggle={{
+                visible: passwordVisible,
+                onVisibleChange: setPasswordVisible,
+              }}
+              id='password'
+              type='password'
+              placeholder={t('auth.passwordPlaceholder')}
+              autoComplete='password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              size='large'
+              prefix={<Lock className='mt-0.5 me-1.5' color='gray' size={16} />}
+            />
+          </div>
+
+          <Button
+            type='submit'
+            className='mt-1'
+            disabled={loading}
+            onClick={async () => {
+              await signIn.email(
+                {
+                  email,
+                  password,
+                },
+                {
+                  onRequest: () => {
+                    setLoading(true);
+                  },
+                  onResponse: () => {
+                    setLoading(false);
+                  },
+                  onSuccess: () => {
+                    router.replace('/');
+                  },
+                  onError: (error) => {
+                    setLoading(false);
+                    const errorMessage =
+                      errorMessagesMap[error.error.message] ||
+                      t('auth.genericError');
+                    toast.error(errorMessage);
+                  },
+                },
+              );
+            }}
+          >
+            {loading ? (
+              <>
+                <LoaderCircle className='animate-spin' /> {t('auth.loading')}
+              </>
+            ) : (
+              <>{t('auth.loginButton')}</>
+            )}
+          </Button>
+
+          <p>
+            {t('auth.noAccountYet')}{' '}
+            <Link
+              replace={true}
+              className='text-base font-medium'
+              href='/signup'
+            >
+              {t('auth.contactAdmin')}
+            </Link>
+          </p>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }
