@@ -7,6 +7,8 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
+import { useTranslation } from '@/hooks/useTranslation';
+
 import { Button } from '@/app/_components/ui/button';
 import { signIn } from '@/utils/lib/better-auth/auth-client';
 import { useTheme } from '@/utils/providers/ThemeProvider';
@@ -16,6 +18,7 @@ import LogoLight from '~/images/logo_light.svg';
 
 export default function SignIn() {
   const { theme } = useTheme();
+  const { t } = useTranslation();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,15 +27,14 @@ export default function SignIn() {
 
   const router = useRouter();
 
-  // Mapper les messages d'erreur pour le toaster
+  // Map error messages for the toaster
   const errorMessagesMap: Record<string, string> = {
-    'Invalid email or password': 'Mot de passe ou e-mail invalide.',
-    'User not found': 'Utilisateur non trouvé.',
-    'Email already in use': "L'adresse e-mail est déjà utilisée.",
-    'Password too short': 'Le mot de passe est trop court.',
-    'Network error': 'Erreur réseau, veuillez réessayer.',
-    'User already exists': 'Un compte existe déjà avec cette adresse e-mail.',
-    // Ajoute ici d'autres messages retournés par better-auth
+    'Invalid email or password': t('auth.invalidCredentials'),
+    'User not found': t('auth.userNotFound'),
+    'Email already in use': t('auth.emailAlreadyInUse'),
+    'Password too short': t('auth.passwordTooShort'),
+    'Network error': t('auth.networkError'),
+    'User already exists': t('auth.userAlreadyExists'),
   };
 
   return (
@@ -46,19 +48,17 @@ export default function SignIn() {
           )}
         </div>
         <div>
-          <h2 className='text-lg md:text-xl'>Se connecter</h2>
-          <p className='text-xs md:text-sm'>
-            Entrez votre email et mot de passe pour vous connecter
-          </p>
+          <h2 className='text-lg md:text-xl'>{t('auth.signInTitle')}</h2>
+          <p className='text-xs md:text-sm'>{t('auth.signInSubtitle')}</p>
         </div>
         <div>
           <div className='grid gap-4'>
             <div className='grid gap-2'>
-              <label htmlFor='email'>Email</label>
+              <label htmlFor='email'>{t('auth.email')}</label>
               <Input
                 id='email'
                 type='email'
-                placeholder='m@example.com'
+                placeholder={t('auth.emailPlaceholder')}
                 required
                 onChange={(e) => {
                   setEmail(e.target.value);
@@ -71,7 +71,7 @@ export default function SignIn() {
 
             <div className='grid gap-2'>
               <div className='flex items-center'>
-                <label htmlFor='password'>Mot de passe</label>
+                <label htmlFor='password'>{t('auth.password')}</label>
               </div>
 
               <Input.Password
@@ -81,7 +81,7 @@ export default function SignIn() {
                 }}
                 id='password'
                 type='password'
-                placeholder='Mot de passe'
+                placeholder={t('auth.passwordPlaceholder')}
                 autoComplete='password'
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -112,7 +112,7 @@ export default function SignIn() {
                       setLoading(false);
                       const errorMessage =
                         errorMessagesMap[error.error.message] ||
-                        'Une erreur est survenue. Veuillez réessayer.';
+                        t('auth.genericError');
                       toast.error(errorMessage);
                     },
                   },
@@ -121,17 +121,17 @@ export default function SignIn() {
             >
               {loading ? (
                 <>
-                  <LoaderCircle className='animate-spin' /> Chargement...
+                  <LoaderCircle className='animate-spin' /> {t('auth.loading')}
                 </>
               ) : (
-                <>Connexion</>
+                <>{t('auth.loginButton')}</>
               )}
             </Button>
             <div className='signin__contact-admin'>
               <p>
-                Pas encore de compte ?{' '}
+                {t('auth.noAccountYet')}{' '}
                 <Link replace={true} href='/signup'>
-                  contactez l'administrateur
+                  {t('auth.contactAdmin')}
                 </Link>
               </p>
             </div>

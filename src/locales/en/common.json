@@ -34,10 +34,24 @@
     "settings": "Settings"
   },
   "auth": {
-    "emailPlaceholder": "Enter your email",
-    "passwordPlaceholder": "Enter your password",
     "loginButton": "Login",
-    "registerButton": "Register"
+    "registerButton": "Register",
+    "signInTitle": "Sign In",
+    "signInSubtitle": "Enter your email and password to sign in",
+    "email": "Email",
+    "emailPlaceholder": "Enter your email address...",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password...",
+    "loading": "Loading...",
+    "noAccountYet": "Don't have an account yet?",
+    "contactAdmin": "Contact the administrator",
+    "invalidCredentials": "Invalid email or password.",
+    "userNotFound": "User not found.",
+    "emailAlreadyInUse": "Email address is already in use.",
+    "passwordTooShort": "Password is too short.",
+    "networkError": "Network error, please try again.",
+    "userAlreadyExists": "An account already exists with this email address.",
+    "genericError": "An error occurred. Please try again."
   },
   "dashboard": {
     "title": "Dashboard",
