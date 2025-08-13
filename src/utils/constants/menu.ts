@@ -60,4 +60,9 @@ export const MENU = {
     key: 'new-estimate',
     icon: FileText,
   },
+  EDIT_ESTIMATE: {
+    title: 'navigation.editEstimate',
+    key: 'edit-estimate',
+    icon: FileText,
+  },
 };

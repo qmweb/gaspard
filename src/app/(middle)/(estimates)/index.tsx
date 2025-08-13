@@ -7,10 +7,22 @@ import {
   ShieldAlert,
   Upload,
 } from 'lucide-react';
+import { useState } from 'react';
 
 import { useTranslation } from '@/hooks/useTranslation';
 
 import { FetchEstimates } from '@/app/_components/fetch/estimates';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/app/_components/ui/alert-dialog';
 import { Badge } from '@/app/_components/ui/badge';
 import { Button } from '@/app/_components/ui/button';
 import {
@@ -38,15 +50,39 @@ import {
 import { Entity, Estimate } from '@/app/generated/prisma';
 import { formatDateToFrenchShort } from '@/utils/helpers/date';
 import { formatNumberToFrench } from '@/utils/helpers/number';
+import { useOrganization } from '@/utils/providers/OrganizationProvider';
 import useMenuStore from '@/utils/stores/menuStore';
 
 interface EstimateWithRelations extends Estimate {
   entity: Entity | null;
 }
 
-function EditMenu() {
+function EditMenu({
+  estimate,
+  onEstimateDeleted,
+}: {
+  estimate: EstimateWithRelations;
+  onEstimateDeleted: () => void;
+}) {
   const { t } = useTranslation();
   const menuStore = useMenuStore();
+  const { currentOrganization } = useOrganization();
+
+  const handleDeleteEstimate = async (id: string) => {
+    if (!currentOrganization) return;
+    const response = await fetch(
+      `/api/estimates/${id}?organizationId=${currentOrganization.id}`,
+      {
+        method: 'DELETE',
+      },
+    );
+
+    if (response.ok) {
+      onEstimateDeleted();
+    } else {
+      alert('Échec de la suppression du devis');
+    }
+  };
 
   return (
     <DropdownMenu>
@@ -81,17 +117,38 @@ function EditMenu() {
           </DropdownMenuPortal>
         </DropdownMenuSub>
         <DropdownMenuItem
-          onClick={() => menuStore.setCurrentKey('edit-estimate')}
+          onClick={() => menuStore.setCurrentKey('edit-estimate', estimate.id)}
         >
           {t('navigation.editEstimate')}
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem
-          onClick={() => menuStore.setCurrentKey('delete-estimate')}
-          className='text-red-500 hover:bg-red-100 dark:hover:bg-red-800'
-        >
-          {t('navigation.deleteEstimate')}
-        </DropdownMenuItem>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <DropdownMenuItem
+              onSelect={(e) => e.preventDefault()}
+              className='text-red-500 hover:bg-red-100 dark:hover:bg-red-800'
+            >
+              {t('navigation.deleteEstimate')}
+            </DropdownMenuItem>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Êtes-vous sûr ?</AlertDialogTitle>
+              <AlertDialogDescription>
+                Cette action ne peut pas être annulée. Cela supprimera
+                définitivement ce devis.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Annuler</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={() => handleDeleteEstimate(estimate.id)}
+              >
+                Supprimer
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -100,7 +157,12 @@ function EditMenu() {
 export default function EstimatesPage() {
   const { t } = useTranslation();
   const menuStore = useMenuStore();
-  const { estimates, loading } = FetchEstimates();
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
+  const { estimates, loading } = FetchEstimates(refreshTrigger);
+
+  const handleEstimateDeleted = () => {
+    setRefreshTrigger((prev) => prev + 1);
+  };
 
   return (
     <section className='flex flex-col gap-4 p-4'>
@@ -169,7 +231,10 @@ export default function EstimatesPage() {
                 {formatNumberToFrench(estimate.totalAmount)} €
               </TableCell>
               <TableCell className='text-right w-[25px]'>
-                <EditMenu />
+                <EditMenu
+                  estimate={estimate}
+                  onEstimateDeleted={handleEstimateDeleted}
+                />
               </TableCell>
             </TableRow>
           ))}

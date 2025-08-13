@@ -1,4 +1,5 @@
 export interface MenuState {
   currentKey: string;
-  setCurrentKey: (key: string) => void;
+  estimateId?: string;
+  setCurrentKey: (key: string, estimateId?: string) => void;
 }

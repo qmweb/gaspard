@@ -24,6 +24,8 @@
     "enterItemName": "Ingrese el nombre del artículo",
     "noItems": "No se encontraron artículos",
     "create": "Crear",
+    "update": "Actualizar",
+    "cancel": "Cancelar",
     "actions": "Acciones"
   },
   "navigation": {
@@ -66,6 +68,9 @@
     "totalPendingBillsAmount": "Total de facturas pendientes"
   },
   "estimates": {
+    "selectEntity": "Seleccionar Entidad",
+    "articleName": "Nombre del Artículo",
+    "articleDescription": "Descripción del artículo",
     "client": "Cliente",
     "selectClientPrompt": "Seleccionar un cliente para crear una cotización",
     "clickToChange": "Haga clic para cambiar",
@@ -73,10 +78,11 @@
     "expirationDate": "Fecha de vencimiento",
     "estimateNumber": "Número de cotización",
     "selectDate": "Seleccionar una fecha",
+    "selectExpirationDate": "Seleccionar fecha de vencimiento",
     "enterEstimateNumber": "Ingrese el número de cotización",
-    "articleDescription": "Descripción del artículo",
     "actions": "Acciones",
-    "addArticle": "Agregar artículo"
+    "addArticle": "Agregar artículo",
+    "updateEstimate": "Actualizar Cotización"
   },
   "status": {
     "pending": "Pendiente",

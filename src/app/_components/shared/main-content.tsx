@@ -21,6 +21,10 @@ const NewEstimate = dynamic(
   () => import('@/app/(middle)/(estimates)/(create)/index'),
 );
 
+const EditEstimate = dynamic(
+  () => import('@/app/(middle)/(estimates)/(update)/index'),
+);
+
 const MainContent = () => {
   const { currentKey } = useMenuStore();
 
@@ -46,6 +50,8 @@ const MainContent = () => {
         return <Account />;
       case MENU.NEW_ESTIMATE.key:
         return <NewEstimate />;
+      case MENU.EDIT_ESTIMATE.key:
+        return <EditEstimate />;
 
       default:
         return <Dashboard />;

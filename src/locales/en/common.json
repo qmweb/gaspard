@@ -24,6 +24,8 @@
     "enterItemName": "Enter item name",
     "noItems": "No items found",
     "create": "Create",
+    "update": "Update",
+    "cancel": "Cancel",
     "actions": "Actions"
   },
   "navigation": {
@@ -69,6 +71,9 @@
     "totalPendingBillsAmount": "Total Pending Bills Amount"
   },
   "estimates": {
+    "selectEntity": "Select Entity",
+    "articleName": "Article Name",
+    "articleDescription": "Article Description",
     "client": "Client",
     "selectClientPrompt": "Select a client to create an estimate",
     "clickToChange": "Click to change",
@@ -76,10 +81,11 @@
     "expirationDate": "Expiration Date",
     "estimateNumber": "Estimate Number",
     "selectDate": "Select a date",
+    "selectExpirationDate": "Select expiration date",
     "enterEstimateNumber": "Enter estimate number",
-    "articleDescription": "Article Description",
     "actions": "Actions",
-    "addArticle": "Add Article"
+    "addArticle": "Add Article",
+    "updateEstimate": "Update Estimate"
   },
   "status": {
     "pending": "Pending",

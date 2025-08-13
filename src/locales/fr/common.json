@@ -24,6 +24,8 @@
     "enterItemName": "Entrez le nom de l'article",
     "noItems": "Aucun article trouvé",
     "create": "Créer",
+    "update": "Mettre à jour",
+    "cancel": "Annuler",
     "actions": "Actions"
   },
   "navigation": {
@@ -70,16 +72,18 @@
   },
   "estimates": {
     "client": "Client",
-    "selectClientPrompt": "Sélectionner un client pour créer un devis",
-    "clickToChange": "Cliquer pour changer",
+    "selectEntity": "Sélectionner une entité",
+    "articleName": "Nom de l'article",
+    "articleDescription": "Description de l'article",
     "date": "Date",
     "expirationDate": "Date d'expiration",
     "estimateNumber": "Numéro de devis",
     "selectDate": "Sélectionner une date",
+    "selectExpirationDate": "Sélectionner une date d'expiration",
     "enterEstimateNumber": "Entrez le numéro de devis",
-    "articleDescription": "Description de l'article",
     "actions": "Actions",
-    "addArticle": "Ajouter un article"
+    "addArticle": "Ajouter un article",
+    "updateEstimate": "Modifier le devis"
   },
   "status": {
     "pending": "En attente",
