@@ -50,10 +50,24 @@
     "settings": "Paramètres"
   },
   "auth": {
-    "emailPlaceholder": "Entrez votre email",
-    "passwordPlaceholder": "Entrez votre mot de passe",
     "loginButton": "Connexion",
-    "registerButton": "Inscription"
+    "registerButton": "Inscription",
+    "signInTitle": "Se connecter",
+    "signInSubtitle": "Entrez votre e-mail et mot de passe pour vous connecter",
+    "email": "E-mail",
+    "emailPlaceholder": "Entrez votre e-mail...",
+    "password": "Mot de passe",
+    "passwordPlaceholder": "Entrez votre mot de passe...",
+    "loading": "Chargement...",
+    "noAccountYet": "Pas encore de compte ?",
+    "contactAdmin": "Contactez l'administrateur",
+    "invalidCredentials": "Mot de passe ou e-mail invalide.",
+    "userNotFound": "Utilisateur non trouvé.",
+    "emailAlreadyInUse": "L'adresse e-mail est déjà utilisée.",
+    "passwordTooShort": "Le mot de passe est trop court.",
+    "networkError": "Erreur réseau, veuillez réessayer.",
+    "userAlreadyExists": "Un compte existe déjà avec cette adresse e-mail.",
+    "genericError": "Une erreur est survenue. Veuillez réessayer."
   },
   "dashboard": {
     "title": "Tableau de bord",

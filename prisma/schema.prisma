@@ -178,8 +178,9 @@ model Invoice {
   taxes          InvoiceTax[]
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
-  items         InvoiceItem[]
-  validUntil    DateTime?
+  validFrom      DateTime?       @default(now())
+  validUntil     DateTime?       @default(now())
+  items          InvoiceItem[]
 }
 
 model Estimate {
@@ -193,8 +194,9 @@ model Estimate {
   taxes          EstimateTax[]
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
+  validFrom      DateTime?       @default(now())
+  validUntil     DateTime?       
   items          EstimateItem[]
-  validUntil     DateTime?
 }
 
 model Entity {

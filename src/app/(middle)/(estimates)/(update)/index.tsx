@@ -189,7 +189,10 @@ export default function UpdateEstimatePage() {
 
   // États pour les données du devis
   const [loading, setLoading] = useState(true);
-  const [selectedEntity, setSelectedEntity] = useState<string>();
+  const [selectedEntity, setSelectedEntity] = useState<{
+    id: string;
+    name: string;
+  } | null>(null);
   const [isEntityDialogOpen, setIsEntityDialogOpen] = useState(false);
   const [date, setDate] = useState<Date>(new Date());
   const [expirationDate, setExpirationDate] = useState<Date>();
@@ -229,8 +232,9 @@ export default function UpdateEstimatePage() {
         const estimate = await response.json();
 
         // Précharger les données
-        setSelectedEntity(estimate.entity || '');
-        setDate(new Date(estimate.createdAt));
+        setSelectedEntity(estimate.entity || null);
+        setDate(new Date(estimate.validFrom));
+        setExpirationDate(new Date(estimate.validUntil));
 
         if (estimate.expirationDate) {
           setExpirationDate(new Date(estimate.expirationDate));
@@ -370,12 +374,6 @@ export default function UpdateEstimatePage() {
     }
   };
 
-  // Calculer le total
-  const totalAmount = articles.reduce(
-    (sum, article) => sum + article.quantity * article.unitPrice,
-    0,
-  );
-
   if (loading) {
     return (
       <section className='flex flex-col gap-4 p-4'>
@@ -426,9 +424,10 @@ export default function UpdateEstimatePage() {
               open={isEntityDialogOpen}
               onOpenChange={setIsEntityDialogOpen}
               onSuccess={(entity: { id: string; name: string }) => {
-                setSelectedEntity(entity.id);
+                setSelectedEntity({ id: entity.id, name: entity.name });
                 setIsEntityDialogOpen(false);
               }}
+              currentEntity={selectedEntity?.id}
             />
           </div>
         </div>
@@ -512,12 +511,7 @@ export default function UpdateEstimatePage() {
             disabled
           />
         </div>
-        <div className='flex flex-col gap-3'>
-          <Label className='px-1'>{t('common.total')}</Label>
-          <div className='text-2xl font-bold text-green-600'>
-            {totalAmount.toFixed(2)} €
-          </div>
-        </div>
+
         <div className='flex flex-col gap-3'>
           <Label htmlFor='date' className='px-1'>
             {t('estimates.actions')}
@@ -580,7 +574,7 @@ export default function UpdateEstimatePage() {
             </TableBody>
             <TableFooter>
               <TableRow>
-                <TableCell colSpan={6} className='text-center'>
+                <TableCell colSpan={4} className='text-center'>
                   <Button
                     variant='outline'
                     className='w-full'
@@ -588,6 +582,16 @@ export default function UpdateEstimatePage() {
                   >
                     {t('estimates.addArticle')}
                   </Button>
+                </TableCell>
+                <TableCell colSpan={2} className='text-right font-medium'>
+                  {articles
+                    .reduce(
+                      (acc, article) =>
+                        acc + article.unitPrice * article.quantity,
+                      0,
+                    )
+                    .toLocaleString()}{' '}
+                  €
                 </TableCell>
               </TableRow>
             </TableFooter>

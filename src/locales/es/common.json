@@ -47,10 +47,24 @@
     "settings": "Configuración"
   },
   "auth": {
-    "emailPlaceholder": "Ingrese su correo electrónico",
-    "passwordPlaceholder": "Ingrese su contraseña",
     "loginButton": "Entrar",
-    "registerButton": "Registrarse"
+    "registerButton": "Registrarse",
+    "signInTitle": "Iniciar sesión",
+    "signInSubtitle": "Ingrese su correo electrónico y contraseña para iniciar sesión",
+    "email": "Correo electrónico",
+    "emailPlaceholder": "Ingrese su correo electrónico...",
+    "password": "Contraseña",
+    "passwordPlaceholder": "Ingrese su contraseña...",
+    "loading": "Cargando...",
+    "noAccountYet": "¿Aún no tienes una cuenta?",
+    "contactAdmin": "Contacta al administrador",
+    "invalidCredentials": "Correo electrónico o contraseña inválidos.",
+    "userNotFound": "Usuario no encontrado.",
+    "emailAlreadyInUse": "La dirección de correo electrónico ya está en uso.",
+    "passwordTooShort": "La contraseña es demasiado corta.",
+    "networkError": "Error de red, por favor inténtalo de nuevo.",
+    "userAlreadyExists": "Ya existe una cuenta con esta dirección de correo electrónico.",
+    "genericError": "Ha ocurrido un error. Por favor inténtalo de nuevo."
   },
   "dashboard": {
     "title": "Panel de control",

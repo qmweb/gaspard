@@ -289,7 +289,8 @@ export default function EstimatesPage() {
       organizationId: currentOrganization?.id,
       entityId: selectedEntity?.id,
       date: date ? date.toISOString() : null,
-      expirationDate: expirationDate ? expirationDate.toISOString() : null,
+      validFrom: date ? date.toISOString() : null,
+      validUntil: expirationDate ? expirationDate.toISOString() : null,
       articles: articles.map((article) => ({
         name: article.name,
         description: article.description,
@@ -354,11 +355,11 @@ export default function EstimatesPage() {
                     {selectedEntity.name}
                   </div>
                   <div className='text-xs text-neutral-500'>
-                    {t('estimates.clickToChange')}
+                    {t('common.update')}
                   </div>
                 </div>
               ) : (
-                t('estimates.selectClientPrompt')
+                t('estimates.selectEntity')
               )}
             </div>
           </button>
@@ -563,7 +564,7 @@ export default function EstimatesPage() {
             </TableBody>
             <TableFooter>
               <TableRow>
-                <TableCell colSpan={6} className='text-center'>
+                <TableCell colSpan={4} className='text-center'>
                   <Button
                     variant='outline'
                     className='w-full'
@@ -571,6 +572,16 @@ export default function EstimatesPage() {
                   >
                     {t('estimates.addArticle')}
                   </Button>
+                </TableCell>
+                <TableCell colSpan={2} className='text-right font-medium'>
+                  {articles
+                    .reduce(
+                      (acc, article) =>
+                        acc + article.unitPrice * article.quantity,
+                      0,
+                    )
+                    .toLocaleString()}{' '}
+                  €
                 </TableCell>
               </TableRow>
             </TableFooter>

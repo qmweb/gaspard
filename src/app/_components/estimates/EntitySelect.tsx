@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   Dialog,
@@ -24,12 +24,14 @@ interface EntitySelectProps {
   onSuccess?: (selectedEntity: { id: string; name: string }) => void;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
+  currentEntity?: string;
 }
 
 export default function EntitySelect({
   onSuccess,
   open = false,
   onOpenChange,
+  currentEntity,
 }: EntitySelectProps) {
   const [entities, setEntities] = useState<string>('');
   const { entity } = FetchEntity();
@@ -38,6 +40,12 @@ export default function EntitySelect({
   const [internalOpen, setInternalOpen] = useState<boolean>(false);
   const isOpen = onOpenChange ? open : internalOpen;
   const setIsOpen = onOpenChange ? onOpenChange : setInternalOpen;
+
+  useEffect(() => {
+    if (entity.length > 0) {
+      setEntities(entity.find((e) => e.id === currentEntity)?.id || '');
+    }
+  }, [entity, currentEntity]);
 
   const handleEntitySelect = (entityId: string) => {
     setEntities(entityId);

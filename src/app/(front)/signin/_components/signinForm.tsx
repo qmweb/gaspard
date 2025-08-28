@@ -7,15 +7,13 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
+import { useTranslation } from '@/hooks/useTranslation';
+
 import { Button } from '@/app/_components/ui/button';
 import { signIn } from '@/utils/lib/better-auth/auth-client';
-import { useTheme } from '@/utils/providers/ThemeProvider';
-
-import Logo from '~/images/logo_dark.svg';
-import LogoLight from '~/images/logo_light.svg';
 
 export default function SignIn() {
-  const { theme } = useTheme();
+  const { t } = useTranslation();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,121 +22,100 @@ export default function SignIn() {
 
   const router = useRouter();
 
-  // Mapper les messages d'erreur pour le toaster
+  // Map error messages for the toaster
   const errorMessagesMap: Record<string, string> = {
-    'Invalid email or password': 'Mot de passe ou e-mail invalide.',
-    'User not found': 'Utilisateur non trouvé.',
-    'Email already in use': "L'adresse e-mail est déjà utilisée.",
-    'Password too short': 'Le mot de passe est trop court.',
-    'Network error': 'Erreur réseau, veuillez réessayer.',
-    'User already exists': 'Un compte existe déjà avec cette adresse e-mail.',
-    // Ajoute ici d'autres messages retournés par better-auth
+    'Invalid email or password': t('auth.invalidCredentials'),
+    'User not found': t('auth.userNotFound'),
+    'Email already in use': t('auth.emailAlreadyInUse'),
+    'Password too short': t('auth.passwordTooShort'),
+    'Network error': t('auth.networkError'),
+    'User already exists': t('auth.userAlreadyExists'),
   };
 
   return (
-    <div className='signin'>
-      <div className='signin__container'>
-        <div className='signin__logo-container'>
-          {theme === 'dark' ? (
-            <LogoLight className='signin__logo' />
-          ) : (
-            <Logo className='signin__logo' />
-          )}
-        </div>
-        <div>
-          <h2 className='text-lg md:text-xl'>Se connecter</h2>
-          <p className='text-xs md:text-sm'>
-            Entrez votre email et mot de passe pour vous connecter
-          </p>
-        </div>
-        <div>
-          <div className='grid gap-4'>
-            <div className='grid gap-2'>
-              <label htmlFor='email'>Email</label>
-              <Input
-                id='email'
-                type='email'
-                placeholder='m@example.com'
-                required
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-                value={email}
-                size='large'
-                prefix={<Mail />}
-              />
-            </div>
-
-            <div className='grid gap-2'>
-              <div className='flex items-center'>
-                <label htmlFor='password'>Mot de passe</label>
-              </div>
-
-              <Input.Password
-                visibilityToggle={{
-                  visible: passwordVisible,
-                  onVisibleChange: setPasswordVisible,
-                }}
-                id='password'
-                type='password'
-                placeholder='Mot de passe'
-                autoComplete='password'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                size='large'
-                prefix={<Lock />}
-              />
-            </div>
-            <Button
-              type='submit'
-              disabled={loading}
-              onClick={async () => {
-                await signIn.email(
-                  {
-                    email,
-                    password,
-                  },
-                  {
-                    onRequest: () => {
-                      setLoading(true);
-                    },
-                    onResponse: () => {
-                      setLoading(false);
-                    },
-                    onSuccess: () => {
-                      router.replace('/');
-                      toast.success('Connexion réussie.');
-                    },
-                    onError: (error) => {
-                      setLoading(false);
-                      const errorMessage =
-                        errorMessagesMap[error.error.message] ||
-                        'Une erreur est survenue. Veuillez réessayer.';
-                      toast.error(errorMessage);
-                    },
-                  },
-                );
-              }}
-            >
-              {loading ? (
-                <>
-                  <LoaderCircle className='animate-spin' /> Chargement...
-                </>
-              ) : (
-                <>Connexion</>
-              )}
-            </Button>
-            <div className='signin__contact-admin'>
-              <p>
-                Pas encore de compte ?{' '}
-                <Link replace={true} href='/signup'>
-                  contactez l'administrateur
-                </Link>
-              </p>
-            </div>
-          </div>
-        </div>
+    <>
+      <div className='grid gap-1'>
+        <label className='text-base font-medium' htmlFor='email'>
+          {t('auth.email')}
+        </label>
+        <Input
+          id='email'
+          type='email'
+          placeholder={t('auth.emailPlaceholder')}
+          required
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+          value={email}
+          size='large'
+          prefix={<Mail className='mt-0.5 me-1.5' color='gray' size={16} />}
+        />
       </div>
-    </div>
+
+      <div className='grid gap-1'>
+        <label className='text-base font-medium' htmlFor='password'>
+          {t('auth.password')}
+        </label>
+
+        <Input.Password
+          visibilityToggle={{
+            visible: passwordVisible,
+            onVisibleChange: setPasswordVisible,
+          }}
+          id='password'
+          type='password'
+          placeholder={t('auth.passwordPlaceholder')}
+          autoComplete='password'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          size='large'
+          prefix={<Lock className='mt-0.5 me-1.5' color='gray' size={16} />}
+        />
+      </div>
+
+      <Button
+        type='submit'
+        className='mt-1'
+        disabled={loading}
+        onClick={async () => {
+          await signIn.email(
+            {
+              email,
+              password,
+            },
+            {
+              onRequest: () => {
+                setLoading(true);
+              },
+              onSuccess: () => {
+                router.replace('/');
+              },
+              onError: (error) => {
+                setLoading(false);
+                const errorMessage =
+                  errorMessagesMap[error.error.message] ||
+                  t('auth.genericError');
+                toast.error(errorMessage);
+              },
+            },
+          );
+        }}
+      >
+        {loading ? (
+          <>
+            <LoaderCircle className='animate-spin' /> {t('auth.loading')}
+          </>
+        ) : (
+          <>{t('auth.loginButton')}</>
+        )}
+      </Button>
+
+      <p>
+        {t('auth.noAccountYet')}{' '}
+        <Link replace={true} className='text-base font-medium' href='/signup'>
+          {t('auth.contactAdmin')}
+        </Link>
+      </p>
+    </>
   );
 }

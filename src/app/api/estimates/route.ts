@@ -14,7 +14,8 @@ interface EstimateRequestBody {
   organizationId: string;
   entityId: string;
   date: string;
-  expirationDate: string;
+  validUntil: string;
+  validFrom: string;
   articles: ArticleItem[];
 }
 
@@ -64,8 +65,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
   const body: EstimateRequestBody = await req.json();
-  const { organizationId, entityId, articles } = body;
-  console.log(body);
+  const { organizationId, entityId, articles, validUntil, validFrom } = body;
 
   if (!organizationId || !entityId) {
     return NextResponse.json(
@@ -95,6 +95,8 @@ export async function POST(req: Request) {
           total: item.quantity * item.unitPrice,
         })),
       },
+      validFrom: validFrom,
+      validUntil: validUntil,
     },
     include: {
       organization: true,
