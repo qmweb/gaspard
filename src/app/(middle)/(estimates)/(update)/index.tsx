@@ -34,6 +34,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/app/_components/ui/popover';
+import { Skeleton } from '@/app/_components/ui/skeleton';
 import {
   Table,
   TableBody,
@@ -380,8 +381,95 @@ export default function UpdateEstimatePage() {
         <h2 className='flex items-center gap-2 text-xl font-semibold text-neutral-800 dark:text-neutral-50'>
           <FileText size={22} /> {t('estimates.updateEstimate')}
         </h2>
-        <div className='flex items-center justify-center h-64'>
-          <p>Chargement...</p>
+        <div className='flex gap-8 w-full justify-between'>
+          <div className='flex flex-col gap-2'>
+            <Label htmlFor='entity' className='px-1'>
+              {t('estimates.client')}
+            </Label>
+            <Skeleton className='h-12 w-80'></Skeleton>
+          </div>
+          <div className='flex gap-2'>
+            <div className='flex flex-col gap-3'>
+              <Label htmlFor='date' className='px-1'>
+                {t('estimates.date')}
+              </Label>
+              <div className='relative flex gap-2'>
+                <Skeleton className='h-10 w-48'></Skeleton>
+              </div>
+            </div>
+            <div className='flex flex-col gap-3'>
+              <Label htmlFor='expiration-date' className='px-1'>
+                {t('estimates.expirationDate')}
+              </Label>
+              <div className='relative flex gap-2'>
+                <Skeleton className='h-10 w-48'></Skeleton>
+              </div>
+            </div>
+            <div className='flex flex-col gap-3'>
+              <Label htmlFor='estimate-number' className='px-1'>
+                {t('estimates.estimateNumber')}
+              </Label>
+              <Skeleton className='h-10 w-48'></Skeleton>
+            </div>
+          </div>
+
+          <div className='flex flex-col gap-2'>
+            <Label htmlFor='date' className='px-1'>
+              {t('estimates.actions')}
+            </Label>
+            <div className='relative flex gap-2'>
+              <Skeleton className='h-10 w-12'></Skeleton>
+              <Skeleton className='h-10 w-12'></Skeleton>
+            </div>
+          </div>
+        </div>
+        <div className='flex gap-8'>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className='w-8'></TableHead>
+                <TableHead>Article</TableHead>
+                <TableHead>{t('common.quantity')}</TableHead>
+                <TableHead>{t('common.unitPrice')}</TableHead>
+                <TableHead className='text-right'>
+                  {t('common.total')}
+                </TableHead>
+                <TableHead className='w-[25px]'></TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell>
+                  <Skeleton className='h-10 w-full'></Skeleton>
+                </TableCell>
+                <TableCell>
+                  <Skeleton className='h-10 w-full'></Skeleton>
+                </TableCell>
+                <TableCell>
+                  <Skeleton className='h-10 w-full'></Skeleton>
+                </TableCell>
+                <TableCell>
+                  <Skeleton className='h-10 w-full'></Skeleton>
+                </TableCell>
+                <TableCell>
+                  <Skeleton className='h-10 w-full'></Skeleton>
+                </TableCell>
+                <TableCell>
+                  <Skeleton className='h-10 w-full'></Skeleton>
+                </TableCell>
+              </TableRow>
+            </TableBody>
+            <TableFooter>
+              <TableRow>
+                <TableCell colSpan={4} className='text-center'>
+                  <Skeleton className='h-10 w-full'></Skeleton>
+                </TableCell>
+                <TableCell colSpan={2} className='text-right font-medium'>
+                  <Skeleton className='h-10 w-full'></Skeleton>
+                </TableCell>
+              </TableRow>
+            </TableFooter>
+          </Table>
         </div>
       </section>
     );
@@ -405,114 +493,119 @@ export default function UpdateEstimatePage() {
       <h2 className='flex items-center gap-2 text-xl font-semibold text-neutral-800 dark:text-neutral-50'>
         <FileText size={22} /> {t('estimates.updateEstimate')}
       </h2>
-      <div className='grid grid-cols-1 gap-8 md:grid-cols-3'>
-        <div className='flex flex-col gap-3'>
+      <div className='flex gap-8 w-full justify-between'>
+        <div className='flex flex-col gap-2'>
           <Label htmlFor='entity' className='px-1'>
-            {t('estimates.selectEntity')}
+            {t('estimates.client')}
           </Label>
-          <div className='relative flex gap-2'>
-            <Button
-              variant='outline'
-              className='w-full justify-start'
-              onClick={() => setIsEntityDialogOpen(true)}
-            >
-              {selectedEntity
-                ? selectedEntity?.name
-                : t('estimates.selectEntity')}
-            </Button>
-            <EntitySelect
-              open={isEntityDialogOpen}
-              onOpenChange={setIsEntityDialogOpen}
-              onSuccess={(entity: { id: string; name: string }) => {
-                setSelectedEntity({ id: entity.id, name: entity.name });
-                setIsEntityDialogOpen(false);
-              }}
-              currentEntity={selectedEntity?.id}
+          <button id='client' onClick={() => setIsEntityDialogOpen(true)}>
+            <div className='cursor-pointer hover:bg-neutral-200 dark:hover:bg-neutral-700 text-sm text-neutral-600 dark:text-neutral-400 p-8 rounded-lg border border-dashed border-neutral-300 dark:border-neutral-600 transition-colors w-80'>
+              {selectedEntity ? (
+                <div className='flex flex-col items-center gap-2'>
+                  <div className='text-neutral-800 dark:text-neutral-200 font-medium'>
+                    {selectedEntity.name}
+                  </div>
+                  <div className='text-xs text-neutral-500'>
+                    {t('common.update')}
+                  </div>
+                </div>
+              ) : (
+                t('estimates.selectEntity')
+              )}
+            </div>
+          </button>
+          <EntitySelect
+            open={isEntityDialogOpen}
+            onOpenChange={setIsEntityDialogOpen}
+            onSuccess={(entity: { id: string; name: string }) => {
+              setSelectedEntity({ id: entity.id, name: entity.name });
+              setIsEntityDialogOpen(false);
+            }}
+            currentEntity={selectedEntity?.id}
+          />
+        </div>
+        <div className='flex gap-2'>
+          <div className='flex flex-col gap-3'>
+            <Label htmlFor='date' className='px-1'>
+              {t('estimates.date')}
+            </Label>
+            <div className='relative flex gap-2'>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    id='date'
+                    variant='outline'
+                    className='w-full justify-start text-left font-normal'
+                  >
+                    <CalendarIcon className='mr-2 h-4 w-4' />
+                    {isValidDate(date)
+                      ? formatDate(date)
+                      : t('estimates.selectDate')}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className='w-auto p-0' align='start'>
+                  <Calendar
+                    mode='single'
+                    selected={date}
+                    onSelect={(selectedDate) => {
+                      if (selectedDate) {
+                        setDate(selectedDate);
+                        const newExpirationDate = new Date(selectedDate);
+                        newExpirationDate.setMonth(
+                          newExpirationDate.getMonth() + 1,
+                        );
+                        setExpirationDate(newExpirationDate);
+                      }
+                    }}
+                    initialFocus
+                  />
+                </PopoverContent>
+              </Popover>
+            </div>
+          </div>
+          <div className='flex flex-col gap-3'>
+            <Label htmlFor='expiration-date' className='px-1'>
+              {t('estimates.expirationDate')}
+            </Label>
+            <div className='relative flex gap-2'>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    id='expiration-date'
+                    variant='outline'
+                    className='w-full justify-start text-left font-normal'
+                  >
+                    <CalendarIcon className='mr-2 h-4 w-4' />
+                    {isValidDate(expirationDate)
+                      ? formatDate(expirationDate)
+                      : t('estimates.selectExpirationDate')}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className='w-auto p-0' align='start'>
+                  <Calendar
+                    mode='single'
+                    selected={expirationDate}
+                    onSelect={setExpirationDate}
+                    initialFocus
+                  />
+                </PopoverContent>
+              </Popover>
+            </div>
+          </div>
+          <div className='flex flex-col gap-3'>
+            <Label htmlFor='estimate-number' className='px-1'>
+              {t('estimates.estimateNumber')}
+            </Label>
+            <Input
+              id='estimate-number'
+              placeholder={t('estimates.enterEstimateNumber')}
+              value='DEV-000001'
+              disabled
             />
           </div>
         </div>
-        <div className='flex flex-col gap-3'>
-          <Label htmlFor='date' className='px-1'>
-            {t('estimates.date')}
-          </Label>
-          <div className='relative flex gap-2'>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  id='date'
-                  variant='outline'
-                  className='w-full justify-start text-left font-normal'
-                >
-                  <CalendarIcon className='mr-2 h-4 w-4' />
-                  {isValidDate(date)
-                    ? formatDate(date)
-                    : t('estimates.selectDate')}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className='w-auto p-0' align='start'>
-                <Calendar
-                  mode='single'
-                  selected={date}
-                  onSelect={(selectedDate) => {
-                    if (selectedDate) {
-                      setDate(selectedDate);
-                      const newExpirationDate = new Date(selectedDate);
-                      newExpirationDate.setMonth(
-                        newExpirationDate.getMonth() + 1,
-                      );
-                      setExpirationDate(newExpirationDate);
-                    }
-                  }}
-                  initialFocus
-                />
-              </PopoverContent>
-            </Popover>
-          </div>
-        </div>
-        <div className='flex flex-col gap-3'>
-          <Label htmlFor='expiration-date' className='px-1'>
-            {t('estimates.expirationDate')}
-          </Label>
-          <div className='relative flex gap-2'>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  id='expiration-date'
-                  variant='outline'
-                  className='w-full justify-start text-left font-normal'
-                >
-                  <CalendarIcon className='mr-2 h-4 w-4' />
-                  {isValidDate(expirationDate)
-                    ? formatDate(expirationDate)
-                    : t('estimates.selectExpirationDate')}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className='w-auto p-0' align='start'>
-                <Calendar
-                  mode='single'
-                  selected={expirationDate}
-                  onSelect={setExpirationDate}
-                  initialFocus
-                />
-              </PopoverContent>
-            </Popover>
-          </div>
-        </div>
-      </div>
-      <div className='grid grid-cols-1 gap-8 md:grid-cols-3'>
-        <div className='flex flex-col gap-3'>
-          <Label htmlFor='estimate-number' className='px-1'>
-            {t('estimates.estimateNumber')}
-          </Label>
-          <Input
-            id='estimate-number'
-            placeholder={t('estimates.enterEstimateNumber')}
-            value='DEV-000001'
-            disabled
-          />
-        </div>
 
-        <div className='flex flex-col gap-3'>
+        <div className='flex flex-col gap-2'>
           <Label htmlFor='date' className='px-1'>
             {t('estimates.actions')}
           </Label>
