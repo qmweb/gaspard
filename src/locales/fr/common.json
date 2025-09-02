@@ -26,7 +26,8 @@
     "create": "Créer",
     "update": "Mettre à jour",
     "cancel": "Annuler",
-    "actions": "Actions"
+    "actions": "Actions",
+    "downloadPDF": "Télécharger le PDF"
   },
   "navigation": {
     "dashboard": "Tableau de bord",
@@ -97,7 +98,8 @@
     "enterEstimateNumber": "Entrez le numéro de devis",
     "actions": "Actions",
     "addArticle": "Ajouter un article",
-    "updateEstimate": "Modifier le devis"
+    "updateEstimate": "Modifier le devis",
+    "toInvoice": "Transformer en facture"
   },
   "status": {
     "pending": "En attente",

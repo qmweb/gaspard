@@ -106,34 +106,32 @@ function SortableArticleRow({
   return (
     <TableRow ref={setNodeRef} style={style}>
       <TableCell className='w-8 pl-2'>
-        <div
+        <Button
+          variant='ghost'
+          size='icon'
           {...attributes}
           {...listeners}
-          className='cursor-grab active:cursor-grabbing hover:text-gray-600'
+          className='cursor-grab active:cursor-grabbing h-8 w-8 p-0'
         >
-          <GripVertical size={16} />
-        </div>
+          <GripVertical className='h-4 w-4 text-neutral-400' />
+        </Button>
       </TableCell>
-      <TableCell>
-        <div className='space-y-2'>
-          <Input
-            placeholder={t('estimates.articleName')}
-            value={article.name}
-            onChange={(e) =>
-              onArticleChange(article.id, 'name', e.target.value)
-            }
-          />
-          <Textarea
-            placeholder={t('estimates.articleDescription')}
-            value={article.description}
-            onChange={(e) =>
-              onArticleChange(article.id, 'description', e.target.value)
-            }
-            rows={2}
-          />
-        </div>
+      <TableCell className='flex flex-col gap-4'>
+        <Input
+          placeholder={t('estimates.articleName')}
+          value={article.name}
+          onChange={(e) => onArticleChange(article.id, 'name', e.target.value)}
+        />
+        <Textarea
+          placeholder={t('estimates.articleDescription')}
+          value={article.description}
+          onChange={(e) =>
+            onArticleChange(article.id, 'description', e.target.value)
+          }
+          rows={2}
+        />
       </TableCell>
-      <TableCell>
+      <TableCell className='align-top'>
         <Input
           type='number'
           placeholder={t('common.quantity')}
@@ -149,7 +147,7 @@ function SortableArticleRow({
           step='1'
         />
       </TableCell>
-      <TableCell>
+      <TableCell className='align-top'>
         <Input
           type='number'
           placeholder={t('common.unitPrice')}
@@ -206,6 +204,7 @@ export default function UpdateEstimatePage() {
       description: string;
     }>
   >([]);
+  const [number, setNumber] = useState<string>();
 
   // Configuration pour le drag & drop
   const sensors = useSensors(
@@ -236,7 +235,7 @@ export default function UpdateEstimatePage() {
         setSelectedEntity(estimate.entity || null);
         setDate(new Date(estimate.validFrom));
         setExpirationDate(new Date(estimate.validUntil));
-
+        setNumber(estimate.number);
         if (estimate.expirationDate) {
           setExpirationDate(new Date(estimate.expirationDate));
         }
@@ -599,7 +598,7 @@ export default function UpdateEstimatePage() {
             <Input
               id='estimate-number'
               placeholder={t('estimates.enterEstimateNumber')}
-              value='DEV-000001'
+              value={number}
               disabled
             />
           </div>

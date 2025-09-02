@@ -169,6 +169,7 @@ model Income {
 
 model Invoice {
   id             String        @id @default(uuid())
+  number         String
   organization   Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   organizationId String
   entity         Entity        @relation(fields: [entityId], references: [id])
@@ -185,6 +186,7 @@ model Invoice {
 
 model Estimate {
   id             String         @id @default(uuid())
+  number         String
   organization   Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   organizationId String
   entity         Entity         @relation(fields: [entityId], references: [id])
