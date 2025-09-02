@@ -1,10 +1,11 @@
+import { pdf } from '@react-pdf/renderer';
 import {
   BadgeCheck,
   CircleX,
+  Download,
   Ellipsis,
   FileText,
   SendHorizonal,
-  ShieldAlert,
   Upload,
 } from 'lucide-react';
 import { useState } from 'react';
@@ -37,6 +38,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '@/app/_components/ui/dropdown-menu';
+import { Skeleton } from '@/app/_components/ui/skeleton';
 import {
   Table,
   TableBody,
@@ -47,22 +49,34 @@ import {
   TableHeader,
   TableRow,
 } from '@/app/_components/ui/table';
-import { Entity, Estimate } from '@/app/generated/prisma';
+import {
+  Entity,
+  Estimate,
+  EstimateItem,
+  EstimateStatus,
+  Organization,
+} from '@/app/generated/prisma';
 import { formatDateToFrenchShort } from '@/utils/helpers/date';
 import { formatNumberToFrench } from '@/utils/helpers/number';
 import { useOrganization } from '@/utils/providers/OrganizationProvider';
 import useMenuStore from '@/utils/stores/menuStore';
 
+import MyDocument from './pdf';
+
 interface EstimateWithRelations extends Estimate {
   entity: Entity | null;
+  organization?: Organization | null;
+  items: EstimateItem[];
 }
 
 function EditMenu({
   estimate,
   onEstimateDeleted,
+  onDownloadPDF,
 }: {
   estimate: EstimateWithRelations;
   onEstimateDeleted: () => void;
+  onDownloadPDF: (estimate: EstimateWithRelations) => void;
 }) {
   const { t } = useTranslation();
   const menuStore = useMenuStore();
@@ -84,6 +98,26 @@ function EditMenu({
     }
   };
 
+  const handleUpdateStatus = async (id: string, status: EstimateStatus) => {
+    if (!currentOrganization) return;
+    const response = await fetch(`/api/estimates/status/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify({
+        status,
+        organizationId: currentOrganization.id,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.ok) {
+      onEstimateDeleted();
+    } else {
+      alert('Échec de la mise à jour du statut du devis');
+    }
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -98,19 +132,29 @@ function EditMenu({
           <DropdownMenuSubTrigger>Status</DropdownMenuSubTrigger>
           <DropdownMenuPortal>
             <DropdownMenuSubContent>
-              <DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => handleUpdateStatus(estimate.id, 'DRAFT')}
+              >
                 <FileText className='size-4' /> {t('status.draft')}
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => handleUpdateStatus(estimate.id, 'SENT')}
+              >
                 <SendHorizonal className='size-4' /> {t('status.sent')}
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <ShieldAlert className='size-4' /> {t('status.accepted')}
+              <DropdownMenuItem
+                onClick={() => handleUpdateStatus(estimate.id, 'ACCEPTED')}
+              >
+                <BadgeCheck className='size-4' /> {t('status.accepted')}
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => handleUpdateStatus(estimate.id, 'REJECTED')}
+              >
                 <CircleX className='size-4' /> {t('status.rejected')}
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => handleUpdateStatus(estimate.id, 'EXPIRED')}
+              >
                 <Upload className='size-4' /> {t('status.expired')}
               </DropdownMenuItem>
             </DropdownMenuSubContent>
@@ -120,6 +164,10 @@ function EditMenu({
           onClick={() => menuStore.setCurrentKey('edit-estimate', estimate.id)}
         >
           {t('navigation.editEstimate')}
+        </DropdownMenuItem>
+        <DropdownMenuItem>{t('estimates.toInvoice')}</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => onDownloadPDF(estimate)}>
+          <Download className='mr-2' /> {t('common.downloadPDF')}
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <AlertDialog>
@@ -162,6 +210,28 @@ export default function EstimatesPage() {
 
   const handleEstimateDeleted = () => {
     setRefreshTrigger((prev) => prev + 1);
+  };
+
+  const handleDownloadPDF = async (estimate: EstimateWithRelations) => {
+    try {
+      // Generate PDF blob
+      const blob = await pdf(<MyDocument estimate={estimate} />).toBlob();
+
+      // Create download link
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${estimate.number || estimate.id}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+
+      // Clean up
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      alert('Erreur lors de la génération du PDF');
+    }
   };
 
   return (
@@ -234,19 +304,37 @@ export default function EstimatesPage() {
                 <EditMenu
                   estimate={estimate}
                   onEstimateDeleted={handleEstimateDeleted}
+                  onDownloadPDF={handleDownloadPDF}
                 />
               </TableCell>
             </TableRow>
           ))}
+          {loading && (
+            <TableRow>
+              <TableCell>
+                <Skeleton className='w-full h-8' />
+              </TableCell>
+              <TableCell>
+                <Skeleton className='h-8 w-full' />
+              </TableCell>
+              <TableCell>
+                <Skeleton className='h-8 w-full' />
+              </TableCell>
+              <TableCell className='text-right'>
+                <Skeleton className='h-8 w-full' />
+              </TableCell>
+              <TableCell className='text-right w-[25px]'>
+                <Skeleton className='h-8 w-full' />
+              </TableCell>
+            </TableRow>
+          )}
         </TableBody>
         <TableFooter>
           <TableRow>
             <TableCell colSpan={3}>Total</TableCell>
             <TableCell className='text-right'>
               {' '}
-              {loading ? (
-                <p>Chargement...</p>
-              ) : estimates.length > 0 ? (
+              {estimates.length > 0 ? (
                 <p>
                   {formatNumberToFrench(
                     estimates.reduce(

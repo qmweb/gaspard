@@ -17,7 +17,7 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { FileText, Save } from 'lucide-react';
 import { CalendarIcon, GripVertical, Trash2 } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 import { useTranslation } from '@/hooks/useTranslation';
@@ -160,17 +160,15 @@ function SortableArticleRow({
           </span>
         </div>
       </TableCell>
-      <TableCell className='relative'>
-        <p className='absolute right-0 '>
-          {(article.quantity * article.unitPrice).toFixed(2).replace('.', ',')}€
-        </p>
+      <TableCell className='text-right'>
+        {(article.quantity * article.unitPrice).toFixed(2)} €
       </TableCell>
-      <TableCell className='text-right w-[25px]'>
+      <TableCell className='w-[25px]'>
         <Button
           variant='ghost'
-          size='icon'
+          size='sm'
           onClick={() => onRemoveArticle(article.id)}
-          className='text-red-500 hover:bg-red-100 dark:hover:bg-red-800'
+          className='h-8 w-8 p-0'
         >
           <Trash2 size={16} />
         </Button>
@@ -213,6 +211,29 @@ export default function EstimatesPage() {
       description: string;
     }[]
   >([]);
+  const [estimateNumber, setEstimateNumber] = useState<string | undefined>(
+    undefined,
+  );
+  const [estimateNumberLoading, setEstimateNumberLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchEstimateNumber = async () => {
+      setEstimateNumberLoading(true);
+      const response = await fetch(
+        '/api/estimates/lastNumber?organizationId=' + currentOrganization?.id,
+      );
+      const data = await response.json();
+      setEstimateNumberLoading(false);
+      if (data[0]?.number) {
+        const number = parseInt(data[0].number.split('-')[1]) + 1;
+        setEstimateNumber(`DEV-${String(number).padStart(6, '0')}`);
+      } else {
+        setEstimateNumber('DEV-000001');
+      }
+    };
+
+    fetchEstimateNumber();
+  }, []);
 
   // Drag and drop sensors
   const sensors = useSensors(
@@ -286,6 +307,7 @@ export default function EstimatesPage() {
   const handleCreateEstimate = async () => {
     // Logic to create the estimate
     const estimateData = {
+      number: estimateNumber,
       organizationId: currentOrganization?.id,
       entityId: selectedEntity?.id,
       date: date ? date.toISOString() : null,
@@ -503,7 +525,9 @@ export default function EstimatesPage() {
               <Input
                 id='estimate-number'
                 placeholder={t('estimates.enterEstimateNumber')}
-                value='DEV-000001'
+                value={estimateNumber}
+                onChange={(e) => setEstimateNumber(e.target.value)}
+                disabled={estimateNumberLoading}
               />
             </div>
           </div>
@@ -513,8 +537,14 @@ export default function EstimatesPage() {
             {t('estimates.actions')}
           </Label>
           <div className='relative flex gap-2'>
-            <Button variant='secondary' onClick={handleCreateEstimate}>
+            <Button onClick={handleCreateEstimate}>
               <Save /> {t('common.create')}
+            </Button>
+            <Button
+              variant='outline'
+              onClick={() => menuStore.setCurrentKey('estimates')}
+            >
+              {t('common.cancel')}
             </Button>
           </div>
         </div>

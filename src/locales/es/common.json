@@ -26,7 +26,8 @@
     "create": "Crear",
     "update": "Actualizar",
     "cancel": "Cancelar",
-    "actions": "Acciones"
+    "actions": "Acciones",
+    "downloadPDF": "Descargar PDF"
   },
   "navigation": {
     "dashboard": "Panel de control",
@@ -96,7 +97,8 @@
     "enterEstimateNumber": "Ingrese el número de cotización",
     "actions": "Acciones",
     "addArticle": "Agregar artículo",
-    "updateEstimate": "Actualizar Cotización"
+    "updateEstimate": "Actualizar Cotización",
+    "toInvoice": "Transformar en factura"
   },
   "status": {
     "pending": "Pendiente",

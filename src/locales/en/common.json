@@ -26,7 +26,8 @@
     "create": "Create",
     "update": "Update",
     "cancel": "Cancel",
-    "actions": "Actions"
+    "actions": "Actions",
+    "downloadPDF": "Download PDF"
   },
   "navigation": {
     "dashboard": "Dashboard",
@@ -99,7 +100,8 @@
     "enterEstimateNumber": "Enter estimate number",
     "actions": "Actions",
     "addArticle": "Add Article",
-    "updateEstimate": "Update Estimate"
+    "updateEstimate": "Update Estimate",
+    "toInvoice": "Convert to Invoice"
   },
   "status": {
     "pending": "Pending",

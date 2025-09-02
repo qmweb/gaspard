@@ -11,6 +11,7 @@ interface ArticleItem {
 }
 
 interface EstimateRequestBody {
+  number: string;
   organizationId: string;
   entityId: string;
   date: string;
@@ -49,6 +50,7 @@ export async function GET(req: Request) {
     include: {
       organization: true,
       entity: true,
+      items: true,
     },
     orderBy: {
       createdAt: 'desc',
@@ -65,7 +67,8 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
   const body: EstimateRequestBody = await req.json();
-  const { organizationId, entityId, articles, validUntil, validFrom } = body;
+  const { organizationId, number, entityId, articles, validUntil, validFrom } =
+    body;
 
   if (!organizationId || !entityId) {
     return NextResponse.json(
@@ -76,6 +79,7 @@ export async function POST(req: Request) {
 
   const estimate = await prisma.estimate.create({
     data: {
+      number,
       organizationId,
       entityId,
       status: 'DRAFT',
