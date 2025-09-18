@@ -2,7 +2,7 @@
 
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
-import { CalendarIcon, Plus } from 'lucide-react';
+import { CalendarIcon, Loader2Icon, Plus } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
@@ -61,6 +61,8 @@ export default function UniqueIncomeDialog({
   const { currentOrganization } = useOrganization();
   const [singleIncome, setSingleIncome] = useState(false);
   const [recursiveIncome, setrecursiveIncome] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const { entity } = FetchEntity(refreshTrigger);
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,6 +78,7 @@ export default function UniqueIncomeDialog({
     if (!currentOrganization) return;
 
     try {
+      setLoading(true);
       const response = await fetch('/api/incomes', {
         method: 'POST',
         headers: {
@@ -91,6 +94,7 @@ export default function UniqueIncomeDialog({
       });
 
       if (response.ok) {
+        setLoading(false);
         // Reset form and close dialog
         setSingleIncome(false);
         toast.success('Revenu créé avec succès');
@@ -98,6 +102,8 @@ export default function UniqueIncomeDialog({
       }
     } catch (error) {
       console.error('Failed to create income:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -225,7 +231,14 @@ export default function UniqueIncomeDialog({
                   </PopoverContent>
                 </Popover>
               </div>
-              <Button type='submit'>Valider</Button>
+              {loading ? (
+                <Button size='sm' disabled>
+                  <Loader2Icon className='animate-spin' />
+                  Création en cours...
+                </Button>
+              ) : (
+                <Button type='submit'>Valider</Button>
+              )}
             </form>
           </DialogHeader>
         </DialogContent>
