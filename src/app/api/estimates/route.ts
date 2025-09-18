@@ -3,6 +3,23 @@ import { NextResponse } from 'next/server';
 import { getUser } from '@/utils/lib/better-auth/auth-session';
 import prisma from '@/utils/lib/prisma/prisma';
 
+interface ArticleItem {
+  name: string;
+  description?: string;
+  quantity: number;
+  unitPrice: number;
+}
+
+interface EstimateRequestBody {
+  number: string;
+  organizationId: string;
+  entityId: string;
+  date: string;
+  validUntil: string;
+  validFrom: string;
+  articles: ArticleItem[];
+}
+
 export async function GET(req: Request) {
   const user = await getUser();
   if (!user?.id)
@@ -33,6 +50,7 @@ export async function GET(req: Request) {
     include: {
       organization: true,
       entity: true,
+      items: true,
     },
     orderBy: {
       createdAt: 'desc',
@@ -41,4 +59,55 @@ export async function GET(req: Request) {
 
   await prisma.$disconnect();
   return NextResponse.json(estimates);
+}
+
+export async function POST(req: Request) {
+  const user = await getUser();
+  if (!user?.id)
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+
+  const body: EstimateRequestBody = await req.json();
+  const { organizationId, number, entityId, articles, validUntil, validFrom } =
+    body;
+
+  if (!organizationId || !entityId) {
+    return NextResponse.json(
+      { error: 'Organization ID and Entity ID are required' },
+      { status: 400 },
+    );
+  }
+
+  const estimate = await prisma.estimate.create({
+    data: {
+      number,
+      organizationId,
+      entityId,
+      status: 'DRAFT',
+      totalAmount: articles.reduce(
+        (acc: number, item: ArticleItem) =>
+          acc + item.quantity * item.unitPrice,
+        0,
+      ),
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      items: {
+        create: articles.map((item: ArticleItem) => ({
+          name: item.name,
+          description: item.description || '',
+          quantity: item.quantity,
+          unitPrice: item.unitPrice,
+          total: item.quantity * item.unitPrice,
+        })),
+      },
+      validFrom: validFrom,
+      validUntil: validUntil,
+    },
+    include: {
+      organization: true,
+      entity: true,
+    },
+  });
+
+  await prisma.$disconnect();
+  return NextResponse.json(estimate);
 }

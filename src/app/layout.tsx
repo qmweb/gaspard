@@ -57,8 +57,25 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang='fr' data-theme='light'>
-      <body className={`${Inter.variable}`}>
+    <html lang='fr' suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const theme = localStorage.getItem('theme') || 'system';
+                  const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                  const actualTheme = theme === 'system' ? systemTheme : theme;
+                  document.documentElement.classList.add(actualTheme);
+                  document.documentElement.setAttribute('data-theme', actualTheme);
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body className={`${Inter.variable}`} suppressHydrationWarning>
         <OrganizationProvider>
           <LanguageProvider>
             <ReactQueryProvider>

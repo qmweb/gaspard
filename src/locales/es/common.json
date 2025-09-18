@@ -12,7 +12,22 @@
     "darkMode": "Oscuro",
     "selectTheme": "Seleccionar tema",
     "selectOrganization": "Seleccionar una organización",
-    "myEntities": "Mis Entidades"
+    "myEntities": "Mis Entidades",
+    "systemMode": "Sistema",
+    "currentTheme": "Tema actual",
+    "themeSettings": "Configuración de tema",
+    "languageSettings": "Configuración de idioma",
+    "accountSettings": "Configuración de cuenta de",
+    "quantity": "Cantidad",
+    "unitPrice": "Precio unitario",
+    "total": "Total",
+    "enterItemName": "Ingrese el nombre del artículo",
+    "noItems": "No se encontraron artículos",
+    "create": "Crear",
+    "update": "Actualizar",
+    "cancel": "Cancelar",
+    "actions": "Acciones",
+    "downloadPDF": "Descargar PDF"
   },
   "navigation": {
     "dashboard": "Panel de control",
@@ -24,17 +39,33 @@
     "reports": "Reportes",
     "users": "Usuarios",
     "account": "Cuenta",
-    "newEstimate": "Nueva cotización"
+    "newEstimate": "Nueva cotización",
+    "editEstimate": "Editar cotización",
+    "deleteEstimate": "Eliminar cotización"
   },
   "navigationGroups": {
     "finance": "Finanzas",
     "settings": "Configuración"
   },
   "auth": {
-    "emailPlaceholder": "Ingrese su correo electrónico",
-    "passwordPlaceholder": "Ingrese su contraseña",
     "loginButton": "Entrar",
-    "registerButton": "Registrarse"
+    "registerButton": "Registrarse",
+    "signInTitle": "Iniciar sesión",
+    "signInSubtitle": "Ingrese su correo electrónico y contraseña para iniciar sesión",
+    "email": "Correo electrónico",
+    "emailPlaceholder": "Ingrese su correo electrónico...",
+    "password": "Contraseña",
+    "passwordPlaceholder": "Ingrese su contraseña...",
+    "loading": "Cargando...",
+    "noAccountYet": "¿Aún no tienes una cuenta?",
+    "contactAdmin": "Contacta al administrador",
+    "invalidCredentials": "Correo electrónico o contraseña inválidos.",
+    "userNotFound": "Usuario no encontrado.",
+    "emailAlreadyInUse": "La dirección de correo electrónico ya está en uso.",
+    "passwordTooShort": "La contraseña es demasiado corta.",
+    "networkError": "Error de red, por favor inténtalo de nuevo.",
+    "userAlreadyExists": "Ya existe una cuenta con esta dirección de correo electrónico.",
+    "genericError": "Ha ocurrido un error. Por favor inténtalo de nuevo."
   },
   "dashboard": {
     "title": "Panel de control",
@@ -50,6 +81,24 @@
     "totalPendingBills": "Total de facturas pendientes",
     "totalPendingInvoicesAmount": "Total de facturas pendientes",
     "totalPendingBillsAmount": "Total de facturas pendientes"
+  },
+  "estimates": {
+    "selectEntity": "Seleccionar Entidad",
+    "articleName": "Nombre del Artículo",
+    "articleDescription": "Descripción del artículo",
+    "client": "Cliente",
+    "selectClientPrompt": "Seleccionar un cliente para crear una cotización",
+    "clickToChange": "Haga clic para cambiar",
+    "date": "Fecha",
+    "expirationDate": "Fecha de vencimiento",
+    "estimateNumber": "Número de cotización",
+    "selectDate": "Seleccionar una fecha",
+    "selectExpirationDate": "Seleccionar fecha de vencimiento",
+    "enterEstimateNumber": "Ingrese el número de cotización",
+    "actions": "Acciones",
+    "addArticle": "Agregar artículo",
+    "updateEstimate": "Actualizar Cotización",
+    "toInvoice": "Transformar en factura"
   },
   "status": {
     "pending": "Pendiente",

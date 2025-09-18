@@ -24,7 +24,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { data: session } = useSession();
   const user = session?.user;
   const userName = user?.name || '';
-  const { memberships, currentOrganization } = useOrganization();
+  const { memberships } = useOrganization();
 
   const navDashboard = [MENU.DASHBOARD];
 

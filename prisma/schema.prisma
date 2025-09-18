@@ -169,6 +169,7 @@ model Income {
 
 model Invoice {
   id             String        @id @default(uuid())
+  number         String
   organization   Organization  @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   organizationId String
   entity         Entity        @relation(fields: [entityId], references: [id])
@@ -178,11 +179,14 @@ model Invoice {
   taxes          InvoiceTax[]
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
-   items         InvoiceItem[]
+  validFrom      DateTime?       @default(now())
+  validUntil     DateTime?       @default(now())
+  items          InvoiceItem[]
 }
 
 model Estimate {
   id             String         @id @default(uuid())
+  number         String
   organization   Organization   @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   organizationId String
   entity         Entity         @relation(fields: [entityId], references: [id])
@@ -192,6 +196,8 @@ model Estimate {
   taxes          EstimateTax[]
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
+  validFrom      DateTime?       @default(now())
+  validUntil     DateTime?       
   items          EstimateItem[]
 }
 
@@ -256,6 +262,7 @@ model EstimateItem {
   id          String    @id @default(uuid())
   estimate    Estimate  @relation(fields: [estimateId], references: [id], onDelete: Cascade)
   estimateId  String
+  name        String
   description String
   quantity    Float      @default(1)
   unitPrice   Float      // Prix unitaire HT
@@ -269,6 +276,7 @@ model InvoiceItem {
   id          String    @id @default(uuid())
   invoice     Invoice   @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
   invoiceId   String
+  name        String
   description String
   quantity    Float      @default(1)
   unitPrice   Float

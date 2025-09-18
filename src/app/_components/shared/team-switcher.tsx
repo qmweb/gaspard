@@ -1,6 +1,5 @@
 'use client';
 
-
 import { Building2, ChevronsUpDown } from 'lucide-react';
 import * as React from 'react';
 
@@ -19,7 +18,6 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar,
 } from '@/app/_components/ui/sidebar';
 import { useOrganization } from '@/utils/providers/OrganizationProvider';
 
@@ -33,7 +31,6 @@ export function TeamSwitcher({
     plan: string;
   }[];
 }) {
-  const { isMobile } = useSidebar();
   const { currentOrganization, setCurrentOrganization } = useOrganization();
   const { t } = useTranslation();
   const [open, setOpen] = React.useState(false);

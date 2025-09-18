@@ -12,7 +12,22 @@
     "darkMode": "Dark",
     "selectTheme": "Select Theme",
     "selectOrganization": "Select an organization",
-    "myEntities": "My Entities"
+    "myEntities": "My Entities",
+    "systemMode": "System",
+    "currentTheme": "Current theme",
+    "themeSettings": "Theme Settings",
+    "languageSettings": "Language Settings",
+    "accountSettings": "Account settings for",
+    "quantity": "Quantity",
+    "unitPrice": "Unit Price",
+    "total": "Total",
+    "enterItemName": "Enter item name",
+    "noItems": "No items found",
+    "create": "Create",
+    "update": "Update",
+    "cancel": "Cancel",
+    "actions": "Actions",
+    "downloadPDF": "Download PDF"
   },
   "navigation": {
     "dashboard": "Dashboard",
@@ -27,17 +42,33 @@
     "account": "Account",
     "billing": "Billing",
     "notifications": "Notifications",
-    "newEstimate": "New Estimate"
+    "newEstimate": "New Estimate",
+    "editEstimate": "Edit Estimate",
+    "deleteEstimate": "Delete Estimate"
   },
   "navigationGroups": {
     "finance": "Finance",
     "settings": "Settings"
   },
   "auth": {
-    "emailPlaceholder": "Enter your email",
-    "passwordPlaceholder": "Enter your password",
     "loginButton": "Login",
-    "registerButton": "Register"
+    "registerButton": "Register",
+    "signInTitle": "Sign In",
+    "signInSubtitle": "Enter your e-mail and password to sign in",
+    "email": "E-mail",
+    "emailPlaceholder": "Enter your e-mail address...",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password...",
+    "loading": "Loading...",
+    "noAccountYet": "Don't have an account yet?",
+    "contactAdmin": "Contact the administrator",
+    "invalidCredentials": "Invalid e-mail or password.",
+    "userNotFound": "User not found.",
+    "emailAlreadyInUse": "E-mail address is already in use.",
+    "passwordTooShort": "Password is too short.",
+    "networkError": "Network error, please try again.",
+    "userAlreadyExists": "An account already exists with this e-mail address.",
+    "genericError": "An error occurred. Please try again."
   },
   "dashboard": {
     "title": "Dashboard",
@@ -53,6 +84,24 @@
     "totalPendingBills": "Total Pending Bills",
     "totalPendingInvoicesAmount": "Total Pending Invoices Amount",
     "totalPendingBillsAmount": "Total Pending Bills Amount"
+  },
+  "estimates": {
+    "selectEntity": "Select Entity",
+    "articleName": "Article Name",
+    "articleDescription": "Article Description",
+    "client": "Client",
+    "selectClientPrompt": "Select a client to create an estimate",
+    "clickToChange": "Click to change",
+    "date": "Date",
+    "expirationDate": "Expiration Date",
+    "estimateNumber": "Estimate Number",
+    "selectDate": "Select a date",
+    "selectExpirationDate": "Select expiration date",
+    "enterEstimateNumber": "Enter estimate number",
+    "actions": "Actions",
+    "addArticle": "Add Article",
+    "updateEstimate": "Update Estimate",
+    "toInvoice": "Convert to Invoice"
   },
   "status": {
     "pending": "Pending",

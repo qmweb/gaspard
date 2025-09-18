@@ -18,7 +18,7 @@ const compat = new FlatCompat({
 
 export default fixupConfigRules([
   {
-    ignores: ['src/app/generated/prisma/**', '**/generated/**'],
+    ignores: ['src/app/generated/prisma/**', '**/generated/**', '.next/**'],
   },
   ...compat.extends(
     'eslint:recommended',

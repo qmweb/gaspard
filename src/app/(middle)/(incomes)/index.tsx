@@ -29,7 +29,7 @@ export default function IncomesPage() {
   const { t } = useTranslation();
 
   const [refreshTrigger, setRefreshTrigger] = useState(0);
-  const [refreshCategoriesTrigger, setRefreshCategoriesTrigger] = useState(0);
+  const [refreshCategoriesTrigger] = useState(0);
   const { incomes, loading } = FetchIncomes(refreshTrigger);
   return (
     <section className='flex flex-col gap-4 p-4'>

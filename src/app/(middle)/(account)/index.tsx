@@ -20,10 +20,9 @@ export default function AccountPage() {
   const user = session?.user;
   const userName = user?.name || '';
 
-  const { currentLanguage, setLanguage, translations, isLoading } =
-    useLanguage();
+  const { currentLanguage, setLanguage } = useLanguage();
 
-  const { setTheme } = useTheme();
+  const { theme, setTheme, actualTheme } = useTheme();
 
   return (
     <section className='flex flex-col gap-4 p-4'>
@@ -31,12 +30,12 @@ export default function AccountPage() {
         <User size={22} /> {t('navigation.account')}
       </h2>
       <h1 className='text-2xl font-bold text-neutral-800 dark:text-neutral-50'>
-        Paramètres du compte de {userName}
+        {t('common.accountSettings')} {userName}
       </h1>
       <div className='flex flex-row gap-4'>
         <div className='rounded-lg border border-neutral-200 bg-white p-4 shadow-sm dark:border-neutral-700 dark:bg-neutral-800 flex flex-col gap-2 w-1/3'>
           <p className='text-neutral-600 dark:text-neutral-400'>
-            Paramètres de langue
+            {t('common.languageSettings')}
           </p>
           <Select value={currentLanguage} onValueChange={setLanguage}>
             <SelectTrigger className='w-full'>
@@ -53,9 +52,9 @@ export default function AccountPage() {
         </div>
         <div className='rounded-lg border border-neutral-200 bg-white p-4 shadow-sm dark:border-neutral-700 dark:bg-neutral-800 flex flex-col gap-2 w-1/3'>
           <p className='text-neutral-600 dark:text-neutral-400'>
-            Paramètres de thème
+            {t('common.themeSettings')}
           </p>
-          <Select onValueChange={setTheme}>
+          <Select value={theme} onValueChange={setTheme}>
             <SelectTrigger className='w-full'>
               <SelectValue placeholder={t('common.selectTheme')} />
             </SelectTrigger>
@@ -63,9 +62,17 @@ export default function AccountPage() {
               <SelectGroup>
                 <SelectItem value='light'>{t('common.lightMode')}</SelectItem>
                 <SelectItem value='dark'>{t('common.darkMode')}</SelectItem>
+                <SelectItem value='system'>{t('common.systemMode')}</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
+          <p className='text-xs text-neutral-500 dark:text-neutral-400'>
+            {t('common.currentTheme')}:{' '}
+            {actualTheme === 'light'
+              ? t('common.lightMode')
+              : t('common.darkMode')}
+            {theme === 'system' && ` (${t('common.systemMode')})`}
+          </p>
         </div>
       </div>
     </section>

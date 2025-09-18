@@ -1,41 +1,7 @@
 @use '../../../base' as *;
 
 .signin {
-  width: 100%;
-  height: 100svh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  &__container {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing);
-  }
-
   &__logo {
     width: 15rem;
-    display: flex;
-  }
-
-  &__logo-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  &__contact-admin {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing);
-
-    & a {
-      color: var(--color-primary);
-      text-decoration: none;
-      font-weight: var(--font-weight-bold);
-    }
   }
 }
