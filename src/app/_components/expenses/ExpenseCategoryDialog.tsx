@@ -1,6 +1,6 @@
 'use client';
 
-import { ListPlus } from 'lucide-react';
+import { ListPlus, Loader2Icon } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
@@ -23,6 +23,7 @@ export default function ExpenseCategoryDialog({
 }: ExpenseCategoryDialogProps) {
   const [name, setName] = useState<string>('');
   const [expenseCategory, setExpenseCategory] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const { currentOrganization } = useOrganization();
   const handleSubmit = async (e: React.FormEvent) => {
@@ -30,6 +31,7 @@ export default function ExpenseCategoryDialog({
     if (!currentOrganization) return;
 
     try {
+      setLoading(true);
       const response = await fetch('/api/categories', {
         method: 'POST',
         headers: {
@@ -42,6 +44,7 @@ export default function ExpenseCategoryDialog({
       });
 
       if (response.ok) {
+        setLoading(false);
         // Reset form and close dialog
         setExpenseCategory(false);
         toast.success('Catégorie créée avec succès');
@@ -78,7 +81,14 @@ export default function ExpenseCategoryDialog({
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
-                <Button type='submit'>Valider</Button>
+                {loading ? (
+                  <Button size='sm' disabled={true}>
+                    <Loader2Icon className='animate-spin' />
+                    Création en cours...
+                  </Button>
+                ) : (
+                  <Button type='submit'>Valider</Button>
+                )}
               </div>
             </form>
           </DialogHeader>
