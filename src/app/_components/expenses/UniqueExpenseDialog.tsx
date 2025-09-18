@@ -2,7 +2,7 @@
 
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
-import { CalendarIcon, Plus } from 'lucide-react';
+import { CalendarIcon, Loader2Icon, Plus } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
@@ -61,6 +61,7 @@ export default function UniqueExpenseDialog({
   const { categories } = FetchCategories(refreshTrigger);
   const [singleExpense, setSingleExpense] = useState(false);
   const [recursiveExpense, setrecursiveExpense] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   // Set initial category when categories are loaded
   useEffect(() => {
@@ -82,6 +83,7 @@ export default function UniqueExpenseDialog({
     if (!currentOrganization) return;
 
     try {
+      setLoading(true);
       const response = await fetch('/api/expenses', {
         method: 'POST',
         headers: {
@@ -97,6 +99,7 @@ export default function UniqueExpenseDialog({
       });
 
       if (response.ok) {
+        setLoading(false);
         // Reset form and close dialog
         setSingleExpense(false);
         toast.success('Dépense créée avec succès');
@@ -232,7 +235,14 @@ export default function UniqueExpenseDialog({
                   </PopoverContent>
                 </Popover>
               </div>
-              <Button type='submit'>Valider</Button>
+              {loading ? (
+                <Button size='sm' disabled={true}>
+                  <Loader2Icon className='animate-spin' />
+                  Création en cours...
+                </Button>
+              ) : (
+                <Button type='submit'>Valider</Button>
+              )}
             </form>
           </DialogHeader>
         </DialogContent>
