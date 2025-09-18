@@ -40,7 +40,7 @@ export default function SignUp() {
 
   return (
     <div className='w-full h-full flex justify-center items-center'>
-      <div className='w-1/2 flex flex-col gap-6'>
+      <div className='w-1/2 flex flex-col' style={{ gap: 'var(--spacing)' }}>
         <div className='w-full flex justify-center items-center'>
           {theme === 'dark' ? (
             <LogoLight className='w-3xs' />
