@@ -1,10 +1,8 @@
 import { PuffLoader } from 'react-spinners';
 
-import '@/styles/ui/loader/loader.scss';
-
 export default function Loader() {
   return (
-    <div className='loader'>
+    <div className='flex flex-col items-center justify-center h-full w-full'>
       <PuffLoader color='#000000' size={100} speedMultiplier={0.7} />
     </div>
   );

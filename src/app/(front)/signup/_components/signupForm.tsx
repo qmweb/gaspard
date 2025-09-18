@@ -39,13 +39,13 @@ export default function SignUp() {
   };
 
   return (
-    <div className='signup'>
-      <div className='signup__container'>
-        <div className='signup__logo-container'>
+    <div className='w-full h-full flex justify-center items-center'>
+      <div className='w-1/2 flex flex-col gap-6'>
+        <div className='w-full flex justify-center items-center'>
           {theme === 'dark' ? (
-            <LogoLight className='signup__logo' />
+            <LogoLight className='w-3xs' />
           ) : (
-            <Logo className='signup__logo' />
+            <Logo className='w-3xs' />
           )}
         </div>
         <div>

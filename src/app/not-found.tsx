@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
 
-import '@/styles/pages/front/not-found.scss';
-
 export const metadata: Metadata = {
   title: 'Erreur 404',
   robots: {

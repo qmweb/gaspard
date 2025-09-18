@@ -2,8 +2,6 @@
 
 import { Toaster } from 'sonner';
 
-import '@/styles/pages/front/signin/index.scss';
-
 import { useTheme } from '@/utils/providers/ThemeProvider';
 
 import SignIn from './_components/signinForm';
@@ -17,13 +15,13 @@ export default function Page() {
   return (
     <>
       <Toaster richColors position='bottom-right' />
-      <main className='signin w-full h-screen flex justify-center items-center'>
-        <section className='signin__content'>
+      <main className='w-full h-screen flex justify-center items-center'>
+        <section>
           <div className='flex justify-center items-center'>
             {theme === 'dark' ? (
-              <LogoLight className='signin__logo' />
+              <LogoLight className='w-3xs' />
             ) : (
-              <Logo className='signin__logo' />
+              <Logo className='w-3xs' />
             )}
           </div>
           <div className='grid gap-3 mt-6'>
