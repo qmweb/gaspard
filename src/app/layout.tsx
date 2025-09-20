@@ -20,8 +20,8 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s | Gaspard`,
     },
     robots: {
-      index: true,
-      follow: true,
+      index: false,
+      follow: false,
     },
     openGraph: {
       title: '',
