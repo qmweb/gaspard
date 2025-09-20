@@ -41,6 +41,7 @@ import {
 } from '@/app/_components/ui/select';
 import { Textarea } from '@/app/_components/ui/textarea';
 import { cn } from '@/utils/helpers/shadcn-ui';
+import { useTranslation } from '@/utils/hooks/useTranslation';
 import { useOrganization } from '@/utils/providers/OrganizationProvider';
 
 import FetchEntity from '../fetch/entity';
@@ -54,6 +55,7 @@ export default function UniqueIncomeDialog({
   onSuccess,
   refreshTrigger,
 }: UniqueIncomeDialogProps) {
+  const { t } = useTranslation();
   const [entities, setEntities] = useState<string>('');
   const [amount, setAmount] = useState<string>('');
   const [description, setDescription] = useState<string>('');
@@ -97,7 +99,7 @@ export default function UniqueIncomeDialog({
         setLoading(false);
         // Reset form and close dialog
         setSingleIncome(false);
-        toast.success('Revenu créé avec succès');
+        toast.success(t('incomes.incomeCreatedSuccessfully'));
         if (onSuccess) onSuccess(); // 🔥 Refresh trigger !
       }
     } catch (error) {
@@ -120,17 +122,17 @@ export default function UniqueIncomeDialog({
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button>
-            <Plus size={16} /> Créer
+            <Plus size={16} /> {t('incomes.create')}
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuLabel>Nouveau revenu</DropdownMenuLabel>
+          <DropdownMenuLabel>{t('incomes.newIncome')}</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => setSingleIncome(true)}>
-            Revenu unique
+            {t('incomes.uniqueIncome')}
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setrecursiveIncome(true)}>
-            Revenu récurrent
+            {t('incomes.recurringIncome')}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -138,21 +140,25 @@ export default function UniqueIncomeDialog({
       <Dialog open={singleIncome} onOpenChange={setSingleIncome}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Créer un revenu unique</DialogTitle>
+            <DialogTitle>{t('incomes.createUniqueIncome')}</DialogTitle>
             <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
               <div className='flex flex-col gap-2'>
-                <label className='text-sm font-medium'>Entitée</label>
+                <label className='text-sm font-medium'>
+                  {t('incomes.entity')}
+                </label>
                 <Select onValueChange={setEntities} value={entities}>
                   <SelectTrigger className='w-full'>
                     {entity.length === 0 ? (
-                      <SelectValue placeholder='Aucune entitée disponible' />
+                      <SelectValue
+                        placeholder={t('incomes.noEntitiesAvailable')}
+                      />
                     ) : (
-                      <SelectValue placeholder='Sélectionnez une entitée' />
+                      <SelectValue placeholder={t('incomes.selectEntity')} />
                     )}
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
-                      <SelectLabel>Entitées</SelectLabel>
+                      <SelectLabel>{t('incomes.entities')}</SelectLabel>
                       {entity.map((entitie) => (
                         <SelectItem key={entitie.id} value={entitie.id}>
                           {entitie.name}
@@ -164,7 +170,7 @@ export default function UniqueIncomeDialog({
               </div>
               <div>
                 <label htmlFor='Amount' className='text-sm font-medium'>
-                  Montant
+                  {t('incomes.amount')}
                 </label>
                 <div className='relative'>
                   <Input
@@ -183,7 +189,7 @@ export default function UniqueIncomeDialog({
               </div>
               <div className='flex flex-col gap-2'>
                 <label htmlFor='Description' className='text-sm font-medium'>
-                  Description
+                  {t('incomes.description')}
                 </label>
                 <Textarea
                   name='Description'
@@ -194,7 +200,7 @@ export default function UniqueIncomeDialog({
               </div>
               <div className='flex flex-col gap-2'>
                 <label htmlFor='Date' className='text-sm font-medium'>
-                  Date
+                  {t('incomes.date')}
                 </label>
                 <Popover>
                   <PopoverTrigger asChild>
@@ -209,7 +215,7 @@ export default function UniqueIncomeDialog({
                       {date ? (
                         format(date, 'PPP', { locale: fr })
                       ) : (
-                        <span>Pick a date</span>
+                        <span>{t('incomes.pickDate')}</span>
                       )}
                       <CalendarIcon className='ml-auto h-4 w-4 opacity-50' />
                     </Button>
@@ -234,10 +240,10 @@ export default function UniqueIncomeDialog({
               {loading ? (
                 <Button size='sm' disabled>
                   <Loader2Icon className='animate-spin' />
-                  Création en cours...
+                  {t('incomes.creationInProgress')}
                 </Button>
               ) : (
-                <Button type='submit'>Valider</Button>
+                <Button type='submit'>{t('common.validate')}</Button>
               )}
             </form>
           </DialogHeader>
@@ -247,12 +253,12 @@ export default function UniqueIncomeDialog({
       <Dialog open={recursiveIncome} onOpenChange={setrecursiveIncome}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Reccursive</DialogTitle>
-            <DialogDescription>En cours de développement...</DialogDescription>
+            <DialogTitle>{t('incomes.recurring')}</DialogTitle>
+            <DialogDescription>{t('incomes.inDevelopment')}</DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <Button onClick={() => setrecursiveIncome(false)}>
-              D'accord, à plus tard !
+              {t('incomes.okayLater')}
             </Button>
           </DialogFooter>
         </DialogContent>

@@ -2,8 +2,7 @@
 
 import { Monitor, Moon, Sun } from 'lucide-react';
 
-import { useTranslation } from '@/hooks/useTranslation';
-
+import { useTranslation } from '@/utils/hooks/useTranslation';
 import { useTheme } from '@/utils/providers/ThemeProvider';
 
 export function ThemeToggle() {

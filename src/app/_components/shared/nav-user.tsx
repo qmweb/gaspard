@@ -10,8 +10,6 @@ import {
 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
-import { useTranslation } from '@/hooks/useTranslation';
-
 import {
   Avatar,
   AvatarFallback,
@@ -32,9 +30,9 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/app/_components/ui/sidebar';
+import { useTranslation } from '@/utils/hooks/useTranslation';
 import { signOut } from '@/utils/lib/better-auth/auth-client';
 import useMenuStore from '@/utils/stores/menuStore';
-
 
 export function NavUser({
   user,
@@ -50,14 +48,12 @@ export function NavUser({
   const { t } = useTranslation();
   const initiales = user?.name?.match(/\b\w/g)?.join('');
 
-
   const handleSignOut = async () => {
     await signOut();
     router.replace('/signin');
   };
 
   const menuStore = useMenuStore();
-
 
   return (
     <SidebarMenu>

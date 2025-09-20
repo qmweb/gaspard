@@ -3,8 +3,6 @@
 import { ReactNode } from 'react';
 import { Toaster } from 'sonner';
 
-import { useTranslation } from '@/hooks/useTranslation';
-
 import { AppSidebar } from '@/app/_components/shared/app-sidebar';
 import {
   Breadcrumb,
@@ -19,6 +17,7 @@ import {
   SidebarTrigger,
 } from '@/app/_components/ui/sidebar';
 import { MENU } from '@/utils/constants/menu';
+import { useTranslation } from '@/utils/hooks/useTranslation';
 import useMenuStore from '@/utils/stores/menuStore';
 
 export default function Layout({ children }: { children: ReactNode }) {

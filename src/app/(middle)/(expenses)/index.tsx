@@ -20,12 +20,11 @@ interface ExpenseWithRelations extends Expense {
   category: ExpenseCategory | null;
 }
 
-import { useTranslation } from '@/hooks/useTranslation';
-
 import ExpenseCategoryDialog from '@/app/_components/expenses/ExpenseCategoryDialog';
 import UniqueExpenseDialog from '@/app/_components/expenses/UniqueExpenseDialog';
 import { FetchExpenses } from '@/app/_components/fetch/expenses';
 import { Button } from '@/app/_components/ui/button';
+import { useTranslation } from '@/utils/hooks/useTranslation';
 export default function ExpensesPage() {
   const { t } = useTranslation();
 

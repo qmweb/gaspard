@@ -1,7 +1,5 @@
 import { User } from 'lucide-react';
 
-import { useTranslation } from '@/hooks/useTranslation';
-
 import {
   Select,
   SelectContent,
@@ -10,7 +8,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/app/_components/ui/select';
-import { useLanguage } from '@/contexts/LanguageContext';
+import { useLanguage } from '@/utils/contexts/LanguageContext';
+import { useTranslation } from '@/utils/hooks/useTranslation';
 import { useSession } from '@/utils/lib/better-auth/auth-client';
 import { useTheme } from '@/utils/providers/ThemeProvider';
 

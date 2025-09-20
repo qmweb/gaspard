@@ -42,6 +42,7 @@ import {
 } from '@/app/_components/ui/select';
 import { Textarea } from '@/app/_components/ui/textarea';
 import { cn } from '@/utils/helpers/shadcn-ui';
+import { useTranslation } from '@/utils/hooks/useTranslation';
 import { useOrganization } from '@/utils/providers/OrganizationProvider';
 
 interface UniqueExpenseDialogProps {
@@ -53,6 +54,7 @@ export default function UniqueExpenseDialog({
   onSuccess,
   refreshTrigger,
 }: UniqueExpenseDialogProps) {
+  const { t } = useTranslation();
   const [category, setCategory] = useState<string>('');
   const [amount, setAmount] = useState<string>('');
   const [description, setDescription] = useState<string>('');
@@ -102,7 +104,7 @@ export default function UniqueExpenseDialog({
         setLoading(false);
         // Reset form and close dialog
         setSingleExpense(false);
-        toast.success('Dépense créée avec succès');
+        toast.success(t('expenses.expenseCreatedSuccessfully'));
         if (onSuccess) onSuccess(); // 🔥 Refresh trigger !
       }
     } catch (error) {
@@ -124,17 +126,17 @@ export default function UniqueExpenseDialog({
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button>
-            <Plus size={16} /> Créer
+            <Plus size={16} /> {t('expenses.create')}
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuLabel>Nouvelle dépense</DropdownMenuLabel>
+          <DropdownMenuLabel>{t('expenses.newExpense')}</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => setSingleExpense(true)}>
-            Dépense unique
+            {t('expenses.uniqueExpense')}
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setrecursiveExpense(true)}>
-            Dépense récurrent
+            {t('expenses.recurringExpense')}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -142,21 +144,25 @@ export default function UniqueExpenseDialog({
       <Dialog open={singleExpense} onOpenChange={setSingleExpense}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Créer une dépense unique</DialogTitle>
+            <DialogTitle>{t('expenses.createUniqueExpense')}</DialogTitle>
             <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
               <div className='flex flex-col gap-2'>
-                <label className='text-sm font-medium'>Catégorie</label>
+                <label className='text-sm font-medium'>
+                  {t('expenses.category')}
+                </label>
                 <Select onValueChange={setCategory} value={category}>
                   <SelectTrigger className='w-full'>
                     {categories.length === 0 ? (
-                      <SelectValue placeholder='Aucune catégorie disponible' />
+                      <SelectValue
+                        placeholder={t('expenses.noCategoriesAvailable')}
+                      />
                     ) : (
-                      <SelectValue placeholder='Sélectionnez une catégorie' />
+                      <SelectValue placeholder={t('expenses.selectCategory')} />
                     )}
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
-                      <SelectLabel>Catégories</SelectLabel>
+                      <SelectLabel>{t('expenses.categories')}</SelectLabel>
                       {categories.map((category) => (
                         <SelectItem key={category.id} value={category.id}>
                           {category.name}
@@ -168,7 +174,7 @@ export default function UniqueExpenseDialog({
               </div>
               <div>
                 <label htmlFor='Amount' className='text-sm font-medium'>
-                  Montant
+                  {t('expenses.amount')}
                 </label>
                 <div className='relative'>
                   <Input
@@ -187,7 +193,7 @@ export default function UniqueExpenseDialog({
               </div>
               <div className='flex flex-col gap-2'>
                 <label htmlFor='Description' className='text-sm font-medium'>
-                  Description
+                  {t('expenses.description')}
                 </label>
                 <Textarea
                   name='Description'
@@ -198,7 +204,7 @@ export default function UniqueExpenseDialog({
               </div>
               <div className='flex flex-col gap-2'>
                 <label htmlFor='Date' className='text-sm font-medium'>
-                  Date
+                  {t('expenses.date')}
                 </label>
                 <Popover>
                   <PopoverTrigger asChild>
@@ -213,7 +219,7 @@ export default function UniqueExpenseDialog({
                       {date ? (
                         format(date, 'PPP', { locale: fr })
                       ) : (
-                        <span>Pick a date</span>
+                        <span>{t('expenses.pickDate')}</span>
                       )}
                       <CalendarIcon className='ml-auto h-4 w-4 opacity-50' />
                     </Button>
@@ -238,10 +244,10 @@ export default function UniqueExpenseDialog({
               {loading ? (
                 <Button size='sm' disabled={true}>
                   <Loader2Icon className='animate-spin' />
-                  Création en cours...
+                  {t('expenses.creationInProgress')}
                 </Button>
               ) : (
-                <Button type='submit'>Valider</Button>
+                <Button type='submit'>{t('common.validate')}</Button>
               )}
             </form>
           </DialogHeader>
@@ -251,12 +257,12 @@ export default function UniqueExpenseDialog({
       <Dialog open={recursiveExpense} onOpenChange={setrecursiveExpense}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Reccursive</DialogTitle>
-            <DialogDescription>En cours de développement...</DialogDescription>
+            <DialogTitle>{t('expenses.recurring')}</DialogTitle>
+            <DialogDescription>{t('expenses.inDevelopment')}</DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <Button onClick={() => setrecursiveExpense(false)}>
-              D'accord, à plus tard !
+              {t('expenses.okayLater')}
             </Button>
           </DialogFooter>
         </DialogContent>

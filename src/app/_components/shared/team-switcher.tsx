@@ -3,8 +3,6 @@
 import { Building2, ChevronsUpDown } from 'lucide-react';
 import * as React from 'react';
 
-import { useTranslation } from '@/hooks/useTranslation';
-
 import NewEntityDialog from '@/app/_components/account/NewEntityDialog';
 import {
   DropdownMenu,
@@ -19,6 +17,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/app/_components/ui/sidebar';
+import { useTranslation } from '@/utils/hooks/useTranslation';
 import { useOrganization } from '@/utils/providers/OrganizationProvider';
 
 export function TeamSwitcher({
@@ -53,7 +52,7 @@ export function TeamSwitcher({
               </div>
               <div className='grid flex-1 text-left text-sm leading-tight'>
                 <span className='truncate font-medium'>
-                  {currentOrganization?.name || t('common.selectOrganization')}
+                  {currentOrganization?.name || t('organizations.select')}
                 </span>
                 <span className='truncate text-xs'>Enterprise</span>
               </div>
@@ -61,7 +60,7 @@ export function TeamSwitcher({
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end' className='w-56'>
-            <DropdownMenuLabel>{t('common.myEntities')}</DropdownMenuLabel>
+            <DropdownMenuLabel>{t('organizations.my')}</DropdownMenuLabel>
             <DropdownMenuSeparator />
             {teams.map((team) => (
               <DropdownMenuItem

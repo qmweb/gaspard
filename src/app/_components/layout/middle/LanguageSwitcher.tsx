@@ -1,6 +1,6 @@
 'use client';
 
-import { useLanguage } from '@/contexts/LanguageContext';
+import { useLanguage } from '@/utils/contexts/LanguageContext';
 
 const languages = [
   { code: 'fr', label: 'Français' },

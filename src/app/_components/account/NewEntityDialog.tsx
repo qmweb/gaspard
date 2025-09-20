@@ -12,6 +12,7 @@ import {
   DialogTitle,
 } from '@/app/_components/ui/dialog';
 import { Input } from '@/app/_components/ui/input';
+import { useTranslation } from '@/utils/hooks/useTranslation';
 import { useOrganization } from '@/utils/providers/OrganizationProvider';
 
 interface ExpenseCategoryDialogProps {
@@ -24,6 +25,8 @@ export default function NewEntityDialog({
   const [name, setName] = useState<string>('');
   const [newEntity, setNewEntity] = useState<boolean>(false);
   const { currentOrganization } = useOrganization();
+  const { t } = useTranslation();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!currentOrganization) return;
@@ -42,11 +45,11 @@ export default function NewEntityDialog({
       if (response.ok) {
         // Reset form and close dialog
         setNewEntity(false);
-        toast.success('Entité créée avec succès');
+        toast.success('Organisation créée avec succès');
         if (onSuccess) onSuccess();
       }
     } catch (error) {
-      console.error('Failed to create entity:', error);
+      console.error('Failed to create organization:', error);
     }
   };
 
@@ -63,27 +66,27 @@ export default function NewEntityDialog({
         className='w-full'
         onClick={() => setNewEntity(true)}
       >
-        <Plus size={16} /> Ajouter une entité
+        <Plus size={16} /> {t('organizations.add')}
       </Button>
 
       <Dialog open={newEntity} onOpenChange={setNewEntity}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Créer une entité</DialogTitle>
+            <DialogTitle>{t('organizations.create')}</DialogTitle>
             <form onSubmit={handleSubmit}>
               <div className='flex flex-col gap-4'>
                 <label htmlFor='Name' className='text-sm font-medium'>
-                  Nom
+                  {t('common.name')}
                 </label>
                 <Input
-                  placeholder="Entrez le nom de l'entité"
+                  placeholder={t('organizations.enterName')}
                   type='text'
                   name='Name'
                   id='Name'
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
-                <Button type='submit'>Valider</Button>
+                <Button type='submit'>{t('common.validate')}</Button>
               </div>
             </form>
           </DialogHeader>

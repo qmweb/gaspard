@@ -1,8 +1,6 @@
 import { Ellipsis, TrendingUp, Upload } from 'lucide-react';
 import { useState } from 'react';
 
-import { useTranslation } from '@/hooks/useTranslation';
-
 import { FetchIncomes } from '@/app/_components/fetch/incomes';
 import UniqueIncomeDialog from '@/app/_components/incomes/UniqueIncomeDialog';
 import { Button } from '@/app/_components/ui/button';
@@ -16,10 +14,10 @@ import {
   TableHeader,
   TableRow,
 } from '@/app/_components/ui/table';
-import { Income } from '@/app/generated/prisma';
-import { Entity } from '@/app/generated/prisma';
+import { Entity, Income } from '@/app/generated/prisma';
 import { formatDateToFrenchShort } from '@/utils/helpers/date';
 import { formatNumberToFrench } from '@/utils/helpers/number';
+import { useTranslation } from '@/utils/hooks/useTranslation';
 
 interface IncomeWithRelations extends Income {
   entity: Entity | null;

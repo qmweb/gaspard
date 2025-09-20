@@ -1,5 +1,6 @@
 {
   "common": {
+    "name": "Name",
     "welcome": "Welcome",
     "signIn": "Sign In",
     "signOut": "Sign Out",
@@ -11,8 +12,6 @@
     "lightMode": "Light",
     "darkMode": "Dark",
     "selectTheme": "Select Theme",
-    "selectOrganization": "Select an organization",
-    "myEntities": "My Entities",
     "systemMode": "System",
     "currentTheme": "Current theme",
     "themeSettings": "Theme Settings",
@@ -27,7 +26,15 @@
     "update": "Update",
     "cancel": "Cancel",
     "actions": "Actions",
-    "downloadPDF": "Download PDF"
+    "downloadPDF": "Download PDF",
+    "validate": "Validate"
+  },
+  "organizations": {
+    "select": "Select an organization",
+    "my": "My organizations",
+    "add": "Add an organization",
+    "create": "Create an organization",
+    "enterName": "Enter organization name"
   },
   "navigation": {
     "dashboard": "Dashboard",
@@ -83,7 +90,12 @@
     "totalPendingInvoices": "Total Pending Invoices",
     "totalPendingBills": "Total Pending Bills",
     "totalPendingInvoicesAmount": "Total Pending Invoices Amount",
-    "totalPendingBillsAmount": "Total Pending Bills Amount"
+    "totalPendingBillsAmount": "Total Pending Bills Amount",
+    "createNewEstimate": "Create a new estimate",
+    "createNewInvoice": "Create a new invoice",
+    "loading": "Loading...",
+    "noExpensesMade": "No expenses made",
+    "noIncome": "No income"
   },
   "estimates": {
     "selectEntity": "Select Entity",
@@ -113,5 +125,73 @@
     "accepted": "Accepted",
     "rejected": "Rejected",
     "expired": "Expired"
+  },
+  "expenses": {
+    "create": "Create",
+    "newExpense": "New Expense",
+    "uniqueExpense": "Unique Expense",
+    "recurringExpense": "Recurring Expense",
+    "createUniqueExpense": "Create a unique expense",
+    "category": "Category",
+    "amount": "Amount",
+    "description": "Description",
+    "date": "Date",
+    "noCategoriesAvailable": "No categories available",
+    "selectCategory": "Select a category",
+    "categories": "Categories",
+    "pickDate": "Pick a date",
+    "creationInProgress": "Creation in progress...",
+    "expenseCreatedSuccessfully": "Expense created successfully",
+    "recurring": "Recurring",
+    "inDevelopment": "In development...",
+    "okayLater": "Okay, later!",
+    "createCategory": "Create a category",
+    "enterCategoryName": "Enter category name",
+    "categoryCreatedSuccessfully": "Category created successfully"
+  },
+  "incomes": {
+    "create": "Create",
+    "newIncome": "New Income",
+    "uniqueIncome": "Unique Income",
+    "recurringIncome": "Recurring Income",
+    "createUniqueIncome": "Create a unique income",
+    "entity": "Entity",
+    "entities": "Entities",
+    "noEntitiesAvailable": "No entities available",
+    "selectEntity": "Select an entity",
+    "amount": "Amount",
+    "description": "Description",
+    "date": "Date",
+    "pickDate": "Pick a date",
+    "creationInProgress": "Creation in progress...",
+    "incomeCreatedSuccessfully": "Income created successfully",
+    "recurring": "Recurring",
+    "inDevelopment": "In development...",
+    "okayLater": "Okay, later!"
+  },
+  "users": {
+    "userList": "User List",
+    "create": "Create",
+    "name": "Name",
+    "email": "Email",
+    "role": "Role",
+    "status": "Status",
+    "admin": "Admin",
+    "user": "User",
+    "manager": "Manager",
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "userMenu": {
+    "myAccount": "My Account - Administrator",
+    "language": "Language",
+    "theme": "Theme",
+    "dark": "Dark",
+    "light": "Light",
+    "firstName": "First Name:",
+    "lastName": "Last Name:",
+    "email": "Email:",
+    "password": "Password:",
+    "validate": "Validate"
   }
 }

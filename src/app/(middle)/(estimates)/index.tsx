@@ -10,8 +10,6 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 
-import { useTranslation } from '@/hooks/useTranslation';
-
 import { FetchEstimates } from '@/app/_components/fetch/estimates';
 import {
   AlertDialog,
@@ -58,6 +56,7 @@ import {
 } from '@/app/generated/prisma';
 import { formatDateToFrenchShort } from '@/utils/helpers/date';
 import { formatNumberToFrench } from '@/utils/helpers/number';
+import { useTranslation } from '@/utils/hooks/useTranslation';
 import { useOrganization } from '@/utils/providers/OrganizationProvider';
 import useMenuStore from '@/utils/stores/menuStore';
 

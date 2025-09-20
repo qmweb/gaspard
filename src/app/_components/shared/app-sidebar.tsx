@@ -3,8 +3,6 @@
 import { Building2 } from 'lucide-react';
 import * as React from 'react';
 
-import { useTranslation } from '@/hooks/useTranslation';
-
 import { NavMain } from '@/app/_components/shared/nav-main';
 import { NavUser } from '@/app/_components/shared/nav-user';
 import { TeamSwitcher } from '@/app/_components/shared/team-switcher';
@@ -16,6 +14,7 @@ import {
   SidebarRail,
 } from '@/app/_components/ui/sidebar';
 import { MENU } from '@/utils/constants/menu';
+import { useTranslation } from '@/utils/hooks/useTranslation';
 import { useSession } from '@/utils/lib/better-auth/auth-client';
 import { useOrganization } from '@/utils/providers/OrganizationProvider';
 

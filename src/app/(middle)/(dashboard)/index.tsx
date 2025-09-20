@@ -1,10 +1,9 @@
 import { FileText, Home, Receipt } from 'lucide-react';
 
-import { useTranslation } from '@/hooks/useTranslation';
-
 import { FetchExpensesDashboard } from '@/app/_components/fetch/expenses';
 import { FetchIncomesDashboard } from '@/app/_components/fetch/incomes';
 import { formatNumberToFrench } from '@/utils/helpers/number';
+import { useTranslation } from '@/utils/hooks/useTranslation';
 import { useSession } from '@/utils/lib/better-auth/auth-client';
 import useMenuStore from '@/utils/stores/menuStore';
 
@@ -32,7 +31,7 @@ export default function DashboardPage() {
         <div className='bg-neutral-800 dark:bg-neutral-50 text-neutral-50 dark:text-neutral-800 p-4 rounded-lg flex flex-col justify-center items-start'>
           <h3 className='font-bold'>{t('dashboard.totalExpenses')}</h3>
           {loadingExpenses ? (
-            <p>Chargement...</p>
+            <p>{t('dashboard.loading')}</p>
           ) : expenses.length > 0 ? (
             <p>
               {formatNumberToFrench(
@@ -41,13 +40,13 @@ export default function DashboardPage() {
               €
             </p>
           ) : (
-            <p>Aucune dépense réalisée</p>
+            <p>{t('dashboard.noExpensesMade')}</p>
           )}
         </div>
         <div className='bg-neutral-800 dark:bg-neutral-50 text-neutral-50 dark:text-neutral-800 p-4 rounded-lg flex flex-col justify-center items-start'>
           <h3 className='font-bold'>{t('dashboard.totalRecettes')}</h3>
           {loadingIncomes ? (
-            <p>Chargement...</p>
+            <p>{t('dashboard.loading')}</p>
           ) : incomes.length > 0 ? (
             <p>
               {formatNumberToFrench(
@@ -56,7 +55,7 @@ export default function DashboardPage() {
               €
             </p>
           ) : (
-            <p>Aucun revenu</p>
+            <p>{t('dashboard.noIncome')}</p>
           )}
         </div>
         <div className='bg-neutral-800 dark:bg-neutral-50 text-neutral-50 dark:text-neutral-800 p-4 rounded-lg flex flex-col justify-center items-start'>
@@ -72,13 +71,13 @@ export default function DashboardPage() {
         <button onClick={() => menuStore.setCurrentKey('new-estimate')}>
           <div className='bg-violet-300 hover:bg-violet-400 transition-all dark:bg-violet-800 text-neutral-50 dark:text-neutral-800 p-4 rounded-lg flex flex-col justify-center items-start cursor-pointer'>
             <FileText />
-            <h3 className='font-bold'>Créer un nouveau devis</h3>
+            <h3 className='font-bold'>{t('dashboard.createNewEstimate')}</h3>
           </div>
         </button>
         <button onClick={() => menuStore.setCurrentKey('invoices')}>
           <div className='bg-orange-300 hover:bg-orange-400 transition-all dark:bg-orange-800 text-neutral-50 dark:text-neutral-800 p-4 rounded-lg flex flex-col justify-center items-start cursor-pointer'>
             <Receipt />
-            <h3 className='font-bold'>Créer une nouvelle facture</h3>
+            <h3 className='font-bold'>{t('dashboard.createNewInvoice')}</h3>
           </div>
         </button>
       </div>

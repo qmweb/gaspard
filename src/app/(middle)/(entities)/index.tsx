@@ -1,6 +1,6 @@
 import { Building2 } from 'lucide-react';
 
-import { useTranslation } from '@/hooks/useTranslation';
+import { useTranslation } from '@/utils/hooks/useTranslation';
 
 export default function EntitiesPage() {
   const { t } = useTranslation();

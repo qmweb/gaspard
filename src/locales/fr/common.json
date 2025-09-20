@@ -1,5 +1,6 @@
 {
   "common": {
+    "name": "Nom",
     "welcome": "Bienvenue",
     "signIn": "Se connecter",
     "signOut": "Se déconnecter",
@@ -11,8 +12,6 @@
     "lightMode": "Clair",
     "darkMode": "Sombre",
     "selectTheme": "Sélectionner le thème",
-    "selectOrganization": "Sélectionner une organisation",
-    "myEntities": "Mes entités",
     "systemMode": "Système",
     "currentTheme": "Thème actuel",
     "themeSettings": "Paramètres de thème",
@@ -27,7 +26,15 @@
     "update": "Mettre à jour",
     "cancel": "Annuler",
     "actions": "Actions",
-    "downloadPDF": "Télécharger le PDF"
+    "downloadPDF": "Télécharger le PDF",
+    "validate": "Valider"
+  },
+  "organizations": {
+    "select": "Sélectionner une organisation",
+    "my": "Mes organisations",
+    "add": "Ajouter une organisation",
+    "create": "Créer une organisation",
+    "enterName": "Entrez le nom de la organisation"
   },
   "navigation": {
     "dashboard": "Tableau de bord",
@@ -83,7 +90,12 @@
     "totalPendingInvoices": "Total des factures en attente",
     "totalPendingBills": "Total des factures en attente",
     "totalPendingInvoicesAmount": "Montant total des factures en attente",
-    "totalPendingBillsAmount": "Montant total des factures en attente"
+    "totalPendingBillsAmount": "Montant total des factures en attente",
+    "createNewEstimate": "Créer un nouveau devis",
+    "createNewInvoice": "Créer une nouvelle facture",
+    "loading": "Chargement...",
+    "noExpensesMade": "Aucune dépense réalisée",
+    "noIncome": "Aucun revenu"
   },
   "estimates": {
     "client": "Client",
@@ -111,5 +123,73 @@
     "accepted": "Accepté",
     "rejected": "Rejeté",
     "expired": "Expiré"
+  },
+  "expenses": {
+    "create": "Créer",
+    "newExpense": "Nouvelle dépense",
+    "uniqueExpense": "Dépense unique",
+    "recurringExpense": "Dépense récurrente",
+    "createUniqueExpense": "Créer une dépense unique",
+    "category": "Catégorie",
+    "amount": "Montant",
+    "description": "Description",
+    "date": "Date",
+    "noCategoriesAvailable": "Aucune catégorie disponible",
+    "selectCategory": "Sélectionnez une catégorie",
+    "categories": "Catégories",
+    "pickDate": "Sélectionner une date",
+    "creationInProgress": "Création en cours...",
+    "expenseCreatedSuccessfully": "Dépense créée avec succès",
+    "recurring": "Récurrent",
+    "inDevelopment": "En cours de développement...",
+    "okayLater": "D'accord, à plus tard !",
+    "createCategory": "Créer une catégorie",
+    "enterCategoryName": "Entrez le nom de la catégorie",
+    "categoryCreatedSuccessfully": "Catégorie créée avec succès"
+  },
+  "incomes": {
+    "create": "Créer",
+    "newIncome": "Nouveau revenu",
+    "uniqueIncome": "Revenu unique",
+    "recurringIncome": "Revenu récurrent",
+    "createUniqueIncome": "Créer un revenu unique",
+    "entity": "Entité",
+    "entities": "Entités",
+    "noEntitiesAvailable": "Aucune entité disponible",
+    "selectEntity": "Sélectionnez une entité",
+    "amount": "Montant",
+    "description": "Description",
+    "date": "Date",
+    "pickDate": "Sélectionner une date",
+    "creationInProgress": "Création en cours...",
+    "incomeCreatedSuccessfully": "Revenu créé avec succès",
+    "recurring": "Récurrent",
+    "inDevelopment": "En cours de développement...",
+    "okayLater": "D'accord, à plus tard !"
+  },
+  "users": {
+    "userList": "Liste des utilisateurs",
+    "create": "Créer",
+    "name": "Nom",
+    "email": "Email",
+    "role": "Rôle",
+    "status": "Status",
+    "admin": "Admin",
+    "user": "Utilisateur",
+    "manager": "Manager",
+    "active": "Actif",
+    "inactive": "Inactif"
+  },
+  "userMenu": {
+    "myAccount": "Mon compte - Administrateur",
+    "language": "Langue",
+    "theme": "Thème",
+    "dark": "Sombre",
+    "light": "Clair",
+    "firstName": "Prénom :",
+    "lastName": "Nom :",
+    "email": "Email :",
+    "password": "Mot de passe :",
+    "validate": "Valider"
   }
 }

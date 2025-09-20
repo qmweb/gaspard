@@ -1,10 +1,10 @@
 'use client';
 
 import { Button, Modal } from 'antd';
-import React from 'react';
 
 import { LanguageSwitcher } from '@/app/_components/layout/middle/LanguageSwitcher';
 import ButtonPrimary from '@/app/_components/ui/Button/ButtonPrimary';
+import { useTranslation } from '@/utils/hooks/useTranslation';
 import { useSession } from '@/utils/lib/better-auth/auth-client';
 import { useTheme } from '@/utils/providers/ThemeProvider';
 
@@ -14,6 +14,7 @@ interface UserMenuDialogProps {
 }
 
 export default function UserMenuDialog({ open, onClose }: UserMenuDialogProps) {
+  const { t } = useTranslation();
   const { data: session } = useSession();
   const user = session?.user;
   const userName = user?.name || '';
@@ -32,37 +33,37 @@ export default function UserMenuDialog({ open, onClose }: UserMenuDialogProps) {
       onCancel={onClose}
       footer={null}
       centered
-      title='Mon compte - Administrateur'
+      title={t('userMenu.myAccount')}
     >
       <div style={{ display: 'flex', flexDirection: 'row', gap: 4 }}>
         <div>
-          <div style={{ marginBottom: 4 }}>Langue</div>
+          <div style={{ marginBottom: 4 }}>{t('userMenu.language')}</div>
           <LanguageSwitcher />
         </div>
         <div>
-          <div style={{ marginBottom: 4 }}>Thème</div>
+          <div style={{ marginBottom: 4 }}>{t('userMenu.theme')}</div>
           <Button
             onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
           >
-            {theme === 'light' ? 'Sombre' : 'Clair'}
+            {theme === 'light' ? t('userMenu.dark') : t('userMenu.light')}
           </Button>
         </div>
       </div>
       <ul>
         <li>
-          <strong>Prénom :</strong> {firstName}
+          <strong>{t('userMenu.firstName')}</strong> {firstName}
         </li>
         <li>
-          <strong>Nom :</strong> {lastName}
+          <strong>{t('userMenu.lastName')}</strong> {lastName}
         </li>
         <li>
-          <strong>Email :</strong> {user?.email}
+          <strong>{t('userMenu.email')}</strong> {user?.email}
         </li>
         <li>
-          <strong>Mot de passe :</strong> ***********
+          <strong>{t('userMenu.password')}</strong> ***********
         </li>
       </ul>
-      <ButtonPrimary onClick={onClose}>Valider</ButtonPrimary>
+      <ButtonPrimary onClick={onClose}>{t('userMenu.validate')}</ButtonPrimary>
     </Modal>
   );
 }

@@ -7,9 +7,8 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
-import { useTranslation } from '@/hooks/useTranslation';
-
 import { Button } from '@/app/_components/ui/button';
+import { useTranslation } from '@/utils/hooks/useTranslation';
 import { signIn } from '@/utils/lib/better-auth/auth-client';
 
 export default function SignIn() {

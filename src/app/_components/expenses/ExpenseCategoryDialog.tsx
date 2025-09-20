@@ -12,6 +12,7 @@ import {
   DialogTitle,
 } from '@/app/_components/ui/dialog';
 import { Input } from '@/app/_components/ui/input';
+import { useTranslation } from '@/utils/hooks/useTranslation';
 import { useOrganization } from '@/utils/providers/OrganizationProvider';
 
 interface ExpenseCategoryDialogProps {
@@ -21,6 +22,7 @@ interface ExpenseCategoryDialogProps {
 export default function ExpenseCategoryDialog({
   onSuccess,
 }: ExpenseCategoryDialogProps) {
+  const { t } = useTranslation();
   const [name, setName] = useState<string>('');
   const [expenseCategory, setExpenseCategory] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -47,7 +49,7 @@ export default function ExpenseCategoryDialog({
         setLoading(false);
         // Reset form and close dialog
         setExpenseCategory(false);
-        toast.success('Catégorie créée avec succès');
+        toast.success(t('expenses.categoryCreatedSuccessfully'));
         if (onSuccess) onSuccess();
       }
     } catch (error) {
@@ -64,17 +66,17 @@ export default function ExpenseCategoryDialog({
   return (
     <>
       <Button onClick={() => setExpenseCategory(true)}>
-        <ListPlus size={16} /> Créer une catégorie
+        <ListPlus size={16} /> {t('expenses.createCategory')}
       </Button>
 
       <Dialog open={expenseCategory} onOpenChange={setExpenseCategory}>
         <DialogContent>
           <DialogHeader className='flex flex-col gap-4'>
-            <DialogTitle>Créer une catégorie</DialogTitle>
+            <DialogTitle>{t('expenses.createCategory')}</DialogTitle>
             <form onSubmit={handleSubmit}>
               <div className='flex flex-col gap-2'>
                 <Input
-                  placeholder='Entrez le nom de la catégorie'
+                  placeholder={t('expenses.enterCategoryName')}
                   type='text'
                   name='Name'
                   id='Name'
@@ -84,10 +86,10 @@ export default function ExpenseCategoryDialog({
                 {loading ? (
                   <Button size='sm' disabled={true}>
                     <Loader2Icon className='animate-spin' />
-                    Création en cours...
+                    {t('expenses.creationInProgress')}
                   </Button>
                 ) : (
-                  <Button type='submit'>Valider</Button>
+                  <Button type='submit'>{t('common.validate')}</Button>
                 )}
               </div>
             </form>

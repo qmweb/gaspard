@@ -3,8 +3,6 @@
 import { ChevronRight, type LucideIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
-import { useTranslation } from '@/hooks/useTranslation';
-
 import {
   Collapsible,
   CollapsibleContent,
@@ -20,6 +18,7 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from '@/app/_components/ui/sidebar';
+import { useTranslation } from '@/utils/hooks/useTranslation';
 import { signOut } from '@/utils/lib/better-auth/auth-client';
 import useMenuStore from '@/utils/stores/menuStore';
 

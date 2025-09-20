@@ -1,5 +1,6 @@
 {
   "common": {
+    "name": "Nombre",
     "welcome": "Bienvenido",
     "signIn": "Iniciar sesión",
     "signOut": "Cerrar sesión",
@@ -11,8 +12,6 @@
     "lightMode": "Claro",
     "darkMode": "Oscuro",
     "selectTheme": "Seleccionar tema",
-    "selectOrganization": "Seleccionar una organización",
-    "myEntities": "Mis Entidades",
     "systemMode": "Sistema",
     "currentTheme": "Tema actual",
     "themeSettings": "Configuración de tema",
@@ -27,7 +26,15 @@
     "update": "Actualizar",
     "cancel": "Cancelar",
     "actions": "Acciones",
-    "downloadPDF": "Descargar PDF"
+    "downloadPDF": "Descargar PDF",
+    "validate": "Validar"
+  },
+  "organizations": {
+    "select": "Seleccionar una organización",
+    "my": "Mis organizaciones",
+    "add": "Agregar una organización",
+    "create": "Crear una organización",
+    "enterName": "Ingrese el nombre de la organización"
   },
   "navigation": {
     "dashboard": "Panel de control",
@@ -38,7 +45,10 @@
     "entities": "Entidades",
     "reports": "Reportes",
     "users": "Usuarios",
+    "upgradeToPro": "Actualizar a Pro",
     "account": "Cuenta",
+    "billing": "Facturación",
+    "notifications": "Notificaciones",
     "newEstimate": "Nueva cotización",
     "editEstimate": "Editar cotización",
     "deleteEstimate": "Eliminar cotización"
@@ -80,7 +90,12 @@
     "totalPendingInvoices": "Total de facturas pendientes",
     "totalPendingBills": "Total de facturas pendientes",
     "totalPendingInvoicesAmount": "Total de facturas pendientes",
-    "totalPendingBillsAmount": "Total de facturas pendientes"
+    "totalPendingBillsAmount": "Total de facturas pendientes",
+    "createNewEstimate": "Crear una nueva cotización",
+    "createNewInvoice": "Crear una nueva factura",
+    "loading": "Cargando...",
+    "noExpensesMade": "No se realizaron gastos",
+    "noIncome": "Sin ingresos"
   },
   "estimates": {
     "selectEntity": "Seleccionar Entidad",
@@ -110,5 +125,73 @@
     "accepted": "Aceptado",
     "rejected": "Rechazado",
     "expired": "Expirado"
+  },
+  "expenses": {
+    "create": "Crear",
+    "newExpense": "Nuevo gasto",
+    "uniqueExpense": "Gasto único",
+    "recurringExpense": "Gasto recurrente",
+    "createUniqueExpense": "Crear un gasto único",
+    "category": "Categoría",
+    "amount": "Cantidad",
+    "description": "Descripción",
+    "date": "Fecha",
+    "noCategoriesAvailable": "No hay categorías disponibles",
+    "selectCategory": "Selecciona una categoría",
+    "categories": "Categorías",
+    "pickDate": "Seleccionar una fecha",
+    "creationInProgress": "Creación en progreso...",
+    "expenseCreatedSuccessfully": "Gasto creado con éxito",
+    "recurring": "Recurrente",
+    "inDevelopment": "En desarrollo...",
+    "okayLater": "¡De acuerdo, más tarde!",
+    "createCategory": "Crear una categoría",
+    "enterCategoryName": "Ingrese el nombre de la categoría",
+    "categoryCreatedSuccessfully": "Categoría creada con éxito"
+  },
+  "incomes": {
+    "create": "Crear",
+    "newIncome": "Nuevo ingreso",
+    "uniqueIncome": "Ingreso único",
+    "recurringIncome": "Ingreso recurrente",
+    "createUniqueIncome": "Crear un ingreso único",
+    "entity": "Entidad",
+    "entities": "Entidades",
+    "noEntitiesAvailable": "No hay entidades disponibles",
+    "selectEntity": "Selecciona una entidad",
+    "amount": "Cantidad",
+    "description": "Descripción",
+    "date": "Fecha",
+    "pickDate": "Seleccionar una fecha",
+    "creationInProgress": "Creación en progreso...",
+    "incomeCreatedSuccessfully": "Ingreso creado con éxito",
+    "recurring": "Recurrente",
+    "inDevelopment": "En desarrollo...",
+    "okayLater": "¡De acuerdo, más tarde!"
+  },
+  "users": {
+    "userList": "Lista de usuarios",
+    "create": "Crear",
+    "name": "Nombre",
+    "email": "Correo electrónico",
+    "role": "Rol",
+    "status": "Estado",
+    "admin": "Admin",
+    "user": "Usuario",
+    "manager": "Gerente",
+    "active": "Activo",
+    "inactive": "Inactivo"
+  },
+  "userMenu": {
+    "myAccount": "Mi cuenta - Administrador",
+    "language": "Idioma",
+    "theme": "Tema",
+    "dark": "Oscuro",
+    "light": "Claro",
+    "firstName": "Nombre:",
+    "lastName": "Apellido:",
+    "email": "Correo electrónico:",
+    "password": "Contraseña:",
+    "validate": "Validar"
   }
 }

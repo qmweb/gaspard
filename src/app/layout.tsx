@@ -3,8 +3,8 @@ import { ReactNode } from 'react';
 
 import '@/styles/base/tailwind.css';
 
-import { LanguageProvider } from '@/contexts/LanguageContext';
 import { APP_URL } from '@/utils/constants/config';
+import { LanguageProvider } from '@/utils/contexts/LanguageContext';
 import { Inter } from '@/utils/fonts';
 import { ReactQueryProvider } from '@/utils/providers/ReactQueryProvider';
 import { ThemeProvider } from '@/utils/providers/ThemeProvider';
