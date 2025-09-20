@@ -3,7 +3,6 @@
 import { Building2, ChevronsUpDown } from 'lucide-react';
 import * as React from 'react';
 
-import NewEntityDialog from '@/app/_components/account/NewEntityDialog';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,6 +19,8 @@ import {
 import { useTranslation } from '@/utils/hooks/useTranslation';
 import { useOrganization } from '@/utils/providers/OrganizationProvider';
 
+import NewOrganizationDialog from '../account/NewOrganizationDialog';
+
 export function TeamSwitcher({
   teams,
 }: {
@@ -27,16 +28,11 @@ export function TeamSwitcher({
     id: string;
     name: string;
     logo: React.ElementType;
-    plan: string;
   }[];
 }) {
   const { currentOrganization, setCurrentOrganization } = useOrganization();
   const { t } = useTranslation();
   const [open, setOpen] = React.useState(false);
-
-  if (!teams.length) {
-    return null;
-  }
 
   return (
     <SidebarMenu>
@@ -52,40 +48,44 @@ export function TeamSwitcher({
               </div>
               <div className='grid flex-1 text-left text-sm leading-tight'>
                 <span className='truncate font-medium'>
-                  {currentOrganization?.name || t('organizations.select')}
+                  {currentOrganization?.name || t('organizations.empty')}
                 </span>
-                <span className='truncate text-xs'>Enterprise</span>
               </div>
               <ChevronsUpDown className='ml-auto size-4' />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
+
           <DropdownMenuContent align='end' className='w-56'>
-            <DropdownMenuLabel>{t('organizations.my')}</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            {teams.map((team) => (
-              <DropdownMenuItem
-                key={team.name}
-                onClick={() =>
-                  setCurrentOrganization({
-                    id: team.id,
-                    name: team.name,
-                    createdAt: new Date(),
-                    updatedAt: new Date(),
-                  })
-                }
-              >
-                <div className='bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg'>
-                  <team.logo className='size-4' />
-                </div>
-                <div className='grid flex-1 text-left text-sm leading-tight'>
-                  <span className='truncate font-medium'>{team.name}</span>
-                  <span className='truncate text-xs'>{team.plan}</span>
-                </div>
-              </DropdownMenuItem>
-            ))}
-            <DropdownMenuSeparator />
+            {teams.length > 0 && (
+              <>
+                <DropdownMenuLabel>{t('organizations.my')}</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                {teams.map((team) => (
+                  <DropdownMenuItem
+                    key={team.name}
+                    onClick={() =>
+                      setCurrentOrganization({
+                        id: team.id,
+                        name: team.name,
+                        createdAt: new Date(),
+                        updatedAt: new Date(),
+                      })
+                    }
+                  >
+                    <div className='bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg'>
+                      <team.logo className='size-4' />
+                    </div>
+                    <div className='grid flex-1 text-left text-sm leading-tight'>
+                      <span className='truncate font-medium'>{team.name}</span>
+                    </div>
+                  </DropdownMenuItem>
+                ))}
+                <DropdownMenuSeparator />
+              </>
+            )}
+
             <DropdownMenuItem asChild>
-              <NewEntityDialog />
+              <NewOrganizationDialog />
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

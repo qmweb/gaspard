@@ -36,7 +36,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       id: membership.organization.id,
       name: membership.organization.name,
       logo: Building2,
-      plan: 'Enterprise',
     })) || [];
 
   return (

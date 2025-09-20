@@ -27,14 +27,19 @@
     "cancel": "Annuler",
     "actions": "Actions",
     "downloadPDF": "Télécharger le PDF",
-    "validate": "Valider"
+    "validate": "Valider",
+    "submitting": "Envoi en cours...",
+    "saving": "Sauvegarde...",
+    "creating": "Création...",
+    "updating": "Mise à jour..."
   },
   "organizations": {
     "select": "Sélectionner une organisation",
     "my": "Mes organisations",
     "add": "Ajouter une organisation",
     "create": "Créer une organisation",
-    "enterName": "Entrez le nom de la organisation"
+    "enterName": "Entrez le nom de la organisation",
+    "empty": "Aucune organisation"
   },
   "navigation": {
     "dashboard": "Tableau de bord",

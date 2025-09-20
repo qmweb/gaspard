@@ -21,6 +21,7 @@ import {
   CalendarIcon,
   FileText,
   GripVertical,
+  Loader2Icon,
   Save,
   Trash2,
 } from 'lucide-react';
@@ -192,6 +193,7 @@ export default function UpdateEstimatePage() {
 
   // États pour les données du devis
   const [loading, setLoading] = useState(true);
+  const [updating, setUpdating] = useState(false);
   const [selectedEntity, setSelectedEntity] = useState<{
     id: string;
     name: string;
@@ -347,6 +349,7 @@ export default function UpdateEstimatePage() {
     }
 
     try {
+      setUpdating(true);
       const response = await fetch(`/api/estimates/${estimateId}`, {
         method: 'PUT',
         headers: {
@@ -375,6 +378,8 @@ export default function UpdateEstimatePage() {
           ? error.message
           : 'Erreur lors de la mise à jour',
       );
+    } finally {
+      setUpdating(false);
     }
   };
 
@@ -613,9 +618,16 @@ export default function UpdateEstimatePage() {
             {t('estimates.actions')}
           </Label>
           <div className='relative flex gap-2'>
-            <Button onClick={handleUpdateEstimate}>
-              <Save /> {t('common.update')}
-            </Button>
+            {updating ? (
+              <Button disabled>
+                <Loader2Icon className='animate-spin' />
+                {t('common.updating')}
+              </Button>
+            ) : (
+              <Button onClick={handleUpdateEstimate}>
+                <Save /> {t('common.update')}
+              </Button>
+            )}
             <Button
               variant='outline'
               onClick={() => menuStore.setCurrentKey('estimates')}

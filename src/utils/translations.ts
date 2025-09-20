@@ -17,7 +17,7 @@ export async function getTranslations(
   lang: string,
 ): Promise<TranslationsType | null> {
   try {
-    return (await import(`@/locales/${lang}/common.json`)).default;
+    return (await import(`@/utils/locales/${lang}/common.json`)).default;
   } catch (error) {
     console.error(`Failed to load translations for ${lang}`, error);
     return null;

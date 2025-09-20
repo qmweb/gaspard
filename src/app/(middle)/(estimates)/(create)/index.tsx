@@ -19,6 +19,7 @@ import {
   CalendarIcon,
   FileText,
   GripVertical,
+  Loader2Icon,
   Save,
   Trash2,
 } from 'lucide-react';
@@ -188,6 +189,7 @@ export default function EstimatesPage() {
   const [entityDialogOpen, setEntityDialogOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const [openExpirationDate, setOpenExpirationDate] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [month, setMonth] = useState<Date | undefined>(date);
   const [monthExpiration, setMonthExpiration] = useState<Date | undefined>(
@@ -327,6 +329,7 @@ export default function EstimatesPage() {
     if (!currentOrganization) return;
 
     try {
+      setLoading(true);
       const response = await fetch('/api/estimates', {
         method: 'POST',
         headers: {
@@ -360,6 +363,8 @@ export default function EstimatesPage() {
       }
     } catch (error) {
       console.error('Failed to create estimate:', error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -541,9 +546,16 @@ export default function EstimatesPage() {
             {t('estimates.actions')}
           </Label>
           <div className='relative flex gap-2'>
-            <Button onClick={handleCreateEstimate}>
-              <Save /> {t('common.create')}
-            </Button>
+            {loading ? (
+              <Button disabled>
+                <Loader2Icon className='animate-spin' />
+                {t('common.creating')}
+              </Button>
+            ) : (
+              <Button onClick={handleCreateEstimate}>
+                <Save /> {t('common.create')}
+              </Button>
+            )}
             <Button
               variant='outline'
               onClick={() => menuStore.setCurrentKey('estimates')}

@@ -27,14 +27,19 @@
     "cancel": "Cancel",
     "actions": "Actions",
     "downloadPDF": "Download PDF",
-    "validate": "Validate"
+    "validate": "Validate",
+    "submitting": "Submitting...",
+    "saving": "Saving...",
+    "creating": "Creating...",
+    "updating": "Updating..."
   },
   "organizations": {
     "select": "Select an organization",
     "my": "My organizations",
     "add": "Add an organization",
     "create": "Create an organization",
-    "enterName": "Enter organization name"
+    "enterName": "Enter organization name",
+    "empty": "No organization"
   },
   "navigation": {
     "dashboard": "Dashboard",
